@@ -2,11 +2,23 @@
 
 基于 Remotion 的钢琴乐谱动效 Skill，保留原版 **ScoreNoteLeap**，支持双手音符跳跃、和弦高亮、渐细发光拖尾，以及共享谱面坐标的倾斜与运镜。
 
-**当前版本：1.0.0-rc5 · 发布候选版。** 已完成 Windows 独立工程渲染验证；公共许可证尚未指定，见 [LICENSE.txt](LICENSE.txt)。本仓库可公开查看，但没有授予 MIT、Apache 等开源许可。
+**当前版本：1.0.0-rc5-r1 · RC5 整改发布候选版。** 已完成 Windows 独立工程渲染验证；公共许可证尚未指定，见 [LICENSE.txt](LICENSE.txt)。本仓库可公开查看，但没有授予 MIT、Apache 等开源许可。
 
 ![通用测试谱面的真实渲染关键帧](assets/preview.png)
 
 图中是随包合成测试数据的真实渲染，不包含商业歌曲或私人角色素材。
+
+## RC5 整改：统一执行与分层验收
+
+跨 Agent 使用同一个确定性入口：`node <skill>/scripts/piano.mjs`。完整命令和数据格式见 **[RC5 工作流程](references/rc5-workflow.md)**。主要整改：
+
+- **环境先复用**：检查当前/显式授权项目、实际依赖与 CLI、Node 包管理器、现有 Python/venv、PATH 外的 Windows 常见安装位置。先计划，首次安装或新增大型依赖先确认；不会自动 npm 安装或新建 venv。
+- **谱面先校验**：区分 PDF/图片 OMR、标准 MusicXML/MIDI 和音频。逐小节保留结构化音符与疑点，提供源谱/重排谱裁切对照；VexFlow 画出 SVG 不代表识谱正确。
+- **音频成为关卡**：MP3 必须能解码、时长合理且有声音，测量开头/中段/末尾起音偏差；缺音频时先询问合成或明确静音预览。
+- **同一曲目数据**：checked job 固定 SVG/timeline/audio/props/layout/review 哈希；预览和导出都走无 Demo 回退的 Song 入口。
+- **成片验证**：实际 MP4 的视频/音频流、时长、尺寸、帧率、非静音信号和抽样同步均由脚本检查。识谱、结构、视觉、几何、音频、成片状态分别报告。
+
+Python 不是基础动画的强制依赖。原版 ScoreNoteLeap/PianoScoreScene 组件保持兼容且字节未变；旧 Demo 入口仍保留，但新歌曲请使用 checked job 工作流。
 
 ## 先安装官方 Remotion Skill
 
@@ -56,9 +68,9 @@ WorkBuddy 等 Agent 使用其实际配置的 Skill 目录；没有 Skill 自动�
 
 更多可直接复制的示例，包括“首次体验、已有标准素材、只有 MP3、五线谱/简谱图片、无音频、预览确认后导出”，见 **[Agent 提示词示例](examples/agent-prompts.md)**。将示例中的素材和工程路径替换为真实路径。图片、音频等文件须通过当前 Agent 支持的附件或本地路径提供。
 
-## 快速运行通用示例
+## 兼容的通用 Demo（无声演示，不代表有声作品验收）
 
-需要 Node.js >=20、npm，以及首次安装依赖/准备浏览器所需的网络。以下 `<skill>`、`<new-directory>` 均需替换为实际路径；有空格时加引号，目标目录必须不存在。
+需要 Node.js >=20、npm；优先复用现有依赖与浏览器。以下 `<skill>`、`<new-directory>` 均需替换为实际路径；有空格时加引号，目标目录必须不存在。先运行 `node <skill>/scripts/piano.mjs install --standalone <new-directory> --plan`，报告路径、版本、安装内容与原因；只有确认没有兼容环境并得到首次安装授权后，才执行下面的 `npm ci`。浏览器准备需要下载时也应先说明并确认，现有浏览器可直接指定使用。
 
 ```sh
 node <skill>/scripts/install.mjs --standalone <new-directory>
@@ -70,18 +82,19 @@ npm run compositions
 npm run studio
 ```
 
-需要导出时手动运行 `npm run render`，输出 `out/PianoRemotion-Demo.mp4`（1280×720、30fps、180 帧）。已有工程优先使用 `install.mjs --project <project>`；安装器不覆盖现有入口或不同内容的文件，详细命令见 [安装使用说明](README_使用说明.md)。
+明确要求导出此无声 Demo 时可运行 `npm run render`，输出 `out/PianoRemotion-Demo.mp4`（1280×720、30fps、180 帧）。已有工程优先使用 `install.mjs --project <project>`；安装器不覆盖现有入口或不同内容的文件，详细命令见 [安装使用说明](README_使用说明.md)。
 
 ## 使用自己的素材
 
 | 输入 | 内置工具与 Agent 处理路径 |
 |---|---|
-| 同一布局 SVG + timeline JSON | 驱动谱面和双手动效；时间轴必须提供音符坐标、手部和触发帧 |
+| 同一布局 SVG + timeline JSON | 通过实际几何映射/同次排版证据后驱动动效；不是只检查文件存在 |
 | MusicXML | 内置导入及根元素检查；Agent 复用既有音高节奏，补 SVG、坐标和触发时间 |
 | MIDI | 内置 format 0/1 PPQN、tempo map 解析；Agent 补记谱、分手/声部、排版与坐标映射 |
 | SVG | 内置导入；缺时间轴时 Agent 从可用布局元数据或视觉能力恢复映射，再补触发时间 |
 | MP3 | 内置接入音频；缺乐谱时 Agent 用已有音频转谱能力生成并校正，再补排版、坐标和同步 |
 | 五线谱图片 | `--score-image` 接收路径；Agent 复用视觉/OMR，核对符号、音高、节奏后生成标准素材 |
+| PDF 乐谱 | `--pdf` 接收来源；score source 检查已有专业 OMR，score compare 生成原谱/重排谱逐小节资料 |
 | 简谱图片 | `--jianpu-image` 接收路径；Agent 核对调号、八度点、时值、休止、连音等，再生成匹配五线谱 SVG |
 | 多种素材组合 | 复用每项最可靠的数据，只补缺失环节，不重复转谱或强制安装全部 CLI |
 
@@ -95,11 +108,14 @@ npm run studio
 
 ## 验证与限制
 
-已在 Windows 的独立目录完成真实 Remotion CLI 渲染、类型检查和关键帧检查。rc4 素材工具 **39 项测试通过**，包括六类输入缺项交接与图片参数透传；rc3 的 7 项 doctor 素材选择测试证据保留。具体版本、证据和验证时间见 [测试报告](TEST-RESULTS.md)。图片测试验证的是接口与交接，没有证明真实图片识谱准确。未在实际 WorkBuddy 宿主或 Linux/macOS 运行认证，也未完成真实歌曲的端到端自动识谱与同步验证。
+本轮真实完成环境复用、经确认的离线首次安装、标准素材导入、带非静音 MP3 的 6 秒成片及开头/中段/结尾起音校验；没有新增 OMR 或 Python 环境。原版动效组件字节不变。详见 **[本轮 RC5 测试报告](TEST-RESULTS-RC5.md)** 和 [历史报告](TEST-RESULTS.md)。PDF/图片缺专业 OMR 的情况、错误音符、未批准的逐小节差异均保持 blocked/needs_review；不把缺失分支测试当成真实识谱成功。未认证实际 WorkBuddy 宿主、其他操作系统、任意音乐的全音高或逐音同步。
 
 ```sh
 node --test <skill>/scripts/test.mjs
 node --test <skill>/scripts/doctor.test.mjs
+node --test <skill>/scripts/workflow.test.mjs
+node --test <skill>/scripts/environment.test.mjs
+node --test <skill>/scripts/score.test.mjs
 ```
 
 前一组会在 `scripts/.test-run-*` 保留测试证据；后一组使用系统临时目录。`.gitignore` 排除依赖、渲染输出、缓存和测试产物。上传仓库时使用本目录的完整源码；ZIP 可作为 Release 附件，避免将原始作品工程一并上传。

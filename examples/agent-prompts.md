@@ -1,5 +1,7 @@
 # Agent 提示词示例
 
+RC5 整改版统一执行入口为 `node <skill>/scripts/piano.mjs`。请让 Agent 先走 doctor/install --plan，再按真实输入类型经过 score、align、bind；预览和导出复用同一个 checked job，不使用旧 Demo 命令代替歌曲。首次依赖安装或新增大型依赖须先报告路径、版本、内容和原因并取得确认。缺音频时询问合成或明确静音预览，不能自动声称已完成有声作品。
+
 先安装并读取官方 `remotion-best-practices` 和本 Skill。支持 Skills CLI 时运行：
 
 ```sh

@@ -19,8 +19,13 @@ function project(mode='project') {
     write(path.join(p,'tsconfig.json'),'{}');write(path.join(p,'package-lock.json'),'{}');
     if(mode==='project'){const r=run('install.mjs',['--project',p]);assert.equal(r.status,0,r.stderr);}
   }
-  // Metadata fixtures isolate doctor logic; they are not real runtime installs.
-  for(const [name,version] of Object.entries(versions))write(path.join(p,'node_modules',name,'package.json'),{name,version});
+  // Executable fixtures isolate selection logic; they are not real runtime installs.
+  for(const [name,version] of Object.entries(versions)){
+    const d=path.join(p,'node_modules',name);
+    write(path.join(d,'package.json'),{name,version,main:'index.js',...(name==='@remotion/cli'?{bin:{remotion:'cli.cjs'}}:{})});
+    write(path.join(d,'index.js'),'module.exports = {};');
+    if(name==='@remotion/cli')write(path.join(d,'cli.cjs'),`console.log('@remotion/cli ${version}');process.exit(1);`);
+  }
   return p;
 }
 function doctor(p,args=[]) {const r=run('doctor.mjs',[p,...args]);assert.ok(r.stdout,r.stderr);return {exit:r.status,report:JSON.parse(r.stdout)};}

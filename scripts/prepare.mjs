@@ -10,6 +10,7 @@ import { parseMidi } from './midi.mjs';
 const HELP = `Usage: node prepare.mjs --svg score.svg --timeline timeline.json
   [--audio performance.mp3] [--midi score.mid] [--musicxml score.musicxml]
   [--score-image staff.png] [--jianpu-image numbered.png]
+  [--pdf score.pdf]
   --out <project>/public/score/<slug> [--preprocessor <executable>]
 
 --out is the exact destination directory, which must not already exist.
@@ -72,7 +73,7 @@ export function validateTimeline(t) {
 }
 
 function parseArgs(argv) {
-  const allowed = new Set(['svg', 'timeline', 'audio', 'midi', 'musicxml', 'score-image', 'jianpu-image', 'out', 'preprocessor']);
+  const allowed = new Set(['svg', 'timeline', 'audio', 'midi', 'musicxml', 'score-image', 'jianpu-image', 'pdf', 'out', 'preprocessor']);
   const args = {};
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--help' || argv[i] === '-h') return { help: true };
@@ -122,7 +123,7 @@ export async function prepare(args) {
   try { await fs.lstat(out); fail(`output already exists: ${out}`); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   const inputs = {};
-  for (const key of ['svg', 'timeline', 'audio', 'midi', 'musicxml', 'score-image', 'jianpu-image']) {
+  for (const key of ['svg', 'timeline', 'audio', 'midi', 'musicxml', 'score-image', 'jianpu-image', 'pdf']) {
     if (args[key]) {
       inputs[key] = path.resolve(args[key]);
       if (!await isFile(inputs[key])) fail(`--${key} is not a readable file: ${inputs[key]}`);

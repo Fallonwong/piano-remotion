@@ -1,5 +1,7 @@
 # Material preparation across Agents
 
+RC5 remediation adds executable gates: use [the deterministic workflow](rc5-workflow.md) and [score validation](score-validation.md). Existing capabilities may perform transcription, but script-generated structural, visual, layout and audio evidence must pass before completion. PDF is a distinct source (`prepare --pdf`, `score source`), not an SVG. Prefer an installed professional OMR for PDF/staff images; no installed engine is not a reason to guess notes with an engraver. First dependency installation or large additions require a concrete plan and current user confirmation.
+
 Use this reference when input is MusicXML, MIDI, SVG, MP3, a staff-notation image, a numbered-notation (jianpu) image, or a combination. The objective is a same-layout SVG + checked timeline, optional original audio, song props, and a concise preparation report. Users need not author coordinates or JSON themselves. Preserve supplied files and keep preprocessing/intermediate data in the user's song workspace, outside the distributable Skill.
 
 ## Discover capabilities, then choose a route

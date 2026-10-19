@@ -1,0 +1,619 @@
+{
+  "schemaVersion": 1,
+  "releaseVersion": "1.0.0-rc5-r1",
+  "auditDate": "2026-10-19",
+  "status": "VERIFIED_WITH_EXPLICIT_SCOPE_LIMITS",
+  "fullFunctionalityCertified": false,
+  "privacy": {
+    "redacted": true,
+    "policy": "No host username or private absolute project paths; role placeholders identify existing environments.",
+    "evidenceRoot": "<audit-evidence>",
+    "rawEvidencePubliclyUploaded": false,
+    "rawEvidenceIncludedInLocalEvidenceArchive": true
+  },
+  "node": {
+    "version": "v24.19.0",
+    "path": "<existing-node>"
+  },
+  "baseline": {
+    "remotion": "4.0.515",
+    "@remotion/cli": "4.0.515",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "typescript": "5.9.3"
+  },
+  "compatibilityPolicy": "Exact installed versions, local module resolution, Node >=20 and actual Remotion CLI version probe required.",
+  "projects": [
+    {
+      "project": "<reused-runtime>",
+      "compatible": true,
+      "versions": {
+        "remotion": "4.0.515",
+        "@remotion/cli": "4.0.515",
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
+        "typescript": "5.9.3"
+      },
+      "cliPath": "<reused-runtime>/node_modules/@remotion/cli/remotion-cli.js",
+      "issues": [],
+      "cliProbe": {
+        "path": "<existing-node>",
+        "args": [
+          "<reused-runtime>/node_modules/@remotion/cli/remotion-cli.js",
+          "--version"
+        ],
+        "ok": true,
+        "exitCode": 1,
+        "timedOut": false,
+        "version": "4.0.515"
+      }
+    },
+    {
+      "project": "<authorized-project>",
+      "compatible": true,
+      "versions": {
+        "remotion": "4.0.515",
+        "@remotion/cli": "4.0.515",
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
+        "typescript": "5.9.3"
+      },
+      "cliPath": "<authorized-project>/node_modules/@remotion/cli/remotion-cli.js",
+      "issues": [],
+      "cliProbe": {
+        "path": "<existing-node>",
+        "args": [
+          "<authorized-project>/node_modules/@remotion/cli/remotion-cli.js",
+          "--version"
+        ],
+        "ok": true,
+        "exitCode": 1,
+        "timedOut": false,
+        "version": "4.0.515"
+      }
+    }
+  ],
+  "selectedProject": "<reused-runtime>",
+  "packageManagers": {
+    "npm": {
+      "paths": [
+        "<existing-npm>/npm-cli.js",
+        "<existing-npm>/npm.cmd",
+        "<existing-npm>/npm"
+      ],
+      "path": "<existing-npm>/npm-cli.js",
+      "version": "11.17.0",
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-node>",
+          "args": [
+            "<existing-npm>/npm-cli.js",
+            "--version"
+          ],
+          "cliPath": "<existing-npm>/npm-cli.js",
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "11.17.0",
+          "stdout": "11.17.0",
+          "stderr": "",
+          "error": null
+        }
+      ],
+      "issues": [
+        "Shell wrappers were not executed; existing CLI scripts were invoked directly."
+      ]
+    },
+    "pnpm": {
+      "paths": [
+        "<existing-pnpm>/pnpm.cmd",
+        "<existing-pnpm>/pnpm.mjs"
+      ],
+      "path": "<existing-pnpm>/pnpm.mjs",
+      "version": "11.25.0",
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-node>",
+          "args": [
+            "<existing-pnpm>/pnpm.mjs",
+            "--version"
+          ],
+          "cliPath": "<existing-pnpm>/pnpm.mjs",
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "11.25.0",
+          "stdout": "11.25.0",
+          "stderr": "",
+          "error": null
+        }
+      ],
+      "issues": [
+        "Shell wrappers were not executed; existing CLI scripts were invoked directly."
+      ]
+    },
+    "yarn": {
+      "paths": [],
+      "path": null,
+      "version": null,
+      "available": false,
+      "probes": [],
+      "issues": [
+        "No available executable/CLI found in the checked locations; no package installed."
+      ]
+    },
+    "bun": {
+      "paths": [
+        "<existing-bun>/bun.exe"
+      ],
+      "path": "<existing-bun>/bun.exe",
+      "version": "1.4.2",
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-bun>/bun.exe",
+          "args": [
+            "--version"
+          ],
+          "cliPath": "<existing-bun>/bun.exe",
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "1.4.2",
+          "stdout": "1.4.2",
+          "stderr": "",
+          "error": null
+        }
+      ],
+      "issues": []
+    }
+  },
+  "pythonRequired": false,
+  "selectedPython": "<existing-python>",
+  "pythons": [
+    {
+      "path": "<existing-python>",
+      "valid": true,
+      "version": "3.12.14",
+      "libraries": {
+        "numpy": true,
+        "PIL": true,
+        "cv2": false,
+        "music21": false,
+        "mido": false,
+        "pretty_midi": false,
+        "librosa": false,
+        "soundfile": false,
+        "lxml": true,
+        "cairosvg": false,
+        "reportlab": true
+      },
+      "libraryDetectionMethod": "importlib.util.find_spec; not proof of successful library import or DLL loading",
+      "probe": {
+        "path": "<existing-python>",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false
+      }
+    }
+  ],
+  "tools": {
+    "ffmpeg": {
+      "paths": [
+        "<existing-tool>/ffmpeg.exe"
+      ],
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-tool>/ffmpeg.exe",
+          "args": [
+            "-version"
+          ],
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "8.1.2"
+        }
+      ]
+    },
+    "ffprobe": {
+      "paths": [
+        "<existing-tool>/ffprobe.exe"
+      ],
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-tool>/ffprobe.exe",
+          "args": [
+            "-version"
+          ],
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "8.1.2"
+        }
+      ]
+    },
+    "mscore": {
+      "paths": [],
+      "available": false,
+      "probes": []
+    },
+    "MuseScore4": {
+      "paths": [
+        "<existing-tool>/MuseScore4.exe"
+      ],
+      "available": true,
+      "probes": [
+        {
+          "path": "<existing-tool>/MuseScore4.exe",
+          "args": [
+            "--version"
+          ],
+          "ok": true,
+          "exitCode": 0,
+          "timedOut": false,
+          "version": "4.7.5"
+        }
+      ]
+    },
+    "musescore": {
+      "paths": [],
+      "available": false,
+      "probes": []
+    },
+    "audiveris": {
+      "paths": [],
+      "available": false,
+      "probes": []
+    },
+    "verovio": {
+      "paths": [],
+      "available": false,
+      "probes": []
+    }
+  },
+  "probeTimeoutMs": 5000,
+  "cliProbeTimeoutMs": 15000,
+  "reuse": {
+    "evidence": "reuse-install-report.json",
+    "action": "link",
+    "source": "<authorized-project>/node_modules",
+    "target": "<reused-runtime>/node_modules",
+    "versions": {
+      "remotion": "4.0.515",
+      "@remotion/cli": "4.0.515",
+      "react": "19.2.4",
+      "react-dom": "19.2.4",
+      "typescript": "5.9.3"
+    },
+    "npmExecuted": false,
+    "songEntry": "src/piano-remotion-demo/song.tsx",
+    "doctorPassed": true
+  },
+  "firstInstall": {
+    "evidence": "first-install-acceptance.json",
+    "status": "passed",
+    "project": "<first-install-runtime>",
+    "operation": {
+      "command": "npm ci --offline --ignore-scripts --no-audit --no-fund",
+      "packagesAddedObserved": 251,
+      "elapsedSecondsObserved": 23,
+      "executionObserved": true,
+      "stdoutTranscriptRetained": false
+    },
+    "versions": {
+      "remotion": "4.0.515",
+      "@remotion/cli": "4.0.515",
+      "react": "19.2.4",
+      "react-dom": "19.2.4",
+      "typescript": "5.9.3"
+    },
+    "doctorEvidence": "first-install-doctor.json",
+    "doctorPassed": true,
+    "typecheck": {
+      "exitCode": 0,
+      "log": "first-install-typecheck.log"
+    },
+    "globalEnvironmentChanged": false,
+    "pythonEnvironmentCreated": false,
+    "stdoutCaveat": "Original npm stdout was not retained; package count and elapsed time are observations in the acceptance record, not a replayable installation transcript."
+  },
+  "skillValidation": {
+    "status": "passed",
+    "evidenceType": "acceptance execution record; separate stdout not retained",
+    "validator": "quick_validate.py",
+    "python": "<validation-python>",
+    "existingPyYamlReused": true,
+    "bundledPythonHasYaml": false,
+    "yamlInstalled": false,
+    "pythonEnvironmentCreated": false,
+    "countedInTestTotal": false
+  },
+  "tests": {
+    "total": 86,
+    "unit": "tests/groups",
+    "singleCombinedRun": false,
+    "suites": [
+      {
+        "name": "preprocessing",
+        "count": 40,
+        "evidence": "main-tests.log"
+      },
+      {
+        "name": "doctor",
+        "count": 7,
+        "evidence": "main-tests.log"
+      },
+      {
+        "name": "workflow",
+        "count": 14,
+        "evidence": "workflow-release-tests.log",
+        "syntheticReviewProtocol": true,
+        "durationMs": 527.1547,
+        "geometryGuard": "Existing geometry test group rejects nested SVG and style/defs/symbol/use indirect geometry pending normalization; no new group count."
+      },
+      {
+        "name": "environment",
+        "count": 18,
+        "evidence": "environment-evidence/package-managers-tests.tap"
+      },
+      {
+        "name": "score",
+        "count": 7,
+        "evidence": "score-evidence/test-final.txt",
+        "unit": "top-level groups"
+      }
+    ],
+    "countingNote": "main-tests.log contains 57=40+7+10; its historical workflow 10 and workflow-final-tests.log 13 are replaced by workflow-release-tests.log 14. Independent review, install, typecheck, Skill validation and media checks are separate, not added to 86."
+  },
+  "media": {
+    "evidence": "verified-against-final-guard.json",
+    "status": "media_verified",
+    "file": "<reused-runtime>/out/RC5-audible-song.mp4",
+    "fileSha256": "0ec268537350e0638236dd6b6cc0e565136b168bea38e627f11263223fe69ff9",
+    "video": {
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration": 6
+    },
+    "audio": {
+      "codec": "aac",
+      "rms": 0.04405447547075701,
+      "peak": 0.4010009765625
+    },
+    "alignment": {
+      "schemaVersion": 1,
+      "status": "sampled_onsets_passed",
+      "audioSha256": "0ec268537350e0638236dd6b6cc0e565136b168bea38e627f11263223fe69ff9",
+      "timelineSha256": "9f3f2f4f1be0e6bdeba9cf122a25f2a19eb4640b8b5900a8adee56f6b0fab5f5",
+      "method": "decoded_pcm_energy_onsets",
+      "toleranceSeconds": 0.06666666666666667,
+      "scoreDuration": 6,
+      "audioDuration": 6.058667,
+      "durationPassed": true,
+      "samples": [
+        {
+          "region": "beginning",
+          "frame": 8,
+          "expectedSeconds": 0.26666666666666666,
+          "observedOnsetSeconds": 0.309297052154195,
+          "offsetSeconds": 0.042630385487528344,
+          "passed": true
+        },
+        {
+          "region": "middle",
+          "frame": 94,
+          "expectedSeconds": 3.1333333333333333,
+          "observedOnsetSeconds": 3.1727891156462587,
+          "offsetSeconds": 0.03945578231292535,
+          "passed": true
+        },
+        {
+          "region": "end",
+          "frame": 174,
+          "expectedSeconds": 5.8,
+          "observedOnsetSeconds": 5.836734693877551,
+          "offsetSeconds": 0.03673469387755102,
+          "passed": true
+        }
+      ],
+      "audibility": {
+        "rms": 0.04405447547075701,
+        "peak": 0.4010009765625
+      },
+      "onsetCount": 9,
+      "limitations": [
+        "Energy onsets are candidates, not pitch recognition.",
+        "Three sampled attacks do not certify every note.",
+        "Dense/polyphonic or legato audio may require manual onset/pitch review."
+      ]
+    },
+    "limits": "Stream and sampled onset checks do not certify all pitches or all note timings.",
+    "latestVerificationEvidence": "verified-release-final.json"
+  },
+  "independentReview": {
+    "initialReport": "independent-review/REPORT.md",
+    "retestReport": "independent-review/retest-two-fixes/REPORT.md",
+    "result": "independent-review/retest-two-fixes/evidence/results.json",
+    "casesPassed": 6,
+    "scope": "Two original findings; source snapshot/sidecar staleness and mismatched SVG viewBox now rejected; synthetic protocol material, not OMR or human approval.",
+    "countedInTestTotal": false
+  },
+  "preservation": {
+    "evidence": "preservation-final.json",
+    "privateProjectFilesCompared": 20,
+    "changed": [],
+    "componentByteIdentity": {
+      "ScoreNoteLeap.tsx": true,
+      "PianoScoreScene.tsx": true,
+      "PianoRemotion.tsx": true
+    }
+  },
+  "scoreRecognition": {
+    "evidence": "score-evidence/rc5-validation-final/delivery-summary.json",
+    "professionalOmrAvailable": false,
+    "actualRecognitionSuccess": false,
+    "actualHumanReview": false,
+    "actualProductionSameRunEvidence": false,
+    "actualComparisonStatus": "needs_review",
+    "syntheticApproval": "protocol regression only",
+    "verified": [
+      "PDF/image input inspection",
+      "MusicXML structural checks",
+      "actual MuseScore re-engraving",
+      "measure comparison artifacts and stale/unreviewed evidence rejection"
+    ],
+    "unverified": [
+      "real PDF/image OMR",
+      "human score review",
+      "general complex path/nested/styled/indirect SVG adapter",
+      "whole-song pitch/rhythm automatic recognition",
+      "every-note synchronization"
+    ],
+    "geometryPolicy": "Fail closed for nested svg and style/defs/symbol/use indirect or dynamic geometry; normalize before binding."
+  },
+  "optionalOmr": {
+    "name": "Audiveris",
+    "version": "5.11.0",
+    "platform": "Windows x86_64",
+    "asset": "Audiveris-5.11.0-windows-x86_64.msi",
+    "plannedBytes": 85062430,
+    "byteCountSource": "installation plan; not independently measured by download",
+    "releaseUrl": "https://github.com/Audiveris/audiveris/releases/tag/5.11.0",
+    "downloadUrl": "https://github.com/Audiveris/audiveris/releases/download/5.11.0/Audiveris-5.11.0-windows-x86_64.msi",
+    "officialAssetListing": "https://github.com/Audiveris/audiveris/releases/expanded_assets/5.11.0",
+    "officialListedSha256": "ac221b0d39a90e32b7f43dbf9f5d5a45ff8b5424076af21b65278955688dac71",
+    "downloaded": false,
+    "installed": false,
+    "installationRequiresSeparateAuthorization": true
+  },
+  "evidenceFiles": [
+    {
+      "file": "main-tests.log",
+      "bytes": 4122,
+      "sha256": "6e7ef9c787363de239cbdb162a3681c6912e9a40c2f6f317425aba78fc2eccba"
+    },
+    {
+      "file": "workflow-release-tests.log",
+      "bytes": 1364,
+      "sha256": "4211276bdd14d2647707df030ac91b9e6d3012e52442499da2b2af603210578a"
+    },
+    {
+      "file": "environment-evidence/package-managers-tests.tap",
+      "bytes": 1876,
+      "sha256": "259d720c6e079875b2090c289f772c60d57cc8ed21ffce76454d10ff792f10ce"
+    },
+    {
+      "file": "environment-evidence/package-managers-result.json",
+      "bytes": 4418,
+      "sha256": "2a638939a8e67aced1ef5653b83650ecc920faa6c564d4aea60303b13fddd9a8"
+    },
+    {
+      "file": "score-evidence/test-final.txt",
+      "bytes": 769,
+      "sha256": "fe5611272d4843aa9b1eaf4b8bb6943ddb81e62b438932cdb6683614b74c535d"
+    },
+    {
+      "file": "score-evidence/rc5-validation-final/delivery-summary.json",
+      "bytes": 633,
+      "sha256": "582ec8c0e3b2f7417715d1f50c2149b01645ca0282958b9aaaeb71a0329af5a2"
+    },
+    {
+      "file": "reuse-install-report.json",
+      "bytes": 12275,
+      "sha256": "66d9de5cceeea9e375e96251fcd6bb232ac2b6ba9a75b87e2fc0c921f37cfcbb"
+    },
+    {
+      "file": "environment-final-private.json",
+      "bytes": 23391,
+      "sha256": "547c3cd851b4a10bc4ae179a4ce2b68689c7cfc93ef4b46457f459f27e04c25e"
+    },
+    {
+      "file": "first-install-acceptance.json",
+      "bytes": 717,
+      "sha256": "0709cc5b9455b272f241839a4ac18a1120f617517f6561b104fabb9153b53912"
+    },
+    {
+      "file": "first-install-doctor.json",
+      "bytes": 19386,
+      "sha256": "380d736b390ba7beb104435e10c199e18f8c5350699d2d071babe538ab1b1b99"
+    },
+    {
+      "file": "first-install-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "verified-against-final-guard.json",
+      "bytes": 2058,
+      "sha256": "4f1278c59c6b6f008ac4134284bb692a20e5a450fe75d0a544c393d2d31644eb"
+    },
+    {
+      "file": "preservation-final.json",
+      "bytes": 192,
+      "sha256": "e82f2842790fffc35851fa7ed6c703453f2af54cab37066a506d6893f7fe60ed"
+    },
+    {
+      "file": "independent-review/REPORT.md",
+      "bytes": 5343,
+      "sha256": "c0419e9b8402fa22562c5c609ef73d17bcd63b944195f2d071c920efcb5aa65a"
+    },
+    {
+      "file": "independent-review/retest-two-fixes/REPORT.md",
+      "bytes": 1338,
+      "sha256": "9a38f854bd84c9d784ac8a0f6651661bdce0f6f06a1eb5ead59f75703f5347b7"
+    },
+    {
+      "file": "independent-review/retest-two-fixes/evidence/results.json",
+      "bytes": 2426,
+      "sha256": "1063bf3ef7142e6786a8243f1b9661186f2b2756fea31667354d8eb385661cbb"
+    },
+    {
+      "file": "release-bind.json",
+      "bytes": 222,
+      "sha256": "27be6d766e8a0d32541431966cbf062e4c52136fea05edced3ea541b18925a99"
+    },
+    {
+      "file": "verified-release-final.json",
+      "bytes": 2058,
+      "sha256": "4f1278c59c6b6f008ac4134284bb692a20e5a450fe75d0a544c393d2d31644eb"
+    },
+    {
+      "file": "archive-first-install-bind.json",
+      "bytes": 221,
+      "sha256": "42e29b795b0e4b63181a229d87dc6e7de9520ea748d9aad470379ed81d22ac4a"
+    },
+    {
+      "file": "archive-first-install-render.log",
+      "bytes": 10756,
+      "sha256": "92e3e8e08ee1a627047bb35955fe9604e2e8c841a5d4b6ec50882e01903a06bf"
+    },
+    {
+      "file": "first-install-runtime/out/RC5-independent-package.mp4.verification.json",
+      "bytes": 2072,
+      "sha256": "4de4c2c38d86434d3b095b6d2cce155389112e4c60d1589d00287baf5a1ddf21"
+    }
+  ],
+  "releaseBinding": {
+    "evidence": "release-bind.json",
+    "status": "bound",
+    "audio": "calibrated",
+    "job": "<reused-runtime>/release-song-job.json",
+    "sameOriginalMp4Reverified": true,
+    "newRenderClaimed": false
+  },
+  "archiveFirstInstallRender": {
+    "status": "passed",
+    "physicalNodeModules": true,
+    "source": "<extracted-source-zip>",
+    "runtime": "<first-install-runtime>",
+    "report": "ARCHIVE-VALIDATION.json",
+    "videoSha256": "8e97a9f65516239f81e546af08a44783fc98aa1c9f801c04ac9a119c83b0407c",
+    "verificationStatus": "media_verified"
+  }
+}

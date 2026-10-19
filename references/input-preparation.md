@@ -1,5 +1,7 @@
 # Portable piano asset import
 
+For new song work use `piano.mjs prepare`, then the [RC5 review/alignment/bind gates](rc5-workflow.md). This legacy importer remains a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.
+
 For missing standard data, use the [Agent material-preparation workflow](material-preparation.md) first. It covers MusicXML, MIDI, SVG, MP3, staff images and jianpu images, reusing available Agent tools instead of mandating a complete CLI suite. A script's incomplete status is an Agent handoff, not a requirement that the user write a timeline manually.
 
 Requires Node.js 18 or newer. Uses built-in modules only; no npm install, Python,

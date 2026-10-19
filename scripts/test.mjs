@@ -132,7 +132,7 @@ test('supplied missing file is an error and cannot silently fall back', () => {
 });
 
 const tinyImage=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a9V8AAAAASUVORK5CYII=','base64');
-for(const kind of ['musicxml','midi','svg','audio','score-image','jianpu-image'])test(`incomplete ${kind} source hands off without claiming recognition`,async()=>{
+for(const kind of ['musicxml','midi','svg','audio','score-image','jianpu-image','pdf'])test(`incomplete ${kind} source hands off without claiming recognition`,async()=>{
   const source=path.join(work,`source-${kind}`);
   let contents;
   if(kind==='musicxml')contents=await fs.readFile(fixture('score.musicxml'));
