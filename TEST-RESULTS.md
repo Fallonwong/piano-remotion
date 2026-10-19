@@ -6,7 +6,7 @@ Release status: **technically validated on this Windows host; public license una
 
 Prepared the isolated repository for https://github.com/Fallonwong/piano-remotion. Added repository-specific Skills CLI installation commands, project/user scope guidance and six copyable Agent prompt scenarios. Clarified that authorized public publication is distinct from assigning an open-source license. The archive keeps all runtime, preprocessing and animation files identical to rc4.
 
-Skills CLI local `add ./piano-remotion --list` successfully discovered exactly one Skill named piano-remotion. Format, relative Markdown links, manifest and archive integrity are checked for this revision. Real rendering and preprocessing/doctor tests below remain the earlier versioned evidence, not newly executed music-recognition or WorkBuddy certification. Post-publication remote installation verification is recorded in the release notes.
+Skills CLI local `add ./piano-remotion --list` successfully discovered exactly one Skill named piano-remotion. Added .gitattributes to preserve exact file bytes on Windows and other systems; Git's automatic newline conversion must not invalidate manifest hashes or the unchanged-source guarantee. Format, relative Markdown links, manifest and archive integrity are checked for this revision. Real rendering and preprocessing/doctor tests below remain the earlier versioned evidence, not newly executed music-recognition or WorkBuddy certification. Post-publication remote installation verification is recorded in the release notes.
 
 ## 1.0.0-rc4 material preparation across Agents
 

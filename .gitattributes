@@ -1,0 +1,3 @@
+# Preserve the exact file bytes used by manifest.json across Windows/macOS/Linux.
+# The distributed Skill includes source files copied unchanged from its origin.
+* -text

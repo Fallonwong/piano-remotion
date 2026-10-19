@@ -31,8 +31,8 @@
       "sha256": "c1f852f0f531733b10c3b36cae135947fb6bbe76e7b800e95ce3546315d20a32"
     },
     "TEST-RESULTS.md": {
-      "bytes": 11844,
-      "sha256": "e58c82976b00b4b1d5f02d8a21f8e06fc0718f01ad312b8638f7e4a38f09c134"
+      "bytes": 12030,
+      "sha256": "70036b033866786448d79dbcb8d4f4e12ad1a48d71ce1d8ec281662e12b37144"
     },
     "agents/openai.yaml": {
       "bytes": 358,
@@ -141,6 +141,10 @@
     "scripts/fixtures/timeline.json": {
       "bytes": 416,
       "sha256": "95bf63a16848eb578f6a5243e4b760e93e9ddb69c8e8e8064bb882133c54e88b"
+    },
+    ".gitattributes": {
+      "bytes": 170,
+      "sha256": "f9d1a3dcdfeaa85845b0605397d03732b65ee765bb42c6db9b64d60d7f9b779b"
     }
   },
   "excluded": [
