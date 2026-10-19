@@ -1,8 +1,7 @@
 > V1.0.0 补充：[音源生产与识谱修订](workflow.md)。新 bind 需要 --audio-evidence，PDF/图片 score-request 需要 --notation-audit；旧 synthesize 示例仅用于 --preview-only 校谱草稿。
 
-> RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
 
-# RC5 deterministic score validation and source comparison
+# Score validation and source comparison
 
 This is a separate evidence pipeline. It does not modify the renderer/core or infer optical recognition, hand assignment, notehead coordinates, repeat expansion, or audio synchronization. `structuralPassed` and `visualReview` are independent. A successful `check` always leaves visual review pending.
 
@@ -63,7 +62,7 @@ The adapter must use a real installed professional OMR engine, write MusicXML in
 
 No package-specific adapter is bundled or asserted to work. Integrators verify their engine's real interface and wrap it, without auto-installation. An environment-provided Python module can register an `importlib.metadata` entry point in group `piano_remotion.omr`; `--omr-module NAME` loads only that registered entry point. Its callable receives `{protocol, source, sourceSha256, out}` and returns the same response object. Registration and explicit selection constitute trust in that integration. The engine's claims are not independently authenticated by this script.
 
-Requests, adapter responses, stdout/stderr, and structural checks are saved. `OMR_TRANSCRIBED_UNREVIEWED` is only a transcription result. It always remains `needs_review`, including when structural checks pass. Bad output paths, stale source hashes, invalid response formats, and failing exits are rejected. No mock adapter test is reported as real recognition.
+Requests, adapter responses, stdout/stderr, and structural checks are saved. `OMR_TRANSCRIBED_UNREVIEWED` is only a transcription result. It always remains `needs_review`, including when structural checks pass. Bad output paths, stale source hashes, invalid response formats, and failing exits are rejected.
 
 ## Agent-assisted measure comparison
 
@@ -123,19 +122,4 @@ After supplying actual mapping and actual producer evidence, rerun `compare` and
 
 JSON canonical hashes use Python `json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False)` UTF-8. Use the generated template rather than independently recreating canonicalization. Crop byte hashes also protect against rasterizer/image decoding changes. Changing source, XML, SVG, timeline, reflow image/PDF, mapping, producer evidence or crop bytes invalidates old approvals. Missing review rows stay pending; unknown/duplicate ids fail. An unresolved `difference` can never pass. Changing a decision to approved requires a reviewer and a nonempty resolution note; the software cannot verify the identity or truth of a human assertion.
 
-`SCORE_REVIEW_APPROVED` / `reviewed` requires structural success, all real crops, all per-measure approvals and valid producer evidence. It is not a complete renderer/audio gate. `timeline.json` is only checked as a JSON object and hash-bound here; the existing timeline validator must separately validate its musical/coordinate contract. A hash binding test with a placeholder timeline does not establish same-layout coordinates or music synchronization.
-
-## Reproducible bounded tests
-
-Use only installed dependencies. This optional score integration suite requires an existing Python with Pillow/reportlab, MuseScore and a PDF rasterizer; it does not install them. Replace placeholders with discovered, usable paths:
-
-```powershell
-$env:PIANO_SCORE_PYTHON='<existing-python.exe>'
-$env:PIANO_SCORE_EVIDENCE='<new-isolated-evidence-directory>'
-$env:PIANO_MUSESCORE='C:/Program Files/MuseScore 4/bin/MuseScore4.exe'
-node --test scripts/score.test.mjs
-```
-
-Tests create one original PNG/PDF score fixture, use MuseScore's real installed exporter for SVG/PNG re-engraving, and keep images, XML, invocation logs, error reports and review HTML in the evidence directory. On Windows, MuseScore must use its `windows` Qt platform; this environment's `offscreen` platform fast-failed with native exit 3221226505 and no SVG. The original failed run is evidence, not a passed export. Follow any additional PDF-operation rules required by the current host environment.
-
-The suite exercises structural extraction, bad XML/pitch/divisions/time/staff/duration/chord/cursor/ties/slurs/tuplets, valid namespace/ties/triplets, pickup/repeats/microtones, PNG/PDF OMR absence, corrupt images/PDF, explicit adapter protocol requirements, pending crop mapping, actual crops, unresolved visual differences, synthetic approval protocol, stale source/XML/SVG/timeline/layout/mapping/crops, and overwrite protection. The positive approval case deliberately labels its reviewer and producer as **synthetic protocol tests**. It is not human review or proof of a same-run production timeline. Actual source-versus-MuseScore evidence remains `needs_review`. No professional OMR is claimed completed without a real engine run.
+`SCORE_REVIEW_APPROVED` / `reviewed` requires structural success, all real crops, all per-measure approvals and valid producer evidence. It is not a complete renderer/audio gate. `timeline.json` is only checked as a JSON object and hash-bound here; the existing timeline validator must separately validate its musical/coordinate contract. Actual same-layout coordinates and musical synchronization are checked separately.

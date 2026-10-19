@@ -7,7 +7,7 @@ description: Make piano-score videos with original two-hand leaps, glow trails a
 
 Read the installed official `remotion-best-practices` first. Reuse compatible authorized environments; Python/OMR are optional. First installs or large downloads require paths, versions, content, size/reason and user permission. Preserve private sources, personal overlays off, original ScoreNoteLeap/PianoScoreScene visuals. No license has been assigned.
 
-Use `node <skill>/scripts/piano.mjs`. Read [audio and recognition workflow](references/workflow.md) for audio or PDF/images; [RC6 workflow](references/rc6-workflow.md) documents geometry and existing stage mechanics. Use production evidence and notation-audit arguments with those commands. Do not use legacy Demo calls as checked song completion.
+Use `node <skill>/scripts/piano.mjs`. Read [audio and recognition workflow](references/workflow.md) for audio or PDF/images; [geometry and rendering workflow](references/rendering.md) documents geometry and existing stage mechanics. For runtime reuse and installation, see [environment setup](references/environment.md). Use production evidence and notation-audit arguments with those commands. Do not use legacy Demo calls as checked song completion.
 
 ## Execute the task with two content review stops
 
@@ -24,4 +24,4 @@ Inspect scan quality, page/crop provenance, accidentals/key/clef/octave, dots/be
 
 Two failures on one path require diagnosis/alternatives. If no reviewable result exists after roughly ten minutes, report blockers; do not silently run an hour. Complete routine work autonomously inside each stage; do not ask micro-permission for ordinary reversible steps or authorized mixing adjustments.
 
-This release adds no OMR engine. Existing professional OMR adapter remains optional, real OMR accuracy unverified. MuseScore/VexFlow engraving and a finished video do not certify original-score correctness. See [tests](TEST-RESULTS-RC7.md), [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with V1.0.0 evidence rather than overwriting finished artifacts.
+Use an installed professional OMR adapter when available. Judge notation against the original source; successful engraving or video export does not replace source review. See [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with V1.0.0 evidence rather than overwriting finished artifacts.

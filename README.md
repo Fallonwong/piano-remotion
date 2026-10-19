@@ -159,7 +159,8 @@ node <skill>/scripts/piano.mjs --help
 
 - [Skill 入口](SKILL.md)
 - [音源与谱面修订流程](references/workflow.md)
-- [几何映射、审阅与渲染](references/rc6-workflow.md)
+- [几何映射、审阅与渲染](references/rendering.md)
+- [环境与安装](references/environment.md)
 - [数据契约](references/data-contract.md)
 - [素材预处理](references/material-preparation.md)
 

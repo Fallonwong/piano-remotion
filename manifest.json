@@ -1,15 +1,13 @@
 {
   "name": "piano-remotion",
   "version": "1.0.0",
-  "releaseStatus": "PUBLIC_RELEASE",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
     "react": "19.2.4",
     "typescript": "5.9.3"
   },
-  "sourceCoreSha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed",
-  "sourceCorePolicy": "Original ScoreNoteLeap/PianoScoreScene visuals preserved. Runtime source exactly matches the RC7 local candidate; V1.0.0 adds public documentation and versioning.",
+  "repository": "https://github.com/Fallonwong/piano-remotion",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -19,81 +17,29 @@
       "bytes": 299,
       "sha256": "f9e7471eb08d255fe7e9c6cb8ac294100728dcea529b38a65b9a23d0c7f543a0"
     },
-    "ARCHIVE-VALIDATION.json": {
-      "bytes": 3429,
-      "sha256": "42267078513f50822de546f42c368860b2a4c2c2a189206f4c00c4f4d09d8d15"
-    },
-    "AUDIT-RC5.md": {
-      "bytes": 7325,
-      "sha256": "61a9aa375fead9383ab8cef7cceefdc4f1c6bbcad8e547e52df276a747498ef5"
-    },
-    "ENVIRONMENT-REPORT-RC6.json": {
-      "bytes": 1009,
-      "sha256": "38671b402f6e9ea274d65f623702a2587d99f66ce4675edc95995d416062aa09"
-    },
-    "ENVIRONMENT-REPORT-RC7.json": {
-      "bytes": 937,
-      "sha256": "91cd98ea4cdbefa842af4298cdc357eb5d01c151ff5a03ddede4b78c11ddd0e9"
-    },
-    "ENVIRONMENT-REPORT.json": {
-      "bytes": 19320,
-      "sha256": "19b961a197ef7876254a90555566adce077a85d315b2cad7cf62b6e487b5601f"
-    },
     "LICENSE.txt": {
       "bytes": 829,
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 8727,
-      "sha256": "ef55a9385d41aca3ed63c2693d4b831060ecdb9be376fdb14f692699415188b3"
+      "bytes": 8946,
+      "sha256": "edb789fa720b1a53c0a691aca83eb39fc4dfa64551a99d4d458466a2d57a9f83"
     },
     "README_使用说明.md": {
-      "bytes": 2729,
-      "sha256": "635280f7a9f4a2569f034c2a625951ad7d3f3f4ab5f9bae073c3a15c543412ca"
-    },
-    "RELEASE-NOTES-RC6.md": {
-      "bytes": 1070,
-      "sha256": "d037e12d408c9263d0efa935073bc5fc7d66adec96f42f655f6f26962df06f65"
-    },
-    "RELEASE-NOTES-RC7.md": {
-      "bytes": 1200,
-      "sha256": "87f39dbe5c2ea781019edb8c123958e97940282fa13410c54fb152d060cf66b2"
-    },
-    "RELEASE-NOTES-V1.0.0.md": {
-      "bytes": 1310,
-      "sha256": "28e635ca0c421c858a39c95fdd99072acd3e419bae94219384f901dd003d0f29"
+      "bytes": 2775,
+      "sha256": "25199da733c1e01abecec38822ee8c4b6952fe9b79be8fbf6e7fd9a4044cb9c3"
     },
     "SKILL.md": {
-      "bytes": 5409,
-      "sha256": "1284ddb5e80cd12e30f5b301e8ece4ebf68d3ff355fde4f0146402306d61d2e0"
-    },
-    "TEST-RESULTS-RC5.md": {
-      "bytes": 6694,
-      "sha256": "8d86c8894978a804ad074d2da3a9ba7dbd3cf74c438a834eb75a700f4558daf6"
-    },
-    "TEST-RESULTS-RC6.md": {
-      "bytes": 4312,
-      "sha256": "78a44887d14900e217430a5fd6cc65c498915620eb63966a8f11385c83c36d96"
-    },
-    "TEST-RESULTS-RC7.md": {
-      "bytes": 3539,
-      "sha256": "7b448ceb1dc802ca6f98a7b8e3ddcd6fd2b9ae11314fcc16e77fbadb561223e2"
-    },
-    "TEST-RESULTS.md": {
-      "bytes": 12030,
-      "sha256": "70036b033866786448d79dbcb8d4f4e12ad1a48d71ce1d8ec281662e12b37144"
-    },
-    "VIDEO-VERIFICATION-RC6.json": {
-      "bytes": 2074,
-      "sha256": "47211cec3a82ffb167449d05028ee0d1d76aba1dd8d29ef94f28588aa586bf25"
+      "bytes": 5473,
+      "sha256": "24cd26b397524bcf47a6b82b1b1c14dcf77b32e6e948fc408cf3522adc0a1b5f"
     },
     "agents/openai.yaml": {
       "bytes": 421,
       "sha256": "7678783a5c9c90ebb65e47b95ec08e7483a2ffd8b188d3649e834c7ad7a26646"
     },
     "assets/preview.png": {
-      "bytes": 835690,
-      "sha256": "de4218a922c4229cbf0e30fd9cff98493ef6dbe8794ca1e30e3c5584a38620ee"
+      "bytes": 905937,
+      "sha256": "5a82366beaa59b8c353adaeaa23391c480bf43d1b120ee4c9c49dedaffe10b1b"
     },
     "assets/runtime/package-lock.json": {
       "bytes": 139418,
@@ -121,7 +67,7 @@
     },
     "assets/runtime/src/index.tsx": {
       "bytes": 834,
-      "sha256": "4971fc0cac82c030820e9b88c062809cfbf7e1e0ae5e726a55ef03e6d1f6e639"
+      "sha256": "d7b8bd045ebc00304a00b8bb889b27e8a25df47d62cb09b4e7be38ab8e309639"
     },
     "assets/runtime/src/song.tsx": {
       "bytes": 949,
@@ -147,45 +93,37 @@
       "bytes": 3407,
       "sha256": "31ca5ad7d1b5f48961a17784e670f5249cbb0c261bc31a85f662c556eaf64cef"
     },
-    "examples/create-smoke-input.mjs": {
-      "bytes": 3496,
-      "sha256": "3763bc04816906b4d3fc475c3e29979af72bed4a71ae45e2aa4caf802dae5e88"
-    },
     "references/assets-policy.md": {
-      "bytes": 1318,
-      "sha256": "dacb335a1fc81c3a8ab4912fd429a652d133b54849037c79f8092f4726cbb1e7"
+      "bytes": 1327,
+      "sha256": "d1c7ce22757b464c4b7715588e7055f6cbc606a866bd62a3804c27c32a7e59b9"
     },
     "references/data-contract.md": {
-      "bytes": 5044,
-      "sha256": "a4219790e7181171394f41f5f8f64ab5af33ae4f6b64a5a976f0fad3e1a4e10f"
+      "bytes": 5089,
+      "sha256": "4a305c56005a9df6eb3b2ec9f788775c22ca98b8ddde035a185c3775e5f64f92"
+    },
+    "references/environment.md": {
+      "bytes": 1875,
+      "sha256": "27bd5efec972a5ef38dbd335f91f4e876367c0075ae4e596f4d0422fdc7079d1"
     },
     "references/input-preparation.md": {
-      "bytes": 8577,
-      "sha256": "7e3d0fc448c799ad07f15f173ead35d40bd954f349b7134b662fb2bdf5cb2142"
+      "bytes": 8392,
+      "sha256": "d3ebcb1aabea786254c4bb2667c1a62dd940aa77e31e10de32d6bcffe44c2183"
     },
     "references/material-preparation.md": {
-      "bytes": 11152,
-      "sha256": "517ccaad75c6cd9f0eb172ec2b6577d011b5d5b437ae509744520d9e7292c28e"
+      "bytes": 11215,
+      "sha256": "6ca72a5c1c9aeb92895f00eebbc431c69a0ec5b8e12f533a03f67dbb7d24f828"
     },
-    "references/rc5-workflow.md": {
-      "bytes": 9558,
-      "sha256": "0f57f1fb9d46b119eb4ea0b9a7e6de54f5fc3761d6e8b0eb6eaa7fc5644c8364"
-    },
-    "references/rc6-workflow.md": {
-      "bytes": 8528,
-      "sha256": "70820a551b0b66a242d7e95b744575bdd4c6a6f9e252f42cd4b1ace117dc22c8"
-    },
-    "references/rc7-audio-recognition.md": {
-      "bytes": 131,
-      "sha256": "bbd244c710d35d36a6f18d3f2af3ef55f93dae184c53630728ca4c1bf6237624"
+    "references/rendering.md": {
+      "bytes": 8640,
+      "sha256": "7dff283e853a4275968f6be3ab24d7fda16e3aeb89ae5996f90f9f3a0e00cd07"
     },
     "references/score-validation.md": {
-      "bytes": 14787,
-      "sha256": "7aabfb1f3bbdb081231f1cb52a47c02125a17f077eb02ced4daa4e8052b8e03c"
+      "bytes": 12835,
+      "sha256": "f5a8563b5d1b4a3642c9bda0bdc71e03b3a60237904d42df62fa41878eb1bd3c"
     },
     "references/workflow.md": {
-      "bytes": 8177,
-      "sha256": "0d531767b0e584e985fe998488e236e8e3e71d313fbd10c914d3c6ce8c61f698"
+      "bytes": 8304,
+      "sha256": "27c3fabde217d36f62833e5bbf8ff8cc4d941a43480f02d0c2dacae46735df53"
     },
     "scripts/audio-production.mjs": {
       "bytes": 9753,
@@ -199,10 +137,6 @@
       "bytes": 4039,
       "sha256": "f672a711846dd570bce78d7c5a4dfb30302085ae75f6dc737fcf375db510b71f"
     },
-    "scripts/doctor.test.mjs": {
-      "bytes": 4362,
-      "sha256": "9be9e634a8e70d76789c6aad00bcccc11e9d226a1ccafa8e6fe8c76adc1a6c6b"
-    },
     "scripts/entry.mjs": {
       "bytes": 283,
       "sha256": "c662a49b0e30936dd7cb46b7d6547529dadc922b8a79128275c47ed5ecd9a921"
@@ -211,33 +145,13 @@
       "bytes": 15595,
       "sha256": "60515715899158af3730065d9caadf612720c18fad88bd3af100660f863fa65a"
     },
-    "scripts/environment.test.mjs": {
-      "bytes": 16057,
-      "sha256": "820374d59b86a8b83c5d0f1cfbfd38e05ef1048999e956b84bbc4c7966b196ae"
-    },
     "scripts/execution.mjs": {
       "bytes": 942,
       "sha256": "2bf64fcb616dbc49b125ed0ba2cd0a86c2fe9e9b5d0d43df8fd386d88b17626d"
     },
-    "scripts/fixtures/score.musicxml": {
-      "bytes": 560,
-      "sha256": "1bd85d3edced1d9a8a950a2c168700045af620989bddde212f03f191d99d751a"
-    },
-    "scripts/fixtures/score.svg": {
-      "bytes": 445,
-      "sha256": "c3c0b7368b824616144b6eb7521d2e0973e318a6ce6a0e8c609d0ccfc3fb5522"
-    },
-    "scripts/fixtures/timeline.json": {
-      "bytes": 416,
-      "sha256": "95bf63a16848eb578f6a5243e4b760e93e9ddb69c8e8e8064bb882133c54e88b"
-    },
     "scripts/geometry.mjs": {
       "bytes": 4322,
       "sha256": "5ac9677529219eeeef8fe15ad18a9e4e41b0a3a23a861e667c85d9910b3046c5"
-    },
-    "scripts/geometry.test.mjs": {
-      "bytes": 1581,
-      "sha256": "51946e8900802453fffab4650a1b28aa4c1bed20ecaab4b314a55c834b5eb34b"
     },
     "scripts/install.mjs": {
       "bytes": 7042,
@@ -251,17 +165,9 @@
       "bytes": 9245,
       "sha256": "2c5ea754b1ffd16866b2c21f899609be413b2b28c303ebf25f42b91d659ce916"
     },
-    "scripts/music.test.mjs": {
-      "bytes": 4718,
-      "sha256": "20725c2d95d089258961229e53cff01d6cb026e9ff932fde92ca62d601bdff3e"
-    },
     "scripts/notation-audit.mjs": {
       "bytes": 8800,
       "sha256": "9d12c4bba9a8cb33171dd1ac64fdf6521c7aa9e7a69d25f7d79ef9c0d0e95af4"
-    },
-    "scripts/omr.test.py": {
-      "bytes": 2698,
-      "sha256": "2687c79db33c65243560e0e57d5ee2d3c8e630f876b8bfcb3839ac0c0ea0ae7b"
     },
     "scripts/piano.mjs": {
       "bytes": 29606,
@@ -271,17 +177,9 @@
       "bytes": 13739,
       "sha256": "37be7f3e21eabd4bedf22b5c7758af6414637ab20a7ebe7f9544f838c8774e74"
     },
-    "scripts/production.test.mjs": {
-      "bytes": 9806,
-      "sha256": "87b3fd2a11c5554db10d01c0aac979c9c58bdb3a449f51c437344d5e291c12a8"
-    },
     "scripts/review.mjs": {
       "bytes": 11051,
       "sha256": "58983f2cb638d2e2487fbdffd1e58a66e34824e53a6a9dfc8615251a99c954aa"
-    },
-    "scripts/review.test.mjs": {
-      "bytes": 8347,
-      "sha256": "3cfd7d635d44bc2a52255497d238804c5b0e30ed4b1ec08193dcfcab96b913fc"
     },
     "scripts/score.mjs": {
       "bytes": 4349,
@@ -290,32 +188,6 @@
     "scripts/score.py": {
       "bytes": 43428,
       "sha256": "22469882de1026525825b30fb8639a1acc82324681bd3f03a6fa121d9f8c9eea"
-    },
-    "scripts/score.test.mjs": {
-      "bytes": 18162,
-      "sha256": "76639d931d48e577ba712fa21f3533d0b6a6dc5c94e8b6188f7d96de782dce9b"
-    },
-    "scripts/test.mjs": {
-      "bytes": 16266,
-      "sha256": "ae4cf550971dd69fbb08138c6fc22850dd2ed52573532048a1088fe23c7e3b3b"
-    },
-    "scripts/workflow.test.mjs": {
-      "bytes": 9535,
-      "sha256": "813265105bc218689f02d3adf183548ff830821b5a25fe863b765fd967a81f98"
     }
-  },
-  "validation": {
-    "report": "TEST-RESULTS-RC7.md",
-    "environmentReport": "ENVIRONMENT-REPORT-RC7.json",
-    "distinctTestsPassed": 82,
-    "newProductionTests": 13,
-    "actualMuseScoreAudioExport": "passed-original-fixture",
-    "actualProfessionalOMRAccuracy": "not_verified",
-    "newCompleteVideoRender": "not_performed",
-    "workBuddyHostTest": "not_retested",
-    "subjectiveAudioApproval": "not_performed",
-    "releaseVersion": "1.0.0",
-    "runtimeMatchesTestedCandidate": "1.0.0-rc7"
-  },
-  "repository": "https://github.com/Fallonwong/piano-remotion"
+  }
 }

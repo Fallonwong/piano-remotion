@@ -1,22 +1,20 @@
 > V1.0.0 补充：[音源生产与识谱修订](workflow.md)。新 bind 需要 --audio-evidence，PDF/图片 score-request 需要 --notation-audit；旧 synthesize 示例仅用于 --preview-only 校谱草稿。
 
-> RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
 
 # Portable piano asset import
 
-For new song work use `piano.mjs prepare`, then the [RC5 review/alignment/bind gates](rc5-workflow.md). This legacy importer remains a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.
+For new song work use `piano.mjs prepare`, then the [review/alignment/bind workflow](rendering.md). The importer is a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.
 
 For missing standard data, use the [Agent material-preparation workflow](material-preparation.md) first. It covers MusicXML, MIDI, SVG, MP3, staff images and jianpu images, reusing available Agent tools instead of mandating a complete CLI suite. A script's incomplete status is an Agent handoff, not a requirement that the user write a timeline manually.
 
 Requires Node.js 18 or newer. Uses built-in modules only; no npm install, Python,
 Remotion upgrade, or CLI installation. Copy the complete Skill to another computer,
-or copy `scripts/prepare.mjs` alongside `scripts/midi.mjs` for import-only use.
+or copy the complete `scripts/` directory for import-only use.
 The full Remotion workflow requires Node.js >=20. Replace `<skill>` with the
 actual Skill root; quote paths with spaces.
 
 ```powershell
 node <skill>/scripts/prepare.mjs --svg "C:/inputs/score.svg" --timeline "C:/inputs/timeline.json" --audio "C:/inputs/performance.mp3" --midi "C:/inputs/score.mid" --musicxml "C:/inputs/score.musicxml" --out "C:/project/public/score/my-piece"
-node --test <skill>/scripts/test.mjs
 ```
 
 Image source inputs are also accepted: `--score-image <staff.png>` and `--jianpu-image <jianpu.jpg>`. These check file existence and pass source paths to an explicit adapter, or return a capability handoff for Agent-native processing. They do not implement built-in image decoding/recognition and do not replace the required final SVG/timeline. Without an adapter, no output bundle is created until those assets exist. With complete standard assets, image paths may be supplied for context; originals stay at their source paths and are not copied to the final bundle. One file is accepted per flag; process multi-page sources with Agent tools before final import.

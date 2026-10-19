@@ -45,6 +45,6 @@ MusicXML 优先保留结构化记谱；MIDI 提供演奏信息，补排版和分
 node <skill>/scripts/piano.mjs --help
 ```
 
-[音源与谱面修订流程](references/workflow.md) · [几何、审阅和渲染](references/rc6-workflow.md) · [数据契约](references/data-contract.md) · [更多提示词](examples/agent-prompts.md)
+[音源与谱面修订流程](references/workflow.md) · [几何、审阅和渲染](references/rendering.md) · [数据契约](references/data-contract.md) · [更多提示词](examples/agent-prompts.md)
 
 原版组件和旧入口保留。新的有声歌曲使用带音频来源记录的 checked job，PDF/图片审阅包含 notation-audit，预览和导出共用同版素材。素材与授权信息见 LICENSE.txt。

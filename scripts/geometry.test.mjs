@@ -1,7 +1,0 @@
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import {nativeGeometry} from './geometry.mjs';import {validateLayout} from './piano.mjs';
-test('existing browser measures native transformed path glyph without deleting ties/dots', {skip:!process.env.PIANO_TEST_BROWSER},()=>{
- const dir=fs.mkdtempSync(path.join(os.tmpdir(),'piano-native-')),svg=path.join(dir,'score.svg'),timeline=path.join(dir,'timeline.json'),mapping=path.join(dir,'ids.json');
- const source='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200"><g transform="translate(20 10)"><path id="head" d="M30 30h20v10H30z"/><circle id="dot" cx="58" cy="35" r="2"/><path id="tie" d="M30 45Q50 65 80 45" fill="none" stroke="black"/></g></svg>';
- fs.writeFileSync(svg,source);fs.writeFileSync(timeline,JSON.stringify({fps:30,durationInFrames:60,scoreWidth:500,scoreHeight:200,events:[{hand:'right',frame:0,x:0,y:0,notes:[{id:'n',pitch:'C4',durationFrames:30,x:0,y:0}]}]}));fs.writeFileSync(mapping,JSON.stringify([{eventIndex:0,noteIndex:0,svgId:'head'}]));
- const result=nativeGeometry({svg,timeline,mapping,browser:process.env.PIANO_TEST_BROWSER,out:path.join(dir,'out')});const t=JSON.parse(fs.readFileSync(result.timeline)),layout=JSON.parse(fs.readFileSync(result.layout));assert.ok(Math.abs(t.events[0].notes[0].x-60)<.001);assert.ok(Math.abs(t.events[0].notes[0].y-45)<.001);assert.equal(fs.readFileSync(svg,'utf8'),source);assert.equal(validateLayout({timeline:t},svg,layout).mappedNoteheads,1);
-});

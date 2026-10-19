@@ -44,7 +44,7 @@ node <skill>/scripts/piano.mjs align --project <project> --props <actual-song-pr
 node <skill>/scripts/piano.mjs bind --project <project> --props <actual-song-props.json> --layout <layout.json> --alignment <alignment.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --out <job.json>
 ```
 
-PDF/图片等仍须 RC6 的 source-type、score-review、browser 参数。录音源与生成音频选择应对应，不能更名绕过来源记录。源文件复制到 public 后只要字节一致可以验证；绝对路径记录是本地证据，迁移需重新绑定。
+PDF/图片等还须提供 [谱面审阅与渲染](rendering.md) 中的 source-type、score-review、browser 参数。录音源与生成音频选择应对应，不能更名绕过来源记录。源文件复制到 public 后只要字节一致可以验证；绝对路径记录是本地证据，迁移需重新绑定。
 
 内置 synthesize 只用于校谱草稿，现在显式要求 `--preview-only`，会生成 calibration-preview 来源记录；完整作品 bind 拒绝它，仅 `--draft` 可使用。保留兼容的底层 API，但不得通过直接调用绕过正式音源策略。
 
