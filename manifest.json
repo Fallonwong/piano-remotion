@@ -220,8 +220,8 @@
       "sha256": "dbbf8660eb26b00ca75817263623719e5d1b222423aa5b9f936a50b5c46104ad"
     },
     "scripts/music.mjs": {
-      "bytes": 9247,
-      "sha256": "47228ca43b3b5b70a6bc85867dd6d24481d67bc57a5155f2bf67fbf06afe1712"
+      "bytes": 9245,
+      "sha256": "2c5ea754b1ffd16866b2c21f899609be413b2b28c303ebf25f42b91d659ce916"
     },
     "scripts/music.test.mjs": {
       "bytes": 4718,

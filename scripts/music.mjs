@@ -96,4 +96,3 @@ export function validateNotationMapping(t,check){
   }
   return {status:'written_note_semantics_match',writtenNotes:notes.length};
 }
-
