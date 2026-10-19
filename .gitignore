@@ -1,0 +1,21 @@
+# Dependencies and generated runtime files (including nested runtime copies)
+node_modules/
+.remotion/
+.cache/
+out/
+dist/
+.test-run-*/
+.piano-prepare-*/
+__pycache__/
+*.pyc
+*.log
+*.tsbuildinfo
+
+# Local secrets; retain example configuration
+.env
+.env.*
+!.env.example
+
+# OS metadata
+.DS_Store
+Thumbs.db

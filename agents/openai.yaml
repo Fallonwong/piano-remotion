@@ -1,0 +1,4 @@
+interface:
+  display_name: "Piano Remotion"
+  short_description: "Animate piano scores with original glowing note leaps"
+  default_prompt: "Use $piano-remotion after reading the official $remotion-best-practices Skill; inspect my music or notation inputs, reuse available Agent tools to prepare missing assets, and preview the original note-leap animation."

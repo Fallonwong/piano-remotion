@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="90" viewBox="0 0 160 90">
+  <!-- Original tiny structural fixture, not a transcription of existing music. -->
+  <path d="M10 20H150 M10 25H150 M10 30H150 M10 35H150 M10 40H150" stroke="black" fill="none"/>
+  <ellipse cx="40" cy="30" rx="4" ry="3"/>
+  <ellipse cx="40" cy="20" rx="4" ry="3"/>
+  <ellipse cx="40" cy="60" rx="4" ry="3"/>
+  <ellipse cx="80" cy="35" rx="4" ry="3"/>
+</svg>

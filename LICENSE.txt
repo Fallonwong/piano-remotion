@@ -1,0 +1,15 @@
+Piano Remotion — licensing pending
+
+The owner chose not to assign a public license yet. On 2026-10-19 the owner
+authorized publishing this release candidate to Fallonwong/piano-remotion on
+GitHub. That publication does not assign MIT, Apache-2.0 or another public license.
+
+No MIT, Apache-2.0, or other public license is granted by this archive.
+Retain applicable rights in the user-supplied ScoreNoteLeap source and in the
+new packaging code. Further reuse and redistribution permissions have not been
+granted by this document; obtain the relevant rights holder's permission. This
+file does not claim ownership for a named
+person or independently certify provenance.
+
+Third-party dependencies retain their own licenses. This archive contains no
+song recordings, private scores, personal character footage or proprietary font.
