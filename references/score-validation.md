@@ -1,3 +1,5 @@
+> RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
+
 # RC5 deterministic score validation and source comparison
 
 This is a separate evidence pipeline. It does not modify the renderer/core or infer optical recognition, hand assignment, notehead coordinates, repeat expansion, or audio synchronization. `structuralPassed` and `visualReview` are independent. A successful `check` always leaves visual review pending.

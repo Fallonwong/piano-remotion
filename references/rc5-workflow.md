@@ -1,3 +1,5 @@
+> RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
+
 # RC5 deterministic workflow
 
 All Agent hosts use `node <skill>/scripts/piano.mjs <command>`. It delegates environment, installation, import and score checks to deterministic scripts and freezes one song job for preview/export. The base animation does not require Python. No script installs npm packages, creates a venv, downloads model weights or changes global PATH automatically.

@@ -6,6 +6,7 @@ import {execFile} from 'node:child_process';
 
 export const BASELINE = Object.freeze({remotion:'4.0.515','@remotion/cli':'4.0.515',react:'19.2.4','react-dom':'19.2.4',typescript:'5.9.3'});
 const TIMEOUT = 5000;
+const CLI_TIMEOUT = Math.max(1,Math.min(120000,Number(process.env.PIANO_CLI_PROBE_TIMEOUT_MS)||15000));
 const exists = p => {try{return fs.statSync(p).isFile();}catch{return false;}};
 const dirs = p => {try{return fs.readdirSync(p,{withFileTypes:true}).filter(e=>e.isDirectory()).map(e=>path.join(p,e.name));}catch{return [];}};
 const canonical = p => {try{return fs.realpathSync(p);}catch{return path.resolve(p);}};
@@ -48,14 +49,14 @@ async function inspectProject(project) {
       }catch(e){result.issues.push(`${name}: ${e.message}`);}
     }
     if(result.cliPath&&result.issues.length===0) {
-      result.cliProbe=await probe(process.execPath,[result.cliPath,'--version'],project,15000);
+      result.cliProbe=await probe(process.execPath,[result.cliPath,'--version'],project,CLI_TIMEOUT);
       const p=result.cliProbe;
       // 4.0.515 prints its version and help, then exits 1 for --version.
       // Accept only that exact banner, the known exit codes, and empty stderr.
       const banner=p.stdout.replace(/\x1b\[[0-9;]*m/g,'');
       p.version= /(?:^|\n)@remotion\/cli (\d+\.\d+\.\d+)(?:\r?\n|$)/.exec(banner)?.[1]??null;
       p.ok=!p.timedOut&&[0,1].includes(p.exitCode)&&!p.stderr&&p.version===BASELINE['@remotion/cli'];
-      if(!p.ok)result.issues.push('Remotion --version probe failed; see cliProbe');
+      if(!p.ok)result.issues.push(p.timedOut?'ENVIRONMENT_VERIFICATION_PENDING: installed packages match, but CLI probe timed out. Do not reinstall; inspect the process/cache and retry with PIANO_CLI_PROBE_TIMEOUT_MS (max 120000).':'Remotion --version probe failed; see cliProbe');
     }
   }catch(e){result.issues.push(e.message);}
   if(Number(process.versions.node.split('.')[0])<20)result.issues.push('Node >=20 required');
@@ -217,5 +218,5 @@ export async function discoverEnvironment({project=process.cwd(),authorizedProje
     const entry=tools[n]??={paths:[],probes:[],available:false};
     entry.paths.push(item.path);entry.probes.push(result);entry.available ||= result.ok;
   }
-  return {baseline:BASELINE,compatibilityPolicy:'Exact installed versions, local module resolution, Node >=20 and actual Remotion CLI version probe required.',projects,selectedProject:projects.find(p=>p.compatible)?.project??null,packageManagers,pythons,selectedPython:pythons.find(p=>p.valid)?.path??null,pythonRequired:false,tools,launcherProbes,probeTimeoutMs:TIMEOUT,cliProbeTimeoutMs:15000};
+  return {baseline:BASELINE,compatibilityPolicy:'Exact installed versions, local module resolution, Node >=20 and actual Remotion CLI version probe required; timeouts mean unverified, not absent.',projects,selectedProject:projects.find(p=>p.compatible)?.project??null,verificationPending:projects.some(p=>p.cliProbe?.timedOut),packageManagers,pythons,selectedPython:pythons.find(p=>p.valid)?.path??null,pythonRequired:false,tools,launcherProbes,probeTimeoutMs:TIMEOUT,cliProbeTimeoutMs:CLI_TIMEOUT};
 }

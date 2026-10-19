@@ -2,15 +2,27 @@
 
 基于 Remotion 的钢琴乐谱动效 Skill，保留原版 **ScoreNoteLeap**，支持双手音符跳跃、和弦高亮、渐细发光拖尾，以及共享谱面坐标的倾斜与运镜。
 
-**当前版本：1.0.0-rc5-r1 · RC5 整改发布候选版。** 已完成 Windows 独立工程渲染验证；公共许可证尚未指定，见 [LICENSE.txt](LICENSE.txt)。本仓库可公开查看，但没有授予 MIT、Apache 等开源许可。
+**当前版本：1.0.0-rc6 · RC6 发布候选版。** 已完成 Windows 独立工程渲染验证；公共许可证尚未指定，见 [LICENSE.txt](LICENSE.txt)。本仓库可公开查看，但没有授予 MIT、Apache 等开源许可。
 
 ![通用测试谱面的真实渲染关键帧](assets/preview.png)
 
 图中是随包合成测试数据的真实渲染，不包含商业歌曲或私人角色素材。
 
-## RC5 整改：统一执行与分层验收
+## RC6：两次用户确认、连音与识谱待审阅
 
-跨 Agent 使用同一个确定性入口：`node <skill>/scripts/piano.mjs`。完整命令和数据格式见 **[RC5 工作流程](references/rc5-workflow.md)**。主要整改：
+新用户只需提供素材并要求成片。Agent 在阶段内自主执行，但必须先展示谱面并等待用户确认，再展示关键帧／短试听并等待确认，最后才能完整导出。
+
+- `score-request` 产生 `WAITING_FOR_SCORE_APPROVAL`，Agent 结束本轮；自检不能代填用户批准。
+- `keyframes` 实际生成 PNG、短音频及连音动态片段，返回 `WAITING_FOR_KEYFRAME_APPROVAL`。
+- `render --approval ... --confirmed` 检查两道确认及同版素材；单独 --confirmed 不能跳过。
+- MusicXML 的时值、延音线、圆滑线与符杠保留到时间轴；同音延音只起音一次。可选原生 SVG 坐标测量保留原始排谱符号。
+- 识谱默认优先已安装专业 OMR。缺少时报告选项与疑点，不强制安装，也不承诺未经实测的准确率。
+
+实际命令与数据格式见 **[RC6 工作流程](references/rc6-workflow.md)**，本轮结果见 **[RC6 测试记录](TEST-RESULTS-RC6.md)**。
+
+## RC5 已有能力与兼容基础
+
+跨 Agent 使用同一个确定性入口：`node <skill>/scripts/piano.mjs`。RC5 历史命令和数据格式见 **[RC5 工作流程](references/rc5-workflow.md)**。主要整改：
 
 - **环境先复用**：检查当前/显式授权项目、实际依赖与 CLI、Node 包管理器、现有 Python/venv、PATH 外的 Windows 常见安装位置。先计划，首次安装或新增大型依赖先确认；不会自动 npm 安装或新建 venv。
 - **谱面先校验**：区分 PDF/图片 OMR、标准 MusicXML/MIDI 和音频。逐小节保留结构化音符与疑点，提供源谱/重排谱裁切对照；VexFlow 画出 SVG 不代表识谱正确。
@@ -18,7 +30,7 @@
 - **同一曲目数据**：checked job 固定 SVG/timeline/audio/props/layout/review 哈希；预览和导出都走无 Demo 回退的 Song 入口。
 - **成片验证**：实际 MP4 的视频/音频流、时长、尺寸、帧率、非静音信号和抽样同步均由脚本检查。识谱、结构、视觉、几何、音频、成片状态分别报告。
 
-Python 不是基础动画的强制依赖。原版 ScoreNoteLeap/PianoScoreScene 组件保持兼容且字节未变；旧 Demo 入口仍保留，但新歌曲请使用 checked job 工作流。
+Python 不是基础动画的强制依赖。PianoScoreScene 保持原样；ScoreNoteLeap 新增可选的延音持续／续接高亮字段，原跳跃轨迹与拖尾算法保持兼容；旧 Demo 入口仍保留，但新歌曲请使用 checked job 工作流。
 
 ## 先安装官方 Remotion Skill
 
@@ -66,7 +78,7 @@ WorkBuddy 等 Agent 使用其实际配置的 Skill 目录；没有 Skill 自动�
 
 > 使用 $piano-remotion。我提供了简谱图片和演奏 MP3，请先检查你已有的识谱、谱面生成和音频对齐能力，自主补齐标准素材，保留原旋律，不额外编配伴奏，完成后打开预览。缺少能力时只指导配置必要工具。
 
-更多可直接复制的示例，包括“首次体验、已有标准素材、只有 MP3、五线谱/简谱图片、无音频、预览确认后导出”，见 **[Agent 提示词示例](examples/agent-prompts.md)**。将示例中的素材和工程路径替换为真实路径。图片、音频等文件须通过当前 Agent 支持的附件或本地路径提供。
+更多可直接复制的 RC6 示例，包括“PDF/图片、标准素材、只有 MP3、两次确认后导出”，见 **[Agent 提示词示例](examples/agent-prompts.md)**。将示例中的素材和工程路径替换为真实路径。图片、音频等文件须通过当前 Agent 支持的附件或本地路径提供。
 
 ## 兼容的通用 Demo（无声演示，不代表有声作品验收）
 
@@ -102,18 +114,21 @@ npm run studio
 
 脚本返回 `incomplete` 时，会列出缺项和 Agent 补齐指引；有能力时继续处理。只有真实缺少能力或关键乐谱信息无法确定时，才说明最小配置需求或提出具体问题。不默认让用户手写时间轴，不擅自补伴奏，不将普通 OCR 成功当作识谱准确。
 
-使用歌曲时，**先准备素材和 props，再预览或导出**。将 `--props=<song-props.json>` 传给每次 Remotion CLI 调用；doctor 使用 `--props <song-props.json>`。素材约束见 [数据契约](references/data-contract.md) 和 [预处理说明](references/input-preparation.md)。
+使用歌曲时，**先确认谱面，再确认关键帧与试听，最后导出**。新歌曲按 RC6 统一入口执行，不使用下面的旧调用说明跳过确认。将 `--props=<song-props.json>` 传给每次 Remotion CLI 调用；doctor 使用 `--props <song-props.json>`。素材约束见 [数据契约](references/data-contract.md) 和 [预处理说明](references/input-preparation.md)。
 
 个人图片/视频装饰为可选项，默认关闭，署名默认为空。不随包提供原曲、原曲谱面、私人 IP、品牌素材或字体，见 [素材边界](references/assets-policy.md)。
 
 ## 验证与限制
 
-本轮真实完成环境复用、经确认的离线首次安装、标准素材导入、带非静音 MP3 的 6 秒成片及开头/中段/结尾起音校验；没有新增 OMR 或 Python 环境。原版动效组件字节不变。详见 **[本轮 RC5 测试报告](TEST-RESULTS-RC5.md)** 和 [历史报告](TEST-RESULTS.md)。PDF/图片缺专业 OMR 的情况、错误音符、未批准的逐小节差异均保持 blocked/needs_review；不把缺失分支测试当成真实识谱成功。未认证实际 WorkBuddy 宿主、其他操作系统、任意音乐的全音高或逐音同步。
+RC5 历史验证真实完成环境复用、经确认的离线首次安装、标准素材导入、带非静音 MP3 的 6 秒成片及开头/中段/结尾起音校验；没有新增 OMR 或 Python 环境。原版动效组件字节不变。详见 **[历史 RC5 测试报告](TEST-RESULTS-RC5.md)** 和 [历史报告](TEST-RESULTS.md)。PDF/图片缺专业 OMR 的情况、错误音符、未批准的逐小节差异均保持 blocked/needs_review；不把缺失分支测试当成真实识谱成功。未认证实际 WorkBuddy 宿主、其他操作系统、任意音乐的全音高或逐音同步。
 
 ```sh
 node --test <skill>/scripts/test.mjs
 node --test <skill>/scripts/doctor.test.mjs
 node --test <skill>/scripts/workflow.test.mjs
+node --test <skill>/scripts/music.test.mjs <skill>/scripts/review.test.mjs
+# 设置 PIANO_TEST_BROWSER 后运行实际原生 SVG 测量测试
+node --test <skill>/scripts/geometry.test.mjs
 node --test <skill>/scripts/environment.test.mjs
 node --test <skill>/scripts/score.test.mjs
 ```

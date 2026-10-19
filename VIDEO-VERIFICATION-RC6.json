@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "media_verified",
+  "file": "RC6-reviewed-smoke.mp4",
+  "fileSha256": "7c46a821e3ce2c71e700a6608e9c07ca0a4674d5b51c3e711acd03d54e497e24",
+  "video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "duration": 5
+  },
+  "audio": {
+    "codec": "aac",
+    "rms": 0.044575186386371986,
+    "peak": 0.317230224609375
+  },
+  "silentConfirmed": false,
+  "alignment": {
+    "schemaVersion": 1,
+    "status": "sampled_onsets_passed",
+    "audioSha256": "7c46a821e3ce2c71e700a6608e9c07ca0a4674d5b51c3e711acd03d54e497e24",
+    "timelineSha256": "c8fb93468b7eb928564e0cc78130e2c4a49d6ba003fc11c16adfb636ee76c98a",
+    "method": "decoded_pcm_energy_onsets",
+    "toleranceSeconds": 0.06666666666666667,
+    "scoreDuration": 5,
+    "audioDuration": 5.056,
+    "durationPassed": true,
+    "samples": [
+      {
+        "region": "beginning",
+        "frame": 10,
+        "expectedSeconds": 0.3333333333333333,
+        "observedOnsetSeconds": 0.3691609977324263,
+        "offsetSeconds": 0.03582766439909296,
+        "passed": true
+      },
+      {
+        "region": "middle",
+        "frame": 40,
+        "expectedSeconds": 1.3333333333333333,
+        "observedOnsetSeconds": 1.3768707482993197,
+        "offsetSeconds": 0.0435374149659864,
+        "passed": true
+      },
+      {
+        "region": "end",
+        "frame": 115,
+        "expectedSeconds": 3.8333333333333335,
+        "observedOnsetSeconds": 3.871201814058957,
+        "offsetSeconds": 0.03786848072562332,
+        "passed": true
+      }
+    ],
+    "audibility": {
+      "rms": 0.044575186386371986,
+      "peak": 0.317230224609375
+    },
+    "onsetCount": 5,
+    "limitations": [
+      "Energy onsets are candidates, not pitch recognition.",
+      "Three sampled attacks do not certify every note.",
+      "Dense/polyphonic or legato audio may require manual onset/pitch review."
+    ]
+  },
+  "limits": "Stream and sampled onset checks do not certify all pitches or all note timings.",
+  "testApproval": "SYNTHETIC_PROTOCOL_FIXTURE_NOT_HUMAN_ACCEPTANCE"
+}

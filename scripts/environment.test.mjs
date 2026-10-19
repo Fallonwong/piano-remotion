@@ -212,3 +212,9 @@ test('live authorized projects, bundled Python, non-PATH MuseScore and real CLI'
   const d=run('doctor.mjs',[p,...(python?['--python',python]:[])]);save('live-doctor',d);assert.equal(d.environment.projects[0].compatible,true);
 });
 console.log(`Environment evidence: ${work}`);
+test('matching dependencies with timed-out CLI remain pending, never a missing-install diagnosis',()=>{
+ const target=fixture();write(path.join(target,'node_modules/@remotion/cli/cli.cjs'),"setTimeout(()=>console.log('@remotion/cli 4.0.515'),1000)");
+ const moduleUrl=new URL('./environment.mjs',import.meta.url).href;
+ const code=`import {discoverEnvironment} from ${JSON.stringify(moduleUrl)}; const r=await discoverEnvironment({project:${JSON.stringify(target)}});console.log(JSON.stringify(r));`;
+ const result=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',windowsHide:true,timeout:60000,env:{...process.env,PIANO_CLI_PROBE_TIMEOUT_MS:'1'}});assert.equal(result.status,0,result.stderr);const r=JSON.parse(result.stdout);assert.equal(r.verificationPending,true);assert.equal(r.selectedProject,null);assert.ok(r.projects[0].issues.some(s=>s.includes('ENVIRONMENT_VERIFICATION_PENDING')));save('matching-cli-timeout-pending',r);
+});

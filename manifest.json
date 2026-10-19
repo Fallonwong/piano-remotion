@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.0.0-rc5-r1",
+  "version": "1.0.0-rc6",
   "releaseStatus": "PUBLIC_RELEASE_CANDIDATE_LICENSE_UNASSIGNED",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
@@ -8,7 +8,8 @@
     "react": "19.2.4",
     "typescript": "5.9.3"
   },
-  "sourceCoreSha256": "e71f2d5ef61cce15c7e7fd1819a4cecbe91e163d7f0fe5cae5d153217fe2b395",
+  "sourceCoreSha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed",
+  "sourceCorePolicy": "RC5 baseline retained in git; additive optional sustain highlight metadata, original leap/trail/camera algorithms retained. PianoScoreScene and PianoRemotion unchanged.",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -26,6 +27,10 @@
       "bytes": 7325,
       "sha256": "61a9aa375fead9383ab8cef7cceefdc4f1c6bbcad8e547e52df276a747498ef5"
     },
+    "ENVIRONMENT-REPORT-RC6.json": {
+      "bytes": 1009,
+      "sha256": "38671b402f6e9ea274d65f623702a2587d99f66ce4675edc95995d416062aa09"
+    },
     "ENVIRONMENT-REPORT.json": {
       "bytes": 19320,
       "sha256": "19b961a197ef7876254a90555566adce077a85d315b2cad7cf62b6e487b5601f"
@@ -35,32 +40,44 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 9746,
-      "sha256": "f03e9911182a51a3aa371b81e7ce12cde5c3136241ea763abe61452351fe9509"
+      "bytes": 11103,
+      "sha256": "81aa5f61bddf614f71852c375507f137e848ad295e11f5ba781f1d17411626ed"
     },
     "README_使用说明.md": {
-      "bytes": 2821,
-      "sha256": "77d91f0d77554a64494ff95c4daea483823840c24db058a7d89493d4da21c551"
+      "bytes": 2893,
+      "sha256": "0528942d3c40df3802a5827adc8998de05dbb7e8f327260f56a241e494ce1af8"
+    },
+    "RELEASE-NOTES-RC6.md": {
+      "bytes": 1070,
+      "sha256": "d037e12d408c9263d0efa935073bc5fc7d66adec96f42f655f6f26962df06f65"
     },
     "SKILL.md": {
-      "bytes": 5042,
-      "sha256": "eaa9c15dead3ef20ee9a2592fed5eec1ef521889a44fd58d7b167308d3e70dee"
+      "bytes": 5721,
+      "sha256": "018aa4bb7fd91068db9bfcf5b422d93a650961dae509158713dd0f7f5b101195"
     },
     "TEST-RESULTS-RC5.md": {
       "bytes": 6694,
       "sha256": "8d86c8894978a804ad074d2da3a9ba7dbd3cf74c438a834eb75a700f4558daf6"
     },
+    "TEST-RESULTS-RC6.md": {
+      "bytes": 4312,
+      "sha256": "78a44887d14900e217430a5fd6cc65c498915620eb63966a8f11385c83c36d96"
+    },
     "TEST-RESULTS.md": {
       "bytes": 12030,
       "sha256": "70036b033866786448d79dbcb8d4f4e12ad1a48d71ce1d8ec281662e12b37144"
     },
+    "VIDEO-VERIFICATION-RC6.json": {
+      "bytes": 2074,
+      "sha256": "47211cec3a82ffb167449d05028ee0d1d76aba1dd8d29ef94f28588aa586bf25"
+    },
     "agents/openai.yaml": {
-      "bytes": 358,
-      "sha256": "6a65105d215c01fa3e53a5cb3b2cb81595ed008d81d0969b9922a9e8566e3d08"
+      "bytes": 421,
+      "sha256": "7678783a5c9c90ebb65e47b95ec08e7483a2ffd8b188d3649e834c7ad7a26646"
     },
     "assets/preview.png": {
-      "bytes": 471951,
-      "sha256": "515ce75bee196399458fd6bf0dc35af32ffc95398834842815b454f0124e60ad"
+      "bytes": 835690,
+      "sha256": "de4218a922c4229cbf0e30fd9cff98493ef6dbe8794ca1e30e3c5584a38620ee"
     },
     "assets/runtime/package-lock.json": {
       "bytes": 139418,
@@ -91,8 +108,8 @@
       "sha256": "4971fc0cac82c030820e9b88c062809cfbf7e1e0ae5e726a55ef03e6d1f6e639"
     },
     "assets/runtime/src/song.tsx": {
-      "bytes": 1134,
-      "sha256": "8a3b8b579aab8abc167f0af4bf64248dcf8444204cb0c017b84d8026a13b78c4"
+      "bytes": 949,
+      "sha256": "5497711387d7b669f191158a1d27f37e3d46118c973c62449c2da964d9a64867"
     },
     "assets/runtime/tsconfig.json": {
       "bytes": 242,
@@ -107,40 +124,48 @@
       "sha256": "bb387fdebbe86995713969b849f7a7c6a5843c3db532c4d16efe341ce9d01a87"
     },
     "components/ScoreNoteLeap.tsx": {
-      "bytes": 5884,
-      "sha256": "e71f2d5ef61cce15c7e7fd1819a4cecbe91e163d7f0fe5cae5d153217fe2b395"
+      "bytes": 6437,
+      "sha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed"
     },
     "examples/agent-prompts.md": {
-      "bytes": 4992,
-      "sha256": "b9fd8af90731a2b9c4e931679e6c3ed4b62e65a2d74cc6b876703722c7bec638"
+      "bytes": 2663,
+      "sha256": "e3a4e4786ca8f56d8493b62d86afaf0804b0768da8637f33dc92e34c9b2c2c92"
+    },
+    "examples/create-smoke-input.mjs": {
+      "bytes": 3496,
+      "sha256": "3763bc04816906b4d3fc475c3e29979af72bed4a71ae45e2aa4caf802dae5e88"
     },
     "references/assets-policy.md": {
       "bytes": 1318,
       "sha256": "dacb335a1fc81c3a8ab4912fd429a652d133b54849037c79f8092f4726cbb1e7"
     },
     "references/data-contract.md": {
-      "bytes": 3619,
-      "sha256": "7e2c66d73623aa244f76642bb471a263f2b0ab61838221317bd9e6888d1acbb9"
+      "bytes": 5044,
+      "sha256": "a4219790e7181171394f41f5f8f64ab5af33ae4f6b64a5a976f0fad3e1a4e10f"
     },
     "references/input-preparation.md": {
-      "bytes": 8135,
-      "sha256": "5fde38e72c669972e29109a02dc637e1b2e0b6deed3ef69842cd94fd5261b3fc"
+      "bytes": 8365,
+      "sha256": "7b8c2a5892e99704e8a8575e1877ba3c7c294fc18a8fa4331ab5663b8e93fad6"
     },
     "references/material-preparation.md": {
       "bytes": 11152,
       "sha256": "517ccaad75c6cd9f0eb172ec2b6577d011b5d5b437ae509744520d9e7292c28e"
     },
     "references/rc5-workflow.md": {
-      "bytes": 9328,
-      "sha256": "a829ea55516fc679223faba3356250f17ad1aaf58de4d82724ab4ba194533e32"
+      "bytes": 9558,
+      "sha256": "0f57f1fb9d46b119eb4ea0b9a7e6de54f5fc3761d6e8b0eb6eaa7fc5644c8364"
+    },
+    "references/rc6-workflow.md": {
+      "bytes": 8316,
+      "sha256": "4ce931a6331793cd080786e84833dcf65ef24b742d48e3c835c6d575236556db"
     },
     "references/score-validation.md": {
-      "bytes": 14345,
-      "sha256": "d8abe6f8fffb4ae2957abb80a69d190208e27744ad7564a64ca7ed383f9e3a84"
+      "bytes": 14575,
+      "sha256": "18e37f9d3a3be9a895bce222f6039fa0b78ee5280e8fde8662d978b0e336667b"
     },
     "scripts/audio.mjs": {
-      "bytes": 7919,
-      "sha256": "96e83ce7f8b415f6f48da3891d0e1e1f4c3cfda75543fb65c9cbcec19daa5265"
+      "bytes": 8421,
+      "sha256": "62e98182e42eed3978c85bf7804a367618e767452c99133de5b770ef7f5f7732"
     },
     "scripts/doctor.mjs": {
       "bytes": 4039,
@@ -150,13 +175,21 @@
       "bytes": 4362,
       "sha256": "9be9e634a8e70d76789c6aad00bcccc11e9d226a1ccafa8e6fe8c76adc1a6c6b"
     },
+    "scripts/entry.mjs": {
+      "bytes": 283,
+      "sha256": "c662a49b0e30936dd7cb46b7d6547529dadc922b8a79128275c47ed5ecd9a921"
+    },
     "scripts/environment.mjs": {
-      "bytes": 15184,
-      "sha256": "dcc7080992aa58c97b61d37256add49e94fff66ca0968d19b161724a5fb9813c"
+      "bytes": 15595,
+      "sha256": "60515715899158af3730065d9caadf612720c18fad88bd3af100660f863fa65a"
     },
     "scripts/environment.test.mjs": {
-      "bytes": 15090,
-      "sha256": "755a65ad919f32912534682a25195601497f05dcc764fbea4b6059aa5f307fde"
+      "bytes": 16057,
+      "sha256": "820374d59b86a8b83c5d0f1cfbfd38e05ef1048999e956b84bbc4c7966b196ae"
+    },
+    "scripts/execution.mjs": {
+      "bytes": 942,
+      "sha256": "2bf64fcb616dbc49b125ed0ba2cd0a86c2fe9e9b5d0d43df8fd386d88b17626d"
     },
     "scripts/fixtures/score.musicxml": {
       "bytes": 560,
@@ -170,29 +203,57 @@
       "bytes": 416,
       "sha256": "95bf63a16848eb578f6a5243e4b760e93e9ddb69c8e8e8064bb882133c54e88b"
     },
+    "scripts/geometry.mjs": {
+      "bytes": 4322,
+      "sha256": "5ac9677529219eeeef8fe15ad18a9e4e41b0a3a23a861e667c85d9910b3046c5"
+    },
+    "scripts/geometry.test.mjs": {
+      "bytes": 1581,
+      "sha256": "51946e8900802453fffab4650a1b28aa4c1bed20ecaab4b314a55c834b5eb34b"
+    },
     "scripts/install.mjs": {
-      "bytes": 6782,
-      "sha256": "1687506dc12079102687ddfdb5891d0027480460c9af0d543c96ffefe4880b73"
+      "bytes": 7042,
+      "sha256": "324faa324c7a6bae942eee71424de76adf7bd58e7b3ed1eb74042652f165815d"
     },
     "scripts/midi.mjs": {
       "bytes": 5690,
       "sha256": "dbbf8660eb26b00ca75817263623719e5d1b222423aa5b9f936a50b5c46104ad"
     },
+    "scripts/music.mjs": {
+      "bytes": 9247,
+      "sha256": "47228ca43b3b5b70a6bc85867dd6d24481d67bc57a5155f2bf67fbf06afe1712"
+    },
+    "scripts/music.test.mjs": {
+      "bytes": 4718,
+      "sha256": "20725c2d95d089258961229e53cff01d6cb026e9ff932fde92ca62d601bdff3e"
+    },
+    "scripts/omr.test.py": {
+      "bytes": 2698,
+      "sha256": "2687c79db33c65243560e0e57d5ee2d3c8e630f876b8bfcb3839ac0c0ea0ae7b"
+    },
     "scripts/piano.mjs": {
-      "bytes": 19081,
-      "sha256": "dd9fb8fb6f30c62ea22c7b8efb6a1fabf98728225c833669363f75893c35ec0b"
+      "bytes": 26385,
+      "sha256": "f3837db95948e93ee04094ae8299260ff7baec03159a3129ea1798d0cf356446"
     },
     "scripts/prepare.mjs": {
-      "bytes": 13763,
-      "sha256": "3e7c3ae4c491f0007bb4b92caf6a5b913b98728e7cc5bba3df64627569da63d2"
+      "bytes": 13739,
+      "sha256": "37be7f3e21eabd4bedf22b5c7758af6414637ab20a7ebe7f9544f838c8774e74"
+    },
+    "scripts/review.mjs": {
+      "bytes": 10735,
+      "sha256": "ee42f7238d86af393dfa00ad683859170f07419dde7a81a1459efd253d850411"
+    },
+    "scripts/review.test.mjs": {
+      "bytes": 7881,
+      "sha256": "d4364642a61d2ac9785415ae26cace20f08944131ca93477cb10147a12af25bd"
     },
     "scripts/score.mjs": {
-      "bytes": 4373,
-      "sha256": "84a6e79a18620c74e3c75e8ef5945b122d0a531a69cf69f3bdad46d299d46e38"
+      "bytes": 4349,
+      "sha256": "f16b4065f389407b0deae7219e626fe48496e19e23a732fa41c8dfef118a3234"
     },
     "scripts/score.py": {
-      "bytes": 40283,
-      "sha256": "60e0d0e2f155fbea00e8e3987ed13c0100a83669a31726c939c9a8b3b9c2cda8"
+      "bytes": 43428,
+      "sha256": "22469882de1026525825b30fb8639a1acc82324681bd3f03a6fa121d9f8c9eea"
     },
     "scripts/score.test.mjs": {
       "bytes": 18162,
@@ -207,61 +268,15 @@
       "sha256": "813265105bc218689f02d3adf183548ff830821b5a25fe863b765fd967a81f98"
     }
   },
-  "excluded": [
-    "original song assets",
-    "personal IP and brand media",
-    "custom fonts",
-    "MP4",
-    "MP3",
-    "WebM",
-    "node_modules",
-    "browser binaries",
-    ".git",
-    "caches",
-    "test run output"
-  ],
-  "acceptance": {
-    "latestScopedVerificationVersion": "1.0.0-rc5-r1",
-    "testsAndGroupsPassed": 86,
-    "suites": {
-      "import": 40,
-      "doctor": 7,
-      "workflow": 14,
-      "environment": 18,
-      "scoreIntegrationGroups": 7
-    },
-    "separateSuiteExecutions": true,
-    "originalFilesChanged": 0,
-    "originalFilesCompared": 20,
-    "coreComponentsByteIdentical": true,
-    "environmentReuse": "passed",
-    "authorizedFirstInstall": {
-      "status": "passed",
-      "offline": true,
-      "packagesAddedObserved": 251
-    },
-    "render": {
-      "status": "media_verified",
-      "videoFrames": 180,
-      "fps": 30,
-      "resolution": [
-        1280,
-        720
-      ],
-      "seconds": 6,
-      "audioCodec": "aac",
-      "sampledOffsetMs": [
-        42.63038548752834,
-        39.45578231292535,
-        36.7346938775514
-      ]
-    },
+  "validation": {
+    "report": "TEST-RESULTS-RC6.md",
+    "environmentReport": "ENVIRONMENT-REPORT-RC6.json",
+    "videoReport": "VIDEO-VERIFICATION-RC6.json",
+    "uniqueTestsPassed": 106,
     "actualProfessionalOMR": "not_verified",
     "actualHumanScoreApproval": "not_verified",
-    "fullPitchAndEveryNoteSync": "not_certified",
-    "workBuddyHostTest": "not_performed",
-    "archiveExtractedIndependentRender": "passed",
-    "archiveReport": "ARCHIVE-VALIDATION.json"
+    "workBuddyHostTest": "not_retested",
+    "fullPitchAndEveryNoteSync": "not_certified"
   },
   "repository": "https://github.com/Fallonwong/piano-remotion"
 }

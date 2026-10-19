@@ -6,6 +6,7 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { parseMidi } from './midi.mjs';
+import {isMain} from './entry.mjs';
 
 const HELP = `Usage: node prepare.mjs --svg score.svg --timeline timeline.json
   [--audio performance.mp3] [--midi score.mid] [--musicxml score.musicxml]
@@ -220,7 +221,7 @@ export async function prepare(args) {
   }
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   try {
     const args = parseArgs(process.argv.slice(2));
     if (args.help) process.stdout.write(HELP);

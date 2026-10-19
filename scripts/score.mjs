@@ -4,6 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {discoverEnvironment} from './environment.mjs';
+import {isMain} from './entry.mjs';
 export async function run(argv = process.argv.slice(2)) {
   const args = [], authorizedProjects = [];
   let project, explicitPython;
@@ -50,6 +51,6 @@ export async function run(argv = process.argv.slice(2)) {
   try {return {exit: result.status ?? 2, report: {...JSON.parse(result.stdout), pythonSelection: {path: python, method, requiresPillow}}};}
   catch {return {exit: 2, report: {code: 'PYTHON_PROTOCOL_ERROR', status: 'error', message: result.stderr.slice(-4000), next: ['Check interpreter and stderr; Python must emit one JSON object.']}};}
 }
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   const {exit, report} = await run(); console.log(JSON.stringify(report, null, 2)); process.exitCode = exit;
 }

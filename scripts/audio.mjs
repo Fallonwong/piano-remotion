@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
+import {performance,attackFrames} from './music.mjs';
 
 export const sha256=(value)=>crypto.createHash('sha256').update(value).digest('hex');
 export const canonical=(v)=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
@@ -35,7 +36,7 @@ export function audioFeatures(file,ffmpeg='ffmpeg') {
 export function checkAlignment(timeline,audioFile,{ffmpeg='ffmpeg',ffprobe='ffprobe',toleranceSeconds=2/timeline.fps}={}) {
   const media=probeMedia(audioFile,ffprobe);
   if(!media.streams.some(s=>s.codec_type==='audio'))throw failure('AUDIO_STREAM_MISSING','No audio stream in supplied recording','Provide an audio file with an audio stream.');
-  const features=audioFeatures(audioFile,ffmpeg),frames=[...new Set(timeline.events.map(e=>e.frame))].sort((a,b)=>a-b);
+  const features=audioFeatures(audioFile,ffmpeg),frames=attackFrames(timeline);
   if(frames.length<3)throw failure('ALIGNMENT_REVIEW_REQUIRED','At least three distinct attacks are needed for automatic start/middle/end sampling','Provide manual timestamp evidence for a sparse score.');
   const selected=[frames[0],frames[Math.floor(frames.length/2)],frames.at(-1)];
   const samples=selected.map((frame,i)=>{
@@ -52,6 +53,7 @@ export function retime(timeline,offsetSeconds){
   if(!Number.isFinite(offsetSeconds))throw failure('INVALID_OFFSET','Calibration offset must be finite seconds','Use a measured signed offset from the alignment report.');
   const result=structuredClone(timeline),delta=offsetSeconds*timeline.fps;
   result.events=result.events.map(e=>({...e,frame:e.frame+delta}));
+  for(const e of result.events)for(const n of e.notes??[])for(const k of ['soundingStartFrame','soundingEndFrame','highlightEndFrame'])if(n[k]!==undefined)n[k]+=delta;
   if(result.events.some(e=>e.frame<0||e.frame>=result.durationInFrames))throw failure('CALIBRATION_OUT_OF_RANGE','Offset moves an attack outside the composition','Review leading audio/score duration; no destructive trimming was performed.');
   if(result.cameraPath)result.cameraPath=Array.from({length:result.durationInFrames},(_,f)=>structuredClone(timeline.cameraPath[Math.max(0,Math.min(timeline.cameraPath.length-1,Math.round(f-delta)))]));
   result.status='needs_audio_alignment';result.timingRevision={originalTimelineSha256:hashObject(timeline),offsetSeconds,method:'explicit_global_offset'};
@@ -62,11 +64,12 @@ export function synthesize(timeline,out,{confirmed=false}={}) {
   if(fs.existsSync(out))throw failure('OUTPUT_EXISTS',out,'Choose a new output file.');
   const rate=22050,length=Math.ceil(timeline.durationInFrames/timeline.fps*rate),pcm=new Float64Array(length);
   const pitch=(p)=>{if(Number.isInteger(p)&&p>=0&&p<=127)return p;const m=/^([A-G])([#b]?)(-?\d+)$/.exec(p??'');if(!m)throw failure('PITCH_REQUIRED',`Cannot synthesize pitch ${p}`,'Provide actual MIDI pitches or C4-style pitches; do not invent notes.');return (Number(m[3])+1)*12+({C:0,D:2,E:4,F:5,G:7,A:9,B:11}[m[1]])+(m[2]==='#'?1:m[2]==='b'?-1:0);};
-  for(const e of timeline.events)for(const n of e.notes??[e]) {
-    const midi=pitch(n.pitch);if(midi<0||midi>127)throw failure('INVALID_PITCH',String(n.pitch),'Use a valid pitch.');const freq=440*2**((midi-69)/12),start=Math.round(e.frame/timeline.fps*rate),span=Math.min(length-start,Math.round(.65*rate));
-    for(let k=0;k<span;k++){const t=k/rate,attack=Math.min(1,k/100),release=Math.min(1,(span-k)/180);pcm[start+k]+=.14*attack*release*Math.exp(-5*t)*[1,.48,.22,.1].reduce((s,a,j)=>s+a*Math.sin(2*Math.PI*freq*(j+1)*t),0);}
+  const music=performance(timeline);
+  for(const n of music.spans) {
+    const midi=pitch(n.pitch);if(midi<0||midi>127)throw failure('INVALID_PITCH',String(n.pitch),'Use a valid pitch.');const freq=440*2**((midi-69)/12),start=Math.round(n.startFrame/timeline.fps*rate),span=Math.min(length-start,Math.round((n.endFrame-n.startFrame+n.legatoOverlapFrames)/timeline.fps*rate));
+    for(let k=0;k<span;k++){const t=k/rate,attack=Math.min(1,k/100),release=Math.min(1,(span-k)/180);pcm[start+k]+=.14*attack*release*Math.exp(-(n.segments[0].legacyDuration?5:2.4)*t)*[1,.48,.22,.1].reduce((s,a,j)=>s+a*Math.sin(2*Math.PI*freq*(j+1)*t),0);}
   }
   const peak=pcm.reduce((a,b)=>Math.max(a,Math.abs(b)),0),scale=peak>.85?.85/peak:1;
   const buffer=Buffer.alloc(44+length*2);buffer.write('RIFF');buffer.writeUInt32LE(36+length*2,4);buffer.write('WAVEfmt ',8);buffer.writeUInt32LE(16,16);buffer.writeUInt16LE(1,20);buffer.writeUInt16LE(1,22);buffer.writeUInt32LE(rate,24);buffer.writeUInt32LE(rate*2,28);buffer.writeUInt16LE(2,32);buffer.writeUInt16LE(16,34);buffer.write('data',36);buffer.writeUInt32LE(length*2,40);for(let i=0;i<length;i++)buffer.writeInt16LE(Math.max(-32768,Math.min(32767,Math.round(pcm[i]*scale*32767))),44+i*2);
-  fs.writeFileSync(out,buffer,{flag:'wx'});return {status:'synthetic_audio_created',file:out,seconds:length/rate,timbre:'original additive damped-harmonic piano-like synthesis, not a sampled piano'};
+  fs.writeFileSync(out,buffer,{flag:'wx'});return {status:'synthetic_audio_created',file:out,seconds:length/rate,soundingAttacks:music.spans.length,legacyDurations:music.legacyDurations,timbre:'original additive damped-harmonic piano-like synthesis, not a sampled piano',limits:'Slur pitches remain separate attacks; explicit durations connect their boundaries. This is not a sampled acoustic piano or pedal model.'};
 }

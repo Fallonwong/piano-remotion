@@ -1,7 +1,7 @@
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
 
-export type ScoreAttack = {frame:number; x:number; y:number; notes?:{x:number;y:number;pitch?:string}[]};
+export type ScoreAttack = {frame:number; x:number; y:number; notes?:{x:number;y:number;pitch?:string;attack?:boolean;soundingStartFrame?:number;soundingEndFrame?:number;highlightEndFrame?:number}[]};
 export type ScoreNoteLeapProps = {
   events?: ScoreAttack[]; color?:string; coreColor?:string; width?:number; height?:number;
   arcHeight?:number; trailFrames?:number; highlightFrames?:number;
@@ -57,10 +57,15 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({events=[],color='#ff
       if(age<0) return null;
       const isHeld=holdHighlightUntilNext&&(i===events.length-1||frame<events[i+1].frame);
       const strength=isHeld?Math.max(.7,1-age/highlightFrames):Math.max(0,1-age/highlightFrames);
-      return <g key={i}>{(event.notes??[event]).map((n,j)=><g key={j}>
-        {glowStrength>0&&strength>0&&<ellipse cx={n.x} cy={n.y} rx={15} ry={10} fill={glowColor} opacity={strength*.5} style={{filter:`blur(${4+glowStrength}px)`}}/>}
-        <ellipse cx={n.x} cy={n.y} rx={10+strength*3} ry={6+strength*2} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={strength*.25} stroke={glowStrength>0&&strength>.2?glowColor:color} strokeWidth={1.5+strength} opacity={.24+strength*.76} style={{filter:`drop-shadow(0 0 ${2+strength*7}px ${glowStrength>0?glowColor:color})`}} />
-      </g>)}</g>;
+      return <g key={i}>{(event.notes??[event]).map((n,j)=>{
+        // Optional performance metadata: legacy leap geometry/trails stay unchanged.
+        const soundingEnd='highlightEndFrame' in n?n.highlightEndFrame:('soundingEndFrame' in n?n.soundingEndFrame:undefined);
+        const isContinuation='attack' in n&&n.attack===false;
+        const noteStrength=soundingEnd!==undefined?(frame<soundingEnd?(isContinuation ? .7 : Math.max(.7,strength)):0):strength;
+        return <g key={j}>
+        {glowStrength>0&&noteStrength>0&&<ellipse cx={n.x} cy={n.y} rx={15} ry={10} fill={glowColor} opacity={noteStrength*.5} style={{filter:`blur(${4+glowStrength}px)`}}/>}
+        <ellipse cx={n.x} cy={n.y} rx={10+noteStrength*3} ry={6+noteStrength*2} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={noteStrength*.25} stroke={glowStrength>0&&noteStrength>.2?glowColor:color} strokeWidth={1.5+noteStrength} opacity={.24+noteStrength*.76} style={{filter:`drop-shadow(0 0 ${2+noteStrength*7}px ${glowStrength>0?glowColor:color})`}} />
+      </g>;})}</g>;
     })}
     {taperTrail ? (
       <>

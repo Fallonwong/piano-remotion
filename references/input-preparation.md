@@ -1,3 +1,5 @@
+> RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
+
 # Portable piano asset import
 
 For new song work use `piano.mjs prepare`, then the [RC5 review/alignment/bind gates](rc5-workflow.md). This legacy importer remains a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.

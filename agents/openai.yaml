@@ -1,4 +1,4 @@
 interface:
   display_name: "Piano Remotion"
-  short_description: "Animate piano scores with original glowing note leaps"
-  default_prompt: "Use $piano-remotion after reading the official $remotion-best-practices Skill; inspect my music or notation inputs, reuse available Agent tools to prepare missing assets, and preview the original note-leap animation."
+  short_description: "Piano videos with score and keyframe approval gates"
+  default_prompt: "Use $piano-remotion after reading $remotion-best-practices. Reuse compatible environments, preserve notation and original visuals. Show the reconstructed score and stop for my approval; then show actual keyframes and audition and stop again. Export only after both real approvals."

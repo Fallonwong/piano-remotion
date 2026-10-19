@@ -1,0 +1,16 @@
+{
+  "releaseVersion": "1.0.0-rc6",
+  "date": "2026-10-19",
+  "status": "VERIFIED_WITH_EXPLICIT_SCOPE_LIMITS",
+  "platform": "Windows",
+  "node": "24.19.0",
+  "reusedRuntime": {"remotion":"4.0.515","react":"19.2.4","typescript":"5.9.3","actualCli":true,"typecheck":"passed","installationPerformed":false},
+  "python": {"requiredForAnimation":false,"existingInterpretersReused":true,"createdEnvironment":false},
+  "browser": {"existingChrome":true,"nativeSvgMeasurement":"passed"},
+  "ffmpeg": {"existing":true,"mp3Decode":"passed","videoAndAudioStreamVerification":"passed"},
+  "probeTimeout": {"matchingPackages":"verification_pending, not absent","targetedTest":"passed"},
+  "audiveris": {"downloaded":false,"installed":false,"realEngineTest":"not_verified","adapterProtocolTests":3},
+  "firstInstall": "historical RC5 authorized offline test retained; not repeated in RC6",
+  "workBuddyHost": "not_retested",
+  "privacy": "Usernames and absolute local project paths omitted; raw logs remain local only."
+}

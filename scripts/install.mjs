@@ -40,6 +40,7 @@ for(const [src,dst,content] of plan) {
 }
 const environment=await discoverEnvironment({project:target,authorizedProjects:reuseProject?[reuseProject]:[]});
 const reuse=reuseProject?environment.projects.find(p=>p.project===reuseProject):null;
+if(environment.verificationPending&&!environment.selectedProject)throw new Error('ENVIRONMENT_VERIFICATION_PENDING: matching packages exist, but CLI verification timed out. Inspect diagnostics and re-probe; do not reinstall dependencies. Nothing installed.');
 if(reuseProject&&!reuse?.compatible)throw new Error(`Incompatible --reuse-project: ${JSON.stringify(reuse?.issues??['not found'])}. Nothing installed.`);
 const dependencyTarget=path.join(target,'node_modules');
 const dependencySource=reuse?fs.realpathSync(path.join(reuse.project,'node_modules')):null;

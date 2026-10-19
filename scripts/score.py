@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import time
+import zipfile
 import sys
 from fractions import Fraction
 import xml.etree.ElementTree as ET
@@ -220,6 +222,8 @@ def inspect_musicxml(file):
                         events.append(e)
                         tie_types = [x.get('type') for x in child.findall('tie')]
                         e['ties'] = tie_types
+                        e['slurs'] = [dict(type=x.get('type'), number=x.get('number', '1')) for x in child.findall('notations/slur')]
+                        e['beams'] = [dict(number=x.get('number', '1'), value=x.text) for x in child.findall('beam')]
                         key = (voice, json.dumps({k: pitch[k] for k in ('step', 'octave', 'alter')}, sort_keys=True) if pitch else None)  # cross-staff ties allowed
                         for action in ('stop', 'start'):
                             if action not in tie_types:
@@ -310,6 +314,44 @@ def capabilities():
                 environmentAdapter=os.environ.get('PIANO_OMR_ADAPTER'))
 
 
+def audiveris_source(src, out, executable):
+    exe = Path(executable).resolve()
+    if not exe.is_file() or exe.suffix.lower() in ('.cmd', '.bat'):
+        raise Failure('OMR_UNAVAILABLE', 'Supply an installed Audiveris executable, not a shell command. No download or installation is performed.')
+    target = out / 'omr'
+    target.mkdir()
+    command = [str(exe), '-batch', '-transcribe', '-export', '-output', str(target), '--', str(src)]
+    started = time.time()
+    result = subprocess.run(command, capture_output=True, timeout=600, shell=False)
+    write_json(out / 'omr-command.json', dict(command=command, startedAt=started, elapsedSeconds=time.time()-started, exitCode=result.returncode))
+    (out / 'omr-stdout.txt').write_bytes(result.stdout)
+    (out / 'omr-stderr.txt').write_bytes(result.stderr)
+    if result.returncode:
+        raise Failure('OMR_FAILED', 'Audiveris failed; inspect retained command/stdout/stderr. Do not silently switch to guessed notation.')
+    candidates = [p for p in target.rglob('*') if p.suffix.lower() in ('.xml', '.musicxml', '.mxl') and p.is_file()]
+    if len(candidates) != 1:
+        raise Failure('OMR_OUTPUT_SELECTION_REQUIRED', f'Expected one score, found {len(candidates)}; select/split movements explicitly.')
+    candidate = candidates[0]
+    dest = out / 'recognized.musicxml'
+    if candidate.suffix.lower() == '.mxl':
+        with zipfile.ZipFile(candidate) as package:
+            container = ET.fromstring(package.read('META-INF/container.xml'))
+            roots = [e.attrib['full-path'] for e in container.iter() if e.tag.split('}')[-1] == 'rootfile']
+            if len(roots) != 1 or roots[0].startswith(('/', '\\')) or '..' in roots[0].replace('\\', '/').split('/'):
+                raise Failure('MXL_CONTAINER_INVALID', 'Ambiguous or unsafe MXL rootfile')
+            info = package.getinfo(roots[0])
+            if info.file_size > 20 * 1024 * 1024:
+                raise Failure('MXL_TOO_LARGE', 'MusicXML exceeds 20 MB limit')
+            dest.write_bytes(package.read(roots[0]))
+    else:
+        shutil.copyfile(candidate, dest)
+    inspected = inspect_musicxml(dest)
+    write_json(out / 'check.json', inspected)
+    return report('OMR_TRANSCRIBED_UNREVIEWED', 'needs_review', engine='installed Audiveris', sourceSha256=sha(src), musicxml=str(dest),
+                  structuralPassed=inspected['structuralPassed'], visualReview=dict(status='pending', complete=False),
+                  next=['Resolve structure issues, create original/reflow measure comparisons, then STOP for user score approval. Recognition has not been certified.'])
+
+
 def source(args, out):
     src = Path(args.source).resolve()
     src_hash = sha(src)
@@ -326,6 +368,10 @@ def source(args, out):
         except Exception as exc:
             raise Failure('INVALID_SOURCE', f'Invalid image: {exc}')
     shutil.copyfile(src, out / ('original-source' + src.suffix))
+    if args.audiveris_exe:
+        if args.omr or args.omr_module:
+            raise Failure('OMR_ADAPTER_REQUIRED', 'Choose one recognition engine only.')
+        return audiveris_source(src, out, args.audiveris_exe)
     cap = capabilities()
     executable = args.omr or os.environ.get('PIANO_OMR_ADAPTER')
     entries = {e.name: e for e in importlib.metadata.entry_points(group='piano_remotion.omr')}
@@ -539,7 +585,7 @@ def main():
     p = sub.add_parser('check'); p.add_argument('--musicxml', required=True); p.add_argument('--out', required=True)
     p = sub.add_parser('source'); p.add_argument('--source', required=True); p.add_argument('--out', required=True)
     p.add_argument('--omr'); p.add_argument('--adapter', choices=['piano-omr/v1']); p.add_argument('--omr-module')
-    p.add_argument('--pdftoppm')
+    p.add_argument('--pdftoppm'); p.add_argument('--audiveris-exe')
     p = sub.add_parser('compare')
     for key in ('source', 'musicxml', 'svg', 'timeline', 'layout', 'out'):
         p.add_argument('--' + key, required=True)
