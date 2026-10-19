@@ -1,3 +1,5 @@
+> V1.0.0 补充：[音源生产与识谱修订](workflow.md)。新 bind 需要 --audio-evidence，PDF/图片 score-request 需要 --notation-audit；旧 synthesize 示例仅用于 --preview-only 校谱草稿。
+
 # RC6 executable workflow
 
 Use `node <skill>/scripts/piano.mjs --help`. Runtime pins remain Remotion/CLI 4.0.515, React 19.2.4, TypeScript 5.9.3. Paths below are placeholders. Review packages/jobs are machine-local; re-bind after relocation.

@@ -1,7 +1,7 @@
 {
   "name": "piano-remotion",
-  "version": "1.0.0-rc6",
-  "releaseStatus": "PUBLIC_RELEASE_CANDIDATE_LICENSE_UNASSIGNED",
+  "version": "1.0.0",
+  "releaseStatus": "PUBLIC_RELEASE",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -9,7 +9,7 @@
     "typescript": "5.9.3"
   },
   "sourceCoreSha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed",
-  "sourceCorePolicy": "RC5 baseline retained in git; additive optional sustain highlight metadata, original leap/trail/camera algorithms retained. PianoScoreScene and PianoRemotion unchanged.",
+  "sourceCorePolicy": "Original ScoreNoteLeap/PianoScoreScene visuals preserved. Runtime source exactly matches the RC7 local candidate; V1.0.0 adds public documentation and versioning.",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -31,6 +31,10 @@
       "bytes": 1009,
       "sha256": "38671b402f6e9ea274d65f623702a2587d99f66ce4675edc95995d416062aa09"
     },
+    "ENVIRONMENT-REPORT-RC7.json": {
+      "bytes": 937,
+      "sha256": "91cd98ea4cdbefa842af4298cdc357eb5d01c151ff5a03ddede4b78c11ddd0e9"
+    },
     "ENVIRONMENT-REPORT.json": {
       "bytes": 19320,
       "sha256": "19b961a197ef7876254a90555566adce077a85d315b2cad7cf62b6e487b5601f"
@@ -40,20 +44,28 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 11103,
-      "sha256": "81aa5f61bddf614f71852c375507f137e848ad295e11f5ba781f1d17411626ed"
+      "bytes": 8847,
+      "sha256": "cc6ac11a621f0f94849174651955027bf502b992f896ff292cf2b7a94bb5c241"
     },
     "README_使用说明.md": {
-      "bytes": 2893,
-      "sha256": "0528942d3c40df3802a5827adc8998de05dbb7e8f327260f56a241e494ce1af8"
+      "bytes": 2729,
+      "sha256": "635280f7a9f4a2569f034c2a625951ad7d3f3f4ab5f9bae073c3a15c543412ca"
     },
     "RELEASE-NOTES-RC6.md": {
       "bytes": 1070,
       "sha256": "d037e12d408c9263d0efa935073bc5fc7d66adec96f42f655f6f26962df06f65"
     },
+    "RELEASE-NOTES-RC7.md": {
+      "bytes": 1200,
+      "sha256": "87f39dbe5c2ea781019edb8c123958e97940282fa13410c54fb152d060cf66b2"
+    },
+    "RELEASE-NOTES-V1.0.0.md": {
+      "bytes": 1310,
+      "sha256": "28e635ca0c421c858a39c95fdd99072acd3e419bae94219384f901dd003d0f29"
+    },
     "SKILL.md": {
-      "bytes": 5721,
-      "sha256": "018aa4bb7fd91068db9bfcf5b422d93a650961dae509158713dd0f7f5b101195"
+      "bytes": 5409,
+      "sha256": "1284ddb5e80cd12e30f5b301e8ece4ebf68d3ff355fde4f0146402306d61d2e0"
     },
     "TEST-RESULTS-RC5.md": {
       "bytes": 6694,
@@ -62,6 +74,10 @@
     "TEST-RESULTS-RC6.md": {
       "bytes": 4312,
       "sha256": "78a44887d14900e217430a5fd6cc65c498915620eb63966a8f11385c83c36d96"
+    },
+    "TEST-RESULTS-RC7.md": {
+      "bytes": 3539,
+      "sha256": "7b448ceb1dc802ca6f98a7b8e3ddcd6fd2b9ae11314fcc16e77fbadb561223e2"
     },
     "TEST-RESULTS.md": {
       "bytes": 12030,
@@ -128,8 +144,8 @@
       "sha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed"
     },
     "examples/agent-prompts.md": {
-      "bytes": 2663,
-      "sha256": "e3a4e4786ca8f56d8493b62d86afaf0804b0768da8637f33dc92e34c9b2c2c92"
+      "bytes": 3407,
+      "sha256": "31ca5ad7d1b5f48961a17784e670f5249cbb0c261bc31a85f662c556eaf64cef"
     },
     "examples/create-smoke-input.mjs": {
       "bytes": 3496,
@@ -144,8 +160,8 @@
       "sha256": "a4219790e7181171394f41f5f8f64ab5af33ae4f6b64a5a976f0fad3e1a4e10f"
     },
     "references/input-preparation.md": {
-      "bytes": 8365,
-      "sha256": "7b8c2a5892e99704e8a8575e1877ba3c7c294fc18a8fa4331ab5663b8e93fad6"
+      "bytes": 8577,
+      "sha256": "7e3d0fc448c799ad07f15f173ead35d40bd954f349b7134b662fb2bdf5cb2142"
     },
     "references/material-preparation.md": {
       "bytes": 11152,
@@ -156,16 +172,28 @@
       "sha256": "0f57f1fb9d46b119eb4ea0b9a7e6de54f5fc3761d6e8b0eb6eaa7fc5644c8364"
     },
     "references/rc6-workflow.md": {
-      "bytes": 8316,
-      "sha256": "4ce931a6331793cd080786e84833dcf65ef24b742d48e3c835c6d575236556db"
+      "bytes": 8528,
+      "sha256": "70820a551b0b66a242d7e95b744575bdd4c6a6f9e252f42cd4b1ace117dc22c8"
+    },
+    "references/rc7-audio-recognition.md": {
+      "bytes": 131,
+      "sha256": "bbd244c710d35d36a6f18d3f2af3ef55f93dae184c53630728ca4c1bf6237624"
     },
     "references/score-validation.md": {
-      "bytes": 14575,
-      "sha256": "18e37f9d3a3be9a895bce222f6039fa0b78ee5280e8fde8662d978b0e336667b"
+      "bytes": 14787,
+      "sha256": "7aabfb1f3bbdb081231f1cb52a47c02125a17f077eb02ced4daa4e8052b8e03c"
+    },
+    "references/workflow.md": {
+      "bytes": 8177,
+      "sha256": "0d531767b0e584e985fe998488e236e8e3e71d313fbd10c914d3c6ce8c61f698"
+    },
+    "scripts/audio-production.mjs": {
+      "bytes": 9753,
+      "sha256": "a48937dec41117c2a4733663536c2bf908f92ab4ecf79a581f71fda3bc9bfd3e"
     },
     "scripts/audio.mjs": {
-      "bytes": 8421,
-      "sha256": "62e98182e42eed3978c85bf7804a367618e767452c99133de5b770ef7f5f7732"
+      "bytes": 8600,
+      "sha256": "d484b6cc2f33fa9e7f49664e0fb0aa3772b1af35fb521719dabd5f6e6bc65889"
     },
     "scripts/doctor.mjs": {
       "bytes": 4039,
@@ -227,25 +255,33 @@
       "bytes": 4718,
       "sha256": "20725c2d95d089258961229e53cff01d6cb026e9ff932fde92ca62d601bdff3e"
     },
+    "scripts/notation-audit.mjs": {
+      "bytes": 8800,
+      "sha256": "9d12c4bba9a8cb33171dd1ac64fdf6521c7aa9e7a69d25f7d79ef9c0d0e95af4"
+    },
     "scripts/omr.test.py": {
       "bytes": 2698,
       "sha256": "2687c79db33c65243560e0e57d5ee2d3c8e630f876b8bfcb3839ac0c0ea0ae7b"
     },
     "scripts/piano.mjs": {
-      "bytes": 26385,
-      "sha256": "f3837db95948e93ee04094ae8299260ff7baec03159a3129ea1798d0cf356446"
+      "bytes": 29606,
+      "sha256": "b8302bb3218b5ae8ba721824683fa733934a5d8f85fa35b19098b321be080f0a"
     },
     "scripts/prepare.mjs": {
       "bytes": 13739,
       "sha256": "37be7f3e21eabd4bedf22b5c7758af6414637ab20a7ebe7f9544f838c8774e74"
     },
+    "scripts/production.test.mjs": {
+      "bytes": 9806,
+      "sha256": "87b3fd2a11c5554db10d01c0aac979c9c58bdb3a449f51c437344d5e291c12a8"
+    },
     "scripts/review.mjs": {
-      "bytes": 10735,
-      "sha256": "ee42f7238d86af393dfa00ad683859170f07419dde7a81a1459efd253d850411"
+      "bytes": 11051,
+      "sha256": "58983f2cb638d2e2487fbdffd1e58a66e34824e53a6a9dfc8615251a99c954aa"
     },
     "scripts/review.test.mjs": {
-      "bytes": 7881,
-      "sha256": "d4364642a61d2ac9785415ae26cace20f08944131ca93477cb10147a12af25bd"
+      "bytes": 8347,
+      "sha256": "3cfd7d635d44bc2a52255497d238804c5b0e30ed4b1ec08193dcfcab96b913fc"
     },
     "scripts/score.mjs": {
       "bytes": 4349,
@@ -269,14 +305,17 @@
     }
   },
   "validation": {
-    "report": "TEST-RESULTS-RC6.md",
-    "environmentReport": "ENVIRONMENT-REPORT-RC6.json",
-    "videoReport": "VIDEO-VERIFICATION-RC6.json",
-    "uniqueTestsPassed": 106,
-    "actualProfessionalOMR": "not_verified",
-    "actualHumanScoreApproval": "not_verified",
+    "report": "TEST-RESULTS-RC7.md",
+    "environmentReport": "ENVIRONMENT-REPORT-RC7.json",
+    "distinctTestsPassed": 82,
+    "newProductionTests": 13,
+    "actualMuseScoreAudioExport": "passed-original-fixture",
+    "actualProfessionalOMRAccuracy": "not_verified",
+    "newCompleteVideoRender": "not_performed",
     "workBuddyHostTest": "not_retested",
-    "fullPitchAndEveryNoteSync": "not_certified"
+    "subjectiveAudioApproval": "not_performed",
+    "releaseVersion": "1.0.0",
+    "runtimeMatchesTestedCandidate": "1.0.0-rc7"
   },
   "repository": "https://github.com/Fallonwong/piano-remotion"
 }

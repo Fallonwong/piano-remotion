@@ -1,3 +1,5 @@
+> V1.0.0 补充：[音源生产与识谱修订](workflow.md)。新 bind 需要 --audio-evidence，PDF/图片 score-request 需要 --notation-audit；旧 synthesize 示例仅用于 --preview-only 校谱草稿。
+
 > RC6 当前流程见 [rc6-workflow.md](rc6-workflow.md)。本文保留底层工具/历史协议；新歌曲必须经过真实用户的谱面确认和关键帧/试听确认，不能仅凭 --confirmed 或 Agent approved 导出。
 
 # RC5 deterministic score validation and source comparison

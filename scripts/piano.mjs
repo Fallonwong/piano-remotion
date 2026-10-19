@@ -11,6 +11,8 @@ import {scoreRequest,approveReview,requireApproval,requestReview} from './review
 import {executeLogged} from './execution.mjs';
 import {isMain} from './entry.mjs';
 import {nativeGeometry,measureNative} from './geometry.mjs';
+import {audioPlan,renderScoreAudio,masterAudio,registerRecording,validateAudioEvidence} from './audio-production.mjs';
+import {notationAudit} from './notation-audit.mjs';
 
 const scripts=path.dirname(fileURLToPath(import.meta.url));
 export const readJSON=(p)=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
@@ -68,6 +70,7 @@ export function bindJob(a){
   const project=path.resolve(need(a,'project')),propsFile=path.resolve(need(a,'props')),out=path.resolve(need(a,'out'));
   const {props,score,audio}=songInputs(project,propsFile),sourceType=a['source-type']??'svg';
   let userReview=null;
+  let audioEvidence=null;
   if(a['score-approval']){
     userReview=requireApproval(a['score-approval'],'score',{musicSha256:musicIdentity(props.timeline)});
     if(userReview.request.sourceType!==sourceType)throw failure('SOURCE_TYPE_MISMATCH','Reviewed source type differs','Keep the original source type.');
@@ -75,6 +78,7 @@ export function bindJob(a){
     if(hashObject(compiled)!==hashObject(props.timeline))throw failure('MUSIC_COMPILE_REQUIRED','Performance metadata is missing or stale','Run piano music --timeline INPUT --out NEW, then update song props.');
     if(!audio&&userReview.response.audioChoice!=='silent')throw failure('AUDIO_MISSING','The user did not approve a silent song','Provide the chosen recording or synthesize after explicit consent.');
     if(audio&&userReview.response.audioChoice==='silent')throw failure('AUDIO_DECISION_MISMATCH','User approved silence','Use the reviewed audio decision.');
+    if(audio){audioEvidence=validateAudioEvidence(need(a,'audio-evidence'),audio,props.timeline,{draft:!!a.draft});if(userReview.response.audioChoice==='synthesize'&&audioEvidence.kind==='provided-recording')throw failure('AUDIO_DECISION_MISMATCH','Generated audio cannot be relabeled as a user recording','Use actual sampled export evidence.');}
   }
   if(!['svg','musicxml','midi','audio','pdf','staff-image','jianpu-image'].includes(sourceType))throw failure('SOURCE_TYPE_INVALID',sourceType,'Use a documented source type.');
   const image=props.scoreImage??{};
@@ -100,6 +104,7 @@ export function bindJob(a){
   const files=[propsFile,score,layoutFile,...(audio?[audio]:[]),...(a.alignment?[path.resolve(a.alignment)]:[]),...(a['score-review']?[path.resolve(a['score-review'])]:[]),...reviewFiles,...(a['score-approval']?[path.resolve(a['score-approval'])]:[])];
   const job={schemaVersion:1,status:a.draft?'checked_draft':'bound',project,entry,composition:'PianoRemotion-Song',propsFile,propsSha256:sha256(fs.readFileSync(propsFile)),fingerprints:Object.fromEntries(files.map(p=>[p,sha256(fs.readFileSync(p))])),timelineSha256:hashObject(props.timeline),scoreSrc:props.scoreSrc,audioSrc:props.audioSrc??null,sourceType,silentConfirmed:!audio&&!!a['silent-confirmed'],draft:!!a.draft,alignment,scoreReview:scoreReview?'structure_and_visual_passed':'not_supplied',layout:validateLayout(props,score,layout)};
   if(userReview){job.scoreApproval=path.resolve(a['score-approval']);job.musicSha256=musicIdentity(props.timeline);job.reviewProtocol='two-user-gates/v1';}
+  if(audioEvidence){job.audioProduction={kind:audioEvidence.kind,scope:audioEvidence.scope,engine:audioEvidence.engine,soundfont:audioEvidence.soundfont,mix:audioEvidence.mix,evidence:path.resolve(a['audio-evidence'])};for(const p of [path.resolve(a['audio-evidence']),...Object.keys(audioEvidence.fingerprints??{})])job.fingerprints[p]=sha256(fs.readFileSync(p));}
   writeJSON(out,job);return {status:job.status,job:out,audio:audio?'calibrated':'explicitly_silent',next:'Use piano preview/render --job with this exact frozen job.'};
 }
 export function loadJob(file){const job=readJSON(file);if(job.schemaVersion!==1||job.composition!=='PianoRemotion-Song')throw failure('INVALID_JOB','Not a checked song job','Bind the song first.');for(const [p,hash] of Object.entries(job.fingerprints))if(!fs.existsSync(p)||sha256(fs.readFileSync(p))!==hash)throw failure('JOB_STALE',`Changed input: ${p}`,'Revalidate and bind a new job; do not change props between preview and render.');
@@ -135,20 +140,29 @@ export function keyframes(job,a){
   }
   const manifest=path.join(dir,'frames.json');writeJSON(manifest,{schema:'piano-keyframes/v1',jobSha256:sha256(fs.readFileSync(a.job)),frames:frames.map((frame,i)=>({frame,seconds:frame/t.fps,file:images[i]})),clips});
   const logs=fs.readdirSync(dir).filter(n=>n.endsWith('.command.json')).map(n=>path.join(dir,n));
-  return requestReview({stage:'keyframes',out:path.join(dir,'review'),files:[path.resolve(a.job),...Object.keys(job.fingerprints),manifest,...images,...clips,...logs],display:[...images,...clips],jobSha256:sha256(fs.readFileSync(a.job)),notes:['请确认清晰度、双手/和弦高亮、换行与镜头范围。','连音必须试听/观看短片段；静帧无法证明没有重复起音。','确认本版后才允许完整导出。未回复时本回合结束。']});
+  return requestReview({stage:'keyframes',out:path.join(dir,'review'),files:[path.resolve(a.job),...Object.keys(job.fingerprints),manifest,...images,...clips,...logs],display:[...images,...clips],jobSha256:sha256(fs.readFileSync(a.job)),notes:[`音频来源与混音：${JSON.stringify(job.audioProduction??{kind:job.audioSrc?'legacy-unverified':'silent'})}。请确认本版实际试听。`,'请确认清晰度、双手/和弦高亮、换行与镜头范围。','连音必须试听/观看短片段；静帧无法证明没有重复起音。','确认本版后才允许完整导出。未回复时本回合结束。']});
 }
 export async function main(argv){
   const [command,...rest]=argv;
   if(['doctor','install','prepare','score'].includes(command)){const child=spawnSync(process.execPath,[path.join(scripts,`${command}.mjs`),...rest],{stdio:'inherit',windowsHide:true});return {exitCode:child.status??2,delegated:true};}
-  if(!command||command==='--help')return {status:'help',commands:['doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Two user gates: score-request -> actual user response -> approve; keyframes -> actual user response -> approve; then render. No automatic installs.'};
+  if(!command||command==='--help')return {status:'help',commands:['audio-plan','audio-render','audio-master','audio-recording','notation-audit','doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Two user gates: score-request -> actual user response -> approve; keyframes -> actual user response -> approve; then render. No automatic installs.'};
   const a=args(rest);
   if(command==='geometry')return nativeGeometry({svg:need(a,'svg'),timeline:need(a,'timeline'),mapping:need(a,'mapping'),browser:need(a,'browser'),out:need(a,'out')});
   if(command==='music-from-check'){const result=fromStructuredScore(readJSON(need(a,'check')),readJSON(need(a,'placement')),{fps:Number(a.fps??30)});writeJSON(need(a,'out'),result.timeline);writeJSON(`${a.out}.mapping.json`,result.mapping);return {status:'notation_compiled_unreviewed',timeline:path.resolve(a.out),mapping:path.resolve(`${a.out}.mapping.json`),next:'Measure native SVG geometry, create comparison, then ask the user to approve the notation.'};}
   if(command==='music'){const timeline=compilePerformance(validateTimeline(readJSON(need(a,'timeline'))),{strict:true});writeJSON(need(a,'out'),timeline);return {status:'music_compiled',music:timeline.music,file:path.resolve(a.out)};}
-  if(command==='score-request')return scoreRequest({source:need(a,'source'),sourceType:need(a,'source-type'),timeline:need(a,'timeline'),comparison:a.comparison,score:a.score,out:need(a,'out')});
+  if(command==='audio-plan')return audioPlan({musescore:a.musescore,soundfont:a.soundfont,authorizedProjects:a['authorized-project']?[a['authorized-project']]:[]});
+  if(command==='notation-audit')return notationAudit({source:need(a,'source'),check:need(a,'check'),previous:a.previous,out:need(a,'out'),expectedMeasures:a['expected-measures']?.split(',')??[],observations:a.observations});
+  if(command==='audio-recording')return registerRecording({audio:need(a,'audio'),timeline:readJSON(need(a,'timeline')),out:need(a,'out')});
+  if(command==='audio-render'){
+    const timeline=readJSON(need(a,'timeline')),approval=requireApproval(a['score-approval'],'score',{musicSha256:musicIdentity(timeline)});
+    if(approval.response.audioChoice!=='synthesize')throw failure('SYNTHESIS_CONFIRMATION_REQUIRED','User did not choose generated audio','Use the approved audio decision.');
+    return renderScoreAudio({musicxml:need(a,'musicxml'),timeline,musescore:need(a,'musescore'),soundfont:need(a,'soundfont'),out:need(a,'out')});
+  }
+  if(command==='audio-master')return masterAudio({evidence:need(a,'evidence'),timeline:readJSON(need(a,'timeline')),out:need(a,'out'),leadSeconds:Number(a['lead-seconds']??0),gainDb:Number(a['gain-db']??0),durationSeconds:a['duration-seconds']===undefined?undefined:Number(a['duration-seconds'])});
+  if(command==='score-request'){const sourceType=need(a,'source-type');if(['pdf','staff-image','jianpu-image'].includes(sourceType))need(a,'notation-audit');return scoreRequest({source:need(a,'source'),sourceType,timeline:need(a,'timeline'),comparison:a.comparison,score:a.score,audit:a['notation-audit'],out:need(a,'out')});}
   if(command==='approve')return approveReview({request:need(a,'request'),response:need(a,'response'),out:need(a,'out')});
   if(command==='status'){const job=loadJob(need(a,'job'));try{requireApproval(job.scoreApproval,'score',{musicSha256:musicIdentity(readJSON(job.propsFile).timeline)});requireApproval(a.approval,'keyframes',{jobSha256:sha256(fs.readFileSync(a.job))});return {status:'READY_FOR_RENDER'};}catch(e){return {status:e.code,next:e.next};}}
-  if(command==='synthesize'){const t=validateTimeline(readJSON(need(a,'timeline'))),approval=requireApproval(a['score-approval'],'score',{musicSha256:musicIdentity(t)});if(approval.response.audioChoice!=='synthesize')throw failure('SYNTHESIS_CONFIRMATION_REQUIRED','User did not choose synthetic audio','Ask for an explicit audio choice.');performance(t,{strict:true});return synthesize(t,need(a,'out'),{confirmed:a.confirmed===true});}
+  if(command==='synthesize'){const t=validateTimeline(readJSON(need(a,'timeline'))),approval=requireApproval(a['score-approval'],'score',{musicSha256:musicIdentity(t)});if(approval.response.audioChoice!=='synthesize')throw failure('SYNTHESIS_CONFIRMATION_REQUIRED','User did not choose synthetic audio','Ask for an explicit audio choice.');if(a['preview-only']!==true)throw failure('PREVIEW_ONLY_SYNTHESIS','The built-in oscillator is for calibration only','Use audio-plan/audio-render for production; explicitly pass --preview-only for a labeled draft.');performance(t,{strict:true});const out=need(a,'out'),result=synthesize(t,out,{confirmed:a.confirmed===true});writeJSON(out+'.audio.json',{schema:'piano-audio-evidence/v1',audio:path.resolve(out),audioSha256:sha256(fs.readFileSync(out)),musicSha256:musicIdentity(t),kind:'calibration-preview',scope:'full-score',purpose:'calibration-preview',fingerprints:{},limits:'Not a sampled piano; draft-only.'});return {...result,purpose:'calibration-preview',evidence:path.resolve(out+'.audio.json')};}
   if(command==='align'){const {props,audio}=songInputs(need(a,'project'),need(a,'props'));if(!audio)throw failure('AUDIO_MISSING','No audioSrc in supplied props','Ask about synthesis or silent preview.');const report=checkAlignment(props.timeline,audio,a);writeJSON(need(a,'out'),report);return {...report,exitCode:report.status==='sampled_onsets_passed'?0:3};}
   if(command==='calibrate'){const {props}=songInputs(need(a,'project'),need(a,'props'));props.timeline=retime(props.timeline,Number(need(a,'offset-seconds')));writeJSON(need(a,'out'),props);return {status:'calibration_proposed',file:path.resolve(a.out),next:'Re-run align, review measured offsets and regenerate stale layout/review evidence. A global shift does not fix tempo drift.'};}
   if(command==='bind')return bindJob(a);

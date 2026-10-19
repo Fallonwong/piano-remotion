@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-rc7",
+  "date": "2026-10-20",
+  "platform": "Windows",
+  "scope": "Local skill update; no Git mutations or public release",
+  "audio": {
+    "engine": "MuseScore4 4.7.5",
+    "soundProfile": "MuseScore Basic",
+    "soundfont": "MS Basic.sf3",
+    "soundfontBytes": 51278610,
+    "actualExport": "passed on original synthetic MusicXML",
+    "masterSeconds": 5,
+    "sampledOffsetsMs": [9.977324263038548, -2.2675736961451642, 16.55328798185951],
+    "subjectiveQualityAccepted": false
+  },
+  "tests": {"distinctPassed": 82, "newProductionTests": 13},
+  "installs": false,
+  "downloads": false,
+  "pythonEnvironmentCreated": false,
+  "coreVisualsChanged": false,
+  "actualProfessionalOMRAccuracy": "not_verified",
+  "fullWorkBuddyHost": "not_retested",
+  "newCompleteVideoRender": "not_performed",
+  "privacy": "No host username, private score or absolute project paths in this summary; raw evidence stays local."
+}

@@ -1,136 +1,176 @@
-# Piano Remotion
+<div align="center">
 
-基于 Remotion 的钢琴乐谱动效 Skill，保留原版 **ScoreNoteLeap**，支持双手音符跳跃、和弦高亮、渐细发光拖尾，以及共享谱面坐标的倾斜与运镜。
+# 🎹 Piano Remotion
 
-**当前版本：1.0.0-rc6 · RC6 发布候选版。** 已完成 Windows 独立工程渲染验证；公共许可证尚未指定，见 [LICENSE.txt](LICENSE.txt)。本仓库可公开查看，但没有授予 MIT、Apache 等开源许可。
+**让乐谱随音乐跳起来。**
 
-![通用测试谱面的真实渲染关键帧](assets/preview.png)
+双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-图中是随包合成测试数据的真实渲染，不包含商业歌曲或私人角色素材。
+![Version](https://img.shields.io/badge/version-V1.0.0-C9A86A?style=flat-square)
+![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
+![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-## RC6：两次用户确认、连音与识谱待审阅
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.0.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0)
 
-新用户只需提供素材并要求成片。Agent 在阶段内自主执行，但必须先展示谱面并等待用户确认，再展示关键帧／短试听并等待确认，最后才能完整导出。
+</div>
 
-- `score-request` 产生 `WAITING_FOR_SCORE_APPROVAL`，Agent 结束本轮；自检不能代填用户批准。
-- `keyframes` 实际生成 PNG、短音频及连音动态片段，返回 `WAITING_FOR_KEYFRAME_APPROVAL`。
-- `render --approval ... --confirmed` 检查两道确认及同版素材；单独 --confirmed 不能跳过。
-- MusicXML 的时值、延音线、圆滑线与符杠保留到时间轴；同音延音只起音一次。可选原生 SVG 坐标测量保留原始排谱符号。
-- 识谱默认优先已安装专业 OMR。缺少时报告选项与疑点，不强制安装，也不承诺未经实测的准确率。
+![Piano Remotion 动效画面](assets/preview.png)
 
-实际命令与数据格式见 **[RC6 工作流程](references/rc6-workflow.md)**，本轮结果见 **[RC6 测试记录](TEST-RESULTS-RC6.md)**。
+> 将钢琴乐谱变成跟随音乐演奏的动态画面。先确认谱面，再确认画面与试听，让每一次修改都有清晰的依据。
 
-## RC5 已有能力与兼容基础
+## 为钢琴乐谱而设计
 
-跨 Agent 使用同一个确定性入口：`node <skill>/scripts/piano.mjs`。RC5 历史命令和数据格式见 **[RC5 工作流程](references/rc5-workflow.md)**。主要整改：
+Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
 
-- **环境先复用**：检查当前/显式授权项目、实际依赖与 CLI、Node 包管理器、现有 Python/venv、PATH 外的 Windows 常见安装位置。先计划，首次安装或新增大型依赖先确认；不会自动 npm 安装或新建 venv。
-- **谱面先校验**：区分 PDF/图片 OMR、标准 MusicXML/MIDI 和音频。逐小节保留结构化音符与疑点，提供源谱/重排谱裁切对照；VexFlow 画出 SVG 不代表识谱正确。
-- **音频成为关卡**：MP3 必须能解码、时长合理且有声音，测量开头/中段/末尾起音偏差；缺音频时先询问合成或明确静音预览。
-- **同一曲目数据**：checked job 固定 SVG/timeline/audio/props/layout/review 哈希；预览和导出都走无 Demo 回退的 Song 入口。
-- **成片验证**：实际 MP4 的视频/音频流、时长、尺寸、帧率、非静音信号和抽样同步均由脚本检查。识谱、结构、视觉、几何、音频、成片状态分别报告。
+- **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
+- **原版动效**：复用 ScoreNoteLeap / PianoScoreScene，保留跳跃弧线、渐细发光拖尾和镜头运动。
+- **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
+- **先看再出片**：谱面确认、关键帧与试听确认，两次停顿把决定权交给你。
+- **优先复用环境**：发现已有 Remotion、排谱工具和音源，按任务需要补齐能力。
+- **通用素材边界**：个人装饰默认关闭，作品素材由你提供。
 
-Python 不是基础动画的强制依赖。PianoScoreScene 保持原样；ScoreNoteLeap 新增可选的延音持续／续接高亮字段，原跳跃轨迹与拖尾算法保持兼容；旧 Demo 入口仍保留，但新歌曲请使用 checked job 工作流。
+适合钢琴教学片段、曲谱演示、练习分享，以及带有音符跳跃效果的音乐视频。
 
-## 先安装官方 Remotion Skill
+## 快速开始
 
-Piano Remotion 是专项扩展。让 Agent 使用前，先检查并读取官方 `remotion-best-practices`，再读取本项目的 [SKILL.md](SKILL.md)。已安装就复用；未安装时按 [Remotion 官方说明](https://www.remotion.dev/docs/ai/skills)执行：
+### 1. 安装 Skills
 
-```sh
-npx skills add remotion-dev/skills
-```
-
-按安装器选择目标 Agent 和安装范围，并确认实际文件可读取。官方 Skill 提供 Agent 工作规范；项目中的 Remotion/React 依赖仍需单独安装。
-
-## 安装 Piano Remotion Skill
-
-支持 Skills CLI 的 Agent 可以从本仓库安装。在自己的工作目录执行：
+先安装官方 Remotion Skill，再安装 Piano Remotion。已经安装的部分可以直接复用。
 
 ```sh
 npx skills add remotion-dev/skills --skill remotion-best-practices
 npx skills add Fallonwong/piano-remotion --skill piano-remotion
 ```
 
-按提示选择目标 Agent 和安装范围。默认项目级安装；已有官方 Skill 则跳过第一条。Codex 用户需要跨项目使用时，可显式选择用户级：
+按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.0.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
 
-```sh
-npx skills add remotion-dev/skills --skill remotion-best-practices -g -a codex
-npx skills add Fallonwong/piano-remotion --skill piano-remotion -g -a codex
+安装后开启新对话，确认 Agent 能读取两个 Skill。使用不支持 `$名称` 调用的 Agent 时，直接让它读取对应目录下的 `SKILL.md`。
+
+### 2. 提供素材，说出目标
+
+可以附上文件，也可以提供 Agent 有权读取的本地路径。把下面的占位内容换成你的素材：
+
+```text
+使用 $piano-remotion，先读取官方 $remotion-best-practices。
+
+我的素材：<PDF / MusicXML / MIDI / SVG / MP3 / 乐谱图片的路径>。
+请制作一支钢琴跟谱视频，保留原版双手跳跃、发光轨迹、音符高亮和运镜。
+优先复用当前工程 <工程路径，如有> 及现有工具，个人装饰关闭。
+
+先展示原谱与重排谱的逐小节对照、修订差异和疑点，停下来等我确认。
+我确认谱面后，再展示真实关键帧、短试听和连音动态，第二次等我确认。
+确认后导出 MP4，并检查音频和画面同步。
+
+有录音就使用原录音；没有录音时，先检查可用钢琴音源并让我试听。
+需要安装工具或下载音源时，先说明方案和大小。
 ```
 
-上述命令依据 [Skills CLI 文档](https://github.com/vercel-labs/skills)。安装 Skill 并不安装 Remotion 项目依赖；后面的独立示例用 `npm ci` 准备运行环境。安装后确认 Agent 能读取官方和本 Skill 的实际文件；必要时开启新会话。Windows 不支持符号链接时可在安装器选择复制方式。
+### 3. 在两个关键节点确认
 
-手动安装可下载 [发布候选包](https://github.com/Fallonwong/piano-remotion/releases)，或克隆仓库：
+**第一次看谱**：核对旋律、节奏、左右手、和弦与连线。发现问题时指出小节和位置，Agent 会展示修改前后的差异。
 
-```sh
-git clone https://github.com/Fallonwong/piano-remotion.git
+**第二次看画面、听声音**：确认清晰度、镜头、音符运动、钢琴音色与同步，再导出完整视频。
+
+更多输入场景见 [提示词示例](examples/agent-prompts.md)，安装细节见 [使用说明](README_使用说明.md)。
+
+## 你可以提供什么
+
+| 素材 | 推荐处理方式 |
+| --- | --- |
+| **MusicXML** | 优先复用结构化音高、节奏、声部和记谱信息，再排版并建立坐标映射。 |
+| **MIDI** | 读取音符与速度信息，补充谱面排版、左右手分配和坐标。 |
+| **SVG + timeline JSON** | 使用同一次排版产生的谱面与时间轴，直接接入动效。 |
+| **SVG** | 保留原谱符号，补充对应的演奏时间和音符坐标。 |
+| **MP3 / 演奏录音** | 接入原音频；缺少乐谱时，调用当前环境可用的转谱能力并核对结果。 |
+| **PDF / 五线谱图片** | 优先调用已有专业 OMR 工具，生成可编辑乐谱，再逐小节对照原件。 |
+| **简谱图片** | 先确认调号、八度、节拍及连线，再整理成可排版、可同步的数据。 |
+| **多种素材组合** | 每个环节选择信息最完整的来源，只补缺少的部分。 |
+
+素材不必一次准备齐全。Agent 会先发现已有工具，再给出与当前素材对应的处理路径。基础动画使用 Node.js 与 Remotion；Python、OMR 和其他 CLI 按实际任务需要接入。
+
+## 从素材到成片
+
+```text
+提供素材
+   ↓
+发现并复用环境
+   ↓
+整理乐谱 · 逐小节对照 · 标记疑点
+   ↓
+你确认谱面
+   ↓
+接入录音 / 生成完整钢琴音频
+   ↓
+真实关键帧 · 短试听 · 连音动态
+   ↓
+你确认画面与声音
+   ↓
+导出 MP4 · 检查音视频与同步
 ```
 
-将本目录保持为 `piano-remotion/`。Codex 可放到 `~/.codex/skills/piano-remotion/`，新会话先读取 `$remotion-best-practices`，再调用 `$piano-remotion`。
+改谱时保留修订记录；调整镜头时复用已经确认的音乐数据。预览与导出绑定同一套谱面、音频和参数，避免曲目或版本混用。
 
-WorkBuddy 等 Agent 使用其实际配置的 Skill 目录；没有 Skill 自动发现能力时，直接提示 Agent 依次读取官方 Skill 和本项目的 `SKILL.md`。本 Skill 的工具使用 Node.js，不依赖 Codex MCP。
+## 钢琴声音，也值得认真选择
 
-例如：
+有演奏录音时优先使用原录音。只有乐谱时，先发现现有钢琴音源，例如 MuseScore 自带的 MS Basic，再生成代表性片段试听。
 
-> 使用 $piano-remotion，先读取官方 remotion-best-practices。把我提供的 SVG、时间轴和 MP3 接入已有 Remotion 工程，保留双手跳跃与发光效果，先打开预览。
+音色确认后，从完整乐谱生成全曲母版，保留音源和混音记录。整体增益、前导静音和尾音处理写入独立记录，最终使用的母版会再次出现在审片试听中。
 
-也可以从缺少标准数据的素材开始：
+随包的简易波形音只用于校谱草稿。正式作品走录音或采样音源路径；需要额外音色时，先选择适合的方案，再按需配置。
 
-> 使用 $piano-remotion。我提供了简谱图片和演奏 MP3，请先检查你已有的识谱、谱面生成和音频对齐能力，自主补齐标准素材，保留原旋律，不额外编配伴奏，完成后打开预览。缺少能力时只指导配置必要工具。
+## 使用建议与常见问题
 
-更多可直接复制的 RC6 示例，包括“PDF/图片、标准素材、只有 MP3、两次确认后导出”，见 **[Agent 提示词示例](examples/agent-prompts.md)**。将示例中的素材和工程路径替换为真实路径。图片、音频等文件须通过当前 Agent 支持的附件或本地路径提供。
+### 为什么不能把 PDF 识别后直接渲染？
 
-## 兼容的通用 Demo（无声演示，不代表有声作品验收）
+识谱、排谱和动效是三个不同环节。一个能被排版的软件接受的音符，也可能与原件不一致。保留逐小节对照，可以在花时间导出前修正音高、节奏、声部和连线。
 
-需要 Node.js >=20、npm；优先复用现有依赖与浏览器。以下 `<skill>`、`<new-directory>` 均需替换为实际路径；有空格时加引号，目标目录必须不存在。先运行 `node <skill>/scripts/piano.mjs install --standalone <new-directory> --plan`，报告路径、版本、安装内容与原因；只有确认没有兼容环境并得到首次安装授权后，才执行下面的 `npm ci`。浏览器准备需要下载时也应先说明并确认，现有浏览器可直接指定使用。
+### 怎样减少反复改谱？
 
-```sh
-node <skill>/scripts/install.mjs --standalone <new-directory>
-cd <new-directory>
-npm ci
-node <skill>/scripts/doctor.mjs .
-npm run typecheck
-npm run compositions
-npm run studio
-```
+优先使用原始 MusicXML；扫描件尽量保持完整、清晰、平正。复杂长谱先挑 3–5 个包含密集节奏、多声部或连线的小节做小样。修改时给出具体小节和位置，并查看本轮差异，避免牵连已经正确的内容。
 
-明确要求导出此无声 Demo 时可运行 `npm run render`，输出 `out/PianoRemotion-Demo.mp4`（1280×720、30fps、180 帧）。已有工程优先使用 `install.mjs --project <project>`；安装器不覆盖现有入口或不同内容的文件，详细命令见 [安装使用说明](README_使用说明.md)。
+### 为什么电脑装过工具，Agent 还要找环境？
 
-## 使用自己的素材
+工具可能在现有项目、虚拟环境或系统安装目录中。Skill 优先检查这些可访问的位置，并核对版本和实际可用性。依赖探测超时时会先诊断，只有确实需要补充时才给出安装方案。
 
-| 输入 | 内置工具与 Agent 处理路径 |
-|---|---|
-| 同一布局 SVG + timeline JSON | 通过实际几何映射/同次排版证据后驱动动效；不是只检查文件存在 |
-| MusicXML | 内置导入及根元素检查；Agent 复用既有音高节奏，补 SVG、坐标和触发时间 |
-| MIDI | 内置 format 0/1 PPQN、tempo map 解析；Agent 补记谱、分手/声部、排版与坐标映射 |
-| SVG | 内置导入；缺时间轴时 Agent 从可用布局元数据或视觉能力恢复映射，再补触发时间 |
-| MP3 | 内置接入音频；缺乐谱时 Agent 用已有音频转谱能力生成并校正，再补排版、坐标和同步 |
-| 五线谱图片 | `--score-image` 接收路径；Agent 复用视觉/OMR，核对符号、音高、节奏后生成标准素材 |
-| PDF 乐谱 | `--pdf` 接收来源；score source 检查已有专业 OMR，score compare 生成原谱/重排谱逐小节资料 |
-| 简谱图片 | `--jianpu-image` 接收路径；Agent 核对调号、八度点、时值、休止、连音等，再生成匹配五线谱 SVG |
-| 多种素材组合 | 复用每项最可靠的数据，只补缺失环节，不重复转谱或强制安装全部 CLI |
+### 延音线和圆滑线怎样处理？
 
-“支持输入”包括 Agent 协作前处理，**不表示内置脚本已集成六类素材的自动识别模型**。先发现当前 Agent 的 Skill、库、工具和已授权服务，自主选择能完成任务的路径。原生工具可以直接产出 SVG/时间轴，无需特制 CLI 适配器。具体流程与验收条件见 [统一素材处理](references/material-preparation.md)。
+同音延音连接成完整持续音，后半段不重复起音；圆滑线下的不同音保留各自起音。符杠用于记谱分组，不会被当成延音线。
 
-脚本返回 `incomplete` 时，会列出缺项和 Agent 补齐指引；有能力时继续处理。只有真实缺少能力或关键乐谱信息无法确定时，才说明最小配置需求或提出具体问题。不默认让用户手写时间轴，不擅自补伴奏，不将普通 OCR 成功当作识谱准确。
+### 密集音符没有被自动起音检查命中，怎么办？
 
-使用歌曲时，**先确认谱面，再确认关键帧与试听，最后导出**。新歌曲按 RC6 统一入口执行，不使用下面的旧调用说明跳过确认。将 `--props=<song-props.json>` 传给每次 Remotion CLI 调用；doctor 使用 `--props <song-props.json>`。素材约束见 [数据契约](references/data-contract.md) 和 [预处理说明](references/input-preparation.md)。
+连奏、和弦和密集节奏会让声音重叠。应结合波形、频谱与试听进一步核对，保留真实时值和音色，避免为了通过检测而把声音改短。
 
-个人图片/视频装饰为可选项，默认关闭，署名默认为空。不随包提供原曲、原曲谱面、私人 IP、品牌素材或字体，见 [素材边界](references/assets-policy.md)。
+### 可以用 10 秒试听文件直接替换整首配乐吗？
 
-## 验证与限制
+试听用于选择音色，全曲母版来自完整批准谱面。Skill 会分别记录来源，接入视频前还会检查全曲时长和同步。
 
-RC5 历史验证真实完成环境复用、经确认的离线首次安装、标准素材导入、带非静音 MP3 的 6 秒成片及开头/中段/结尾起音校验；没有新增 OMR 或 Python 环境。原版动效组件字节不变。详见 **[历史 RC5 测试报告](TEST-RESULTS-RC5.md)** 和 [历史报告](TEST-RESULTS.md)。PDF/图片缺专业 OMR 的情况、错误音符、未批准的逐小节差异均保持 blocked/needs_review；不把缺失分支测试当成真实识谱成功。未认证实际 WorkBuddy 宿主、其他操作系统、任意音乐的全音高或逐音同步。
+### 修改后需要全部重做吗？
+
+音符或节奏改变时，重新确认相应谱面版本；镜头、样式、音源或混音改变时，更新关键帧与试听。已有成片和源素材保留，新版本另存输出。
+
+## 面向不同 Agent 的同一套工具
+
+统一执行入口：
 
 ```sh
-node --test <skill>/scripts/test.mjs
-node --test <skill>/scripts/doctor.test.mjs
-node --test <skill>/scripts/workflow.test.mjs
-node --test <skill>/scripts/music.test.mjs <skill>/scripts/review.test.mjs
-# 设置 PIANO_TEST_BROWSER 后运行实际原生 SVG 测量测试
-node --test <skill>/scripts/geometry.test.mjs
-node --test <skill>/scripts/environment.test.mjs
-node --test <skill>/scripts/score.test.mjs
+node <skill>/scripts/piano.mjs --help
 ```
 
-前一组会在 `scripts/.test-run-*` 保留测试证据；后一组使用系统临时目录。`.gitignore` 排除依赖、渲染输出、缓存和测试产物。上传仓库时使用本目录的完整源码；ZIP 可作为 Release 附件，避免将原始作品工程一并上传。
+环境发现、素材处理、谱面审计、音源导出和视频制作通过脚本执行。Agent 负责理解需求、调用现有能力、展示待确认资料，并在用户确认后继续。
+
+- [Skill 入口](SKILL.md)
+- [音源与谱面修订流程](references/workflow.md)
+- [几何映射、审阅与渲染](references/rc6-workflow.md)
+- [数据契约](references/data-contract.md)
+- [素材预处理](references/material-preparation.md)
+
+---
+
+<div align="center">
+
+**Piano Remotion · V1.0.0**
+为认真对待每一个音符的创作者而做。
+
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+
+</div>
