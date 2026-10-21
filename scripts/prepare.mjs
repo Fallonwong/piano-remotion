@@ -50,6 +50,7 @@ export function validateTimeline(t) {
     if (!Array.isArray(t.cameraPath) || t.cameraPath.length !== t.durationInFrames) fail('cameraPath must contain one sample per frame');
     t.cameraPath.forEach((p,i)=>{if(!object(p)||!finite(p.cameraX)||!finite(p.cameraY))fail(`cameraPath[${i}] needs finite cameraX/cameraY`);});
   }
+  if(t.focusPath!==undefined&&(!Array.isArray(t.focusPath)||t.focusPath.length!==t.durationInFrames||t.focusPath.some(p=>!object(p)||!finite(p.focusX)||!finite(p.focusY))))fail('focusPath must contain one finite focusX/focusY sample per frame');
   const last = { left: -Infinity, right: -Infinity };
   const point = (p, at) => {
     if (!object(p) || !finite(p.x) || !finite(p.y)) fail(`${at}: x/y must be finite numbers`);

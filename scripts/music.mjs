@@ -1,7 +1,9 @@
+import {validateMappedNotation,validateSymbolic} from './performance-map.mjs';
 import {createHash} from 'node:crypto';
 const fail=(code,message)=>{throw Object.assign(new Error(message),{code,next:'Preserve note durations, voices and tie/slur declarations from reviewed notation; do not infer missing values.'});};
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function musicIdentity(t){
+  if(t.notation?.schema==='piano-symbolic-events/v2'){validateSymbolic(t.symbolic);if(t.symbolic.scoreSha256!==t.notation.scoreSha256)fail('NOTATION_IDENTITY_STALE','Changed symbolic source');return t.notation.scoreSha256;}
   return hash({fps:t.fps,durationInFrames:t.durationInFrames,events:t.events.map(e=>({hand:e.hand,frame:e.frame,notes:e.notes.map(n=>({id:n.id,pitch:n.pitch,durationFrames:n.durationFrames,voice:n.voice,part:n.part,tieStart:n.tieStart,tieStop:n.tieStop,slurs:n.slurs,beams:n.beams}))}))});
 }
 export function performance(t,{strict=false}={}){
@@ -85,6 +87,7 @@ export function fromStructuredScore(check,placement,{fps=30,leadFrames=10,tailFr
   return {timeline:t,mapping:ids};
 }
 export function validateNotationMapping(t,check){
+  if(t.notation?.schema==='piano-symbolic-events/v2')return validateMappedNotation(t,check);
   if(!check.structuralPassed||!t.tempoBpm||t.sourceMusicxmlSha256!==check.sourceSha256)fail('NOTATION_MAPPING_REQUIRED','Use music-from-check with the actual structural report.');
   const fraction=s=>{const [a,b=1]=String(s).split('/').map(Number);return a/b;};
   const source=new Map(),partOffsets=new Map();for(const m of check.measures){const offset=partOffsets.get(m.part)??0;m.events.forEach((e,i)=>{if(e.kind==='note')source.set(`${m.id}:${i}`,{...e,sourcePart:m.part,absoluteQuarter:offset+fraction(e.onsetQuarter)});});partOffsets.set(m.part,offset+fraction(m.durationQuarter));}

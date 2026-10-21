@@ -59,6 +59,21 @@ export function retime(timeline,offsetSeconds){
   result.status='needs_audio_alignment';result.timingRevision={originalTimelineSha256:hashObject(timeline),offsetSeconds,method:'explicit_global_offset'};
   return result;
 }
+export function verifyAudioTransfer(source,output,{ffmpeg='ffmpeg',fps=30}={}){
+  const decode=file=>run(ffmpeg,['-v','error','-i',file,'-vn','-ac','1','-ar','11025','-f','s16le','pipe:1'],{encoding:null,maxBuffer:256*1024*1024});
+  const a=decode(source),b=decode(output),rate=11025,window=rate/2|0,limit=Math.ceil(2/fps*rate),samples=[];
+  const count=Math.min(a.length,b.length)/2|0;
+  for(let region=0;region<5;region++){
+    const start=Math.floor((count-window)*region/4);if(start<0)continue;let energy=0;
+    for(let i=0;i<window;i+=4)energy+=(a.readInt16LE((start+i)*2)/32768)**2;
+    if(energy/window<1e-7)continue;
+    let best={similarity:-1,lagSamples:0};
+    for(let lag=-limit;lag<=limit;lag+=4){let dot=0,aa=0,bb=0;for(let i=0;i<window;i+=4){const j=start+i+lag;if(j<0||j>=b.length/2)continue;const x=a.readInt16LE((start+i)*2),y=b.readInt16LE(j*2);dot+=x*y;aa+=x*x;bb+=y*y;}const similarity=dot/Math.sqrt(Math.max(1,aa*bb));if(similarity>best.similarity)best={similarity,lagSamples:lag};}
+    samples.push({region,...best,lagSeconds:best.lagSamples/rate});
+  }
+  if(!samples.length||samples.some(s=>s.similarity<.95))throw failure('AUDIO_TRANSFER_REVIEW_REQUIRED','Output audio differs from the reviewed master','Inspect encoding, offsets, gain and source selection; no content accuracy was inferred.');
+  return {status:'sampled_master_transfer_passed',samples,limits:'Checks sampled master preservation, not every pitch or all samples.'};
+}
 export function synthesize(timeline,out,{confirmed=false}={}) {
   if(!confirmed)throw failure('SYNTHESIS_CONFIRMATION_REQUIRED','No audio was supplied; synthesis is opt-in','Ask whether the user wants synthetic piano-like audio, or explicitly confirms a silent preview.');
   if(fs.existsSync(out))throw failure('OUTPUT_EXISTS',out,'Choose a new output file.');

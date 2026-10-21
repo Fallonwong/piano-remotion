@@ -40,8 +40,8 @@ node <skill>/scripts/piano.mjs audio-recording --audio <provided.mp3> --timeline
 新 checked bind 增加 `--audio-evidence <master.wav.audio.json 或 recording-evidence.json>`；之后的 job 把来源、音源及混音日志固定下来：
 
 ```sh
-node <skill>/scripts/piano.mjs align --project <project> --props <actual-song-props.json> --out <alignment.json>
-node <skill>/scripts/piano.mjs bind --project <project> --props <actual-song-props.json> --layout <layout.json> --alignment <alignment.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --out <job.json>
+node <skill>/scripts/piano.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original-source> --out <quality-result.json>
+node <skill>/scripts/piano.mjs bind --project <project> --props <actual-song-props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --out <job.json>
 ```
 
 PDF/图片等还须提供 [谱面审阅与渲染](rendering.md) 中的 source-type、score-review、browser 参数。录音源与生成音频选择应对应，不能更名绕过来源记录。源文件复制到 public 后只要字节一致可以验证；绝对路径记录是本地证据，迁移需重新绑定。
@@ -50,7 +50,7 @@ PDF/图片等还须提供 [谱面审阅与渲染](rendering.md) 中的 source-ty
 
 ## 同步检查不能决定音色
 
-能量阈值没找到起音，返回 needs_review；不等于漏音。密集十六分、和弦、连奏、踏板音应保留原时值/包络，用针对性波形/频谱证据和听感复核。严禁为了通过自动阈值改短衰减、截断延音或改谱。当前脚本没有实现自动音高对齐或新的人工证据放行接口；需要复核时应如实阻止，不伪造 sampled_onsets_passed。
+能量阈值没找到起音，返回 needs_review；不等于漏音。密集十六分、和弦、连奏、踏板音应保留原时值/包络，用针对性波形/频谱证据和听感复核。严禁为了通过自动阈值改短衰减、截断延音或改谱。旧 align 仅供诊断，不能授权新正式输出。当前使用 [分段映射与内容证据](performance-quality.md) 的人工复核门禁；FFT/DTW/起音编辑路径仍只是候选，不伪造 sampled_onsets_passed 或自动准确结论。
 
 先出 10–15 秒代表性试听可按需进行；默认两次内容确认仍是谱面及关键帧/试听。音源选择不满意时可提前试听，不强制每个用户增加固定第三道审批。第二次确认必须包含最终 master 产生的试听和音源/混音说明；音源、主音频或混音改变都要重新绑定并重新确认关键帧/试听。短试听不能冒充全曲母版。
 

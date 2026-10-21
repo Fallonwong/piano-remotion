@@ -64,11 +64,11 @@ node <skill>/scripts/piano.mjs approve --request <score-review-dir/request.json>
 # Generate production audio with audio-plan/audio-render/audio-master; see workflow.md.
 ```
 
-Generated audio requires the user's audio choice. The optional built-in synthesize --preview-only is for calibration drafts; production audio follows [the audio workflow](workflow.md). Set real public-relative scoreSrc/audioSrc and the compiled timeline in song props. Keep new camera paths in props.presentation.cameraPath. Align the actual audio, then bind:
+Generated audio requires the user's audio choice. Built-in synthesize --preview-only is for calibration drafts; production audio follows [the audio workflow](workflow.md). Set real public-relative scoreSrc/audioSrc and the mapped timeline in song props. New aspect presets use timeline.focusPath from camera-path; props.presentation.cameraPath is a legacy mechanism. Establish [content/time evidence](performance-quality.md) and confirmed production configuration, then bind:
 
 ```sh
-node <skill>/scripts/piano.mjs align --project <project> --props <props.json> --out <alignment.json>
-node <skill>/scripts/piano.mjs bind --project <project> --props <props.json> --layout <layout.json> --alignment <alignment.json> --source-type pdf --score-review <compare-dir/report.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --browser <existing-Chromium.exe> --out <job.json>
+node <skill>/scripts/piano.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original.pdf> --out <quality-result.json>
+node <skill>/scripts/piano.mjs bind --project <project> --props <props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --source-type pdf --score-review <compare-dir/report.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --browser <existing-Chromium.exe> --out <job.json>
 ```
 
 User-reviewed comparisons can remain pending in the Agent-check layer: no bulk auto-approval is needed. Explicit silence needs --silent-confirmed and the user's silent audio choice. Camera/style changes require fresh keyframes; music changes require renewed score review.
