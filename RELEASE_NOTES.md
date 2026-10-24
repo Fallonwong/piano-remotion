@@ -1,3 +1,7 @@
+# 1.2.0-local.3 — aligned with the 14-keep / 12-drop decision, unpublished
+
+Retired nebula and parchment themes, white-invert surface, and ground ripple defaults. Synced the four remaining presets (SlateClassic, SapphireRunway, ObsidianFocus, SapphireLandscape), converge-arc 14-frame trails with 58/44 arc heights, and pulse-only alternative. Preserved legacy low-level props and both content approvals. No GitHub publication.
+
 # 1.2.0-local.2 — continuous score-strip tool, unpublished
 
 Added `piano score-strip` for a single normalized multi-system SVG with measured bounds and notehead mappings. Preserves musical timing, transforms coordinates, verifies source/output glyph registration, and generates continuous focusPath for the existing portrait-runway camera. No auto-recognition, repeat unfolding, time fitting, private assets or GitHub publication. See references/score-strip.md.

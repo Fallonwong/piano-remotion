@@ -2,7 +2,6 @@ import React from 'react';
 import {portraitRunwayPose, portraitRunwayNoteStyle, portraitRunwayScoreFilter, type ScoreCameraMode, type RunwayCameraOptions} from './ScoreCameraPresets';
 import {SunsetOcean} from './SunsetOcean';
 import {DeepSapphire} from './DeepSapphire';
-import {CosmicNebula} from './CosmicNebula';
 import type {ScoreSurfaceTexture, ScorePipelineMode, ScoreTypographyHud} from './ScoreVideoConfig';
 import {AbsoluteFill, Audio, Img, Loop, OffthreadVideo, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {depthPreset,themePreset,dimensions,type AspectRatio,type ScoreTheme} from './PianoPresentation';
@@ -20,7 +19,7 @@ export type PianoScoreSceneProps = {
   timeline: PianoTimeline; scoreSrc: string; audioSrc?: string;
   title?: string; subtitle?: string; label?: string; credit?: string;
   background?: string; fontFamily?: string;
-  backgroundScene?: 'sunset-ocean' | 'deep-sapphire' | 'cosmic-nebula' | 'none';
+  backgroundScene?: 'sunset-ocean' | 'deep-sapphire' | 'none';
   texture?: ScoreSurfaceTexture; pipeline?: ScorePipelineMode; typographyStyle?: ScoreTypographyHud['style']; chineseTitle?: string;
   scoreImage?: {x?: number; y?: number; width?: number; height?: number; filter?:string; blendMode?: React.CSSProperties['mixBlendMode']};
   cameraMode?: ScoreCameraMode; runwayCamera?: RunwayCameraOptions;
@@ -47,7 +46,7 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
   if((cameraMode==='portrait-focus'||cameraMode==='portrait-classic')&&(!modern||aspect!=='9:16'))throw new Error('PORTRAIT_REQUIRES_EXPLICIT_9_16');
   if(cameraMode==='landscape-classic'&&(!modern||aspect!=='16:9'))throw new Error('LANDSCAPE_REQUIRES_EXPLICIT_16_9');
   if(pipeline&&(pipeline==='score-strip')!==(cameraMode==='portrait-runway'))throw new Error('PIPELINE_CAMERA_MISMATCH');
-  const textureStyle=texture==='black-multiply'?{blend:'multiply' as const,filter:'none'}:texture==='metallic-screen'?{blend:'screen' as const,filter:'invert(0.92) hue-rotate(180deg) contrast(1.25)'}:texture==='white-invert'?{blend:'screen' as const,filter:'invert(0.95) contrast(1.2)'}:undefined;
+  const textureStyle=texture==='black-multiply'?{blend:'multiply' as const,filter:'none'}:texture==='metallic-screen'?{blend:'screen' as const,filter:'invert(0.92) hue-rotate(180deg) contrast(1.25)'}:undefined;
   if(modern&&(width!==dimensions(aspect).width||height!==dimensions(aspect).height))throw new Error('ASPECT_DIMENSIONS_MISMATCH');
   if(modern&&(!timeline.focusPath||timeline.focusPath.length!==D||timeline.focusPath.some(p=>!Number.isFinite(p.focusX)||!Number.isFinite(p.focusY))))throw new Error('FOCUS_PATH_REQUIRED: derive a path from actual layout and mapped performance times');
   if(cameraMode==='portrait-runway'&&(!modern||aspect!=='9:16'))throw new Error('RUNWAY_REQUIRES_EXPLICIT_9_16');
@@ -84,7 +83,6 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
   return <AbsoluteFill style={{background:surface,overflow:'hidden'}}>
     {backgroundScene==='sunset-ocean'&&<SunsetOcean width={width} height={height}/>}
     {backgroundScene==='deep-sapphire'&&<DeepSapphire width={width} height={height}/>}
-    {backgroundScene==='cosmic-nebula'&&<CosmicNebula width={width} height={height}/>}
     {modern&&backgroundSrc&&<Img src={staticFile(backgroundSrc)} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}
     {audioSrc&&<Audio src={staticFile(audioSrc)} volume={modern?1:f=>interpolate(f,[Math.max(0,D-6),D],[1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})}/>}
     <div style={modern?{position:'absolute',inset:0,perspective:runway?.perspective??preset.perspective,perspectiveOrigin:'50% 50%',zIndex:10,mixBlendMode:texture?(texture==='black-multiply'?undefined:'screen'):(theme==='custom'?'screen':undefined)}:{display:'contents'}}>

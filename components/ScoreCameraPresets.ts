@@ -31,15 +31,15 @@ export const portraitRunwayPose = (
   };
 };
 
-/** Established arc and 16-frame tapered glow, with per-note chord flights.
+/** Established arc and 14-frame tapered glow, with per-note chord flights.
  * Colors stay with the song's reviewed palette; caller overrides win.
  * Defaults are frames at any composition fps, not seconds.
  */
 export const portraitRunwayNoteStyle = (): Partial<ScoreNoteLeapProps> => ({
-  trailFrames: 16, highlightFrames: 10, followChordNotes: true,
+  trailFrames: 14, highlightFrames: 10, followChordNotes: true,
   trailWidth: 2.4, taperTrail: true, glowStrength: 1.2,
   holdHighlightUntilNext: true, starburst: false,
-  rippleRing: true, rippleFrames: 14, rippleMaxRadius: 38,
+  rippleRing: false, rippleFrames: 0, rippleMaxRadius: 38,
 });
 
 /** Directional 3D embossed cast-shadow matching the setting-sun angle. */

@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.0-local.2",
+  "version": "1.2.0-local.3",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -72,24 +72,24 @@
       "sha256": "9dc6fbab86811087b1add76656dc1b52e9fbccc4f93f94ab5486bfe84ef52ae1"
     },
     "components/PianoPresentation.ts": {
-      "bytes": 1581,
-      "sha256": "db09d9def0d4983ff05535069e3debe150869a854a5b29dfabc8a8a0f2580685"
+      "bytes": 1385,
+      "sha256": "8040e454567310495ca814df693336948be02b374b5bf51ccf03591f520335eb"
     },
     "components/PianoRemotion.tsx": {
       "bytes": 156,
       "sha256": "298ce310c2dabee52043d2841689eb8d3c8e6f442f633222b88813339621d0eb"
     },
     "components/PianoScoreScene.tsx": {
-      "bytes": 13514,
-      "sha256": "803a5f8a9a2acc9a1332db0a25eb119a38299394efb4f24024711cdb106ebfb0"
+      "bytes": 13275,
+      "sha256": "aa69eee0465626bb88833e8168aa6fb0c23099bc2977f1774483fe02f90b5733"
     },
     "components/resolveScoreVideoConfig.ts": {
-      "bytes": 3932,
-      "sha256": "2990b49be9fdd0ab747170122e1b7ce7e2e777c505da8cb05bfb48a77e4eb5d6"
+      "bytes": 4080,
+      "sha256": "e08b7e0877ef4745eddeafd8c89a5a5029acd192d32b3fc5446f4e7dada73fab"
     },
     "components/ScoreCameraPresets.ts": {
       "bytes": 2007,
-      "sha256": "f1cf081886c6002989a99b065defd0f3ec9714567b1e9751018290243418abc1"
+      "sha256": "f9d8f97a245fd22b718bec45d0bbe24a43f1ad95e8567f485fc81bc6c44cd022"
     },
     "components/ScoreChordGeometry.ts": {
       "bytes": 4740,
@@ -100,8 +100,8 @@
       "sha256": "17c0c136aacef365d9d5f821fa8d65950888dd3aa9168f946650dc802f9f5bb3"
     },
     "components/ScoreVideoConfig.ts": {
-      "bytes": 9507,
-      "sha256": "7477b84d39e97641334bdfcc37ee871eb90cc126d90dec84c27c9e02ec461ab1"
+      "bytes": 8971,
+      "sha256": "9af1f6b18a7fa86cf8ed340271f074cb4b7d141c0f27f62edf7a50602d2f8a78"
     },
     "components/SunsetOcean.tsx": {
       "bytes": 9972,
@@ -116,12 +116,12 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 18614,
-      "sha256": "7a8c0f5462daac87a31b9a7a9401d20fff70e8dd72407fea324232df566811c1"
+      "bytes": 18454,
+      "sha256": "1fc55ceb96ce1b9c998ff4879af833f07961ecdee80bfdb1441d9ce8bbd83f68"
     },
     "README_使用说明.md": {
-      "bytes": 5770,
-      "sha256": "eb86651bd1d13be0aff8723c6e6062d061cb963aed04e0298a0238c7687f0fb4"
+      "bytes": 5358,
+      "sha256": "fd90d80d8ccded2b2d7777a8cac8547173cdeb7d45702aee5a6b46d2df910691"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
@@ -152,8 +152,8 @@
       "sha256": "d9cd8dca7e8c3c7916de6c45fd745169cd82830157010be4332d495bef4c55e4"
     },
     "references/portrait-runway.md": {
-      "bytes": 4142,
-      "sha256": "ef3218af705cb78f5bd605f6b83fa8c5469d4cdae04f44eb00a44c14849a77ef"
+      "bytes": 4238,
+      "sha256": "794e544351360b2cdc6d7f1ea71decb916cd180eff7779fc97dd76bba1d76332"
     },
     "references/production.md": {
       "bytes": 4127,
@@ -164,8 +164,8 @@
       "sha256": "d1b963bc6587760ca6491d9ca1681bfe2d6fa9f17810afa9075dc5db15e04e95"
     },
     "references/score-strip.md": {
-      "bytes": 4367,
-      "sha256": "5f54b86125dffc77a0575da393947f9193c8d3a81edcbef1b1953e356ac26844"
+      "bytes": 4454,
+      "sha256": "e82bf4ba2a47af5d7b7594d708ea4143a3f4a6a3968deb26064c108fb8fde1b6"
     },
     "references/score-validation.md": {
       "bytes": 12835,
@@ -176,16 +176,16 @@
       "sha256": "dec01d4248289ac5574b1ae59f55e9252a0c9f665b3faccb65c19e9aa86e6f53"
     },
     "references/visual-presets.md": {
-      "bytes": 6240,
-      "sha256": "fd541565a38556aa6038b18f9b004c4dafb07210ef105aec9327aa979d18ee6f"
+      "bytes": 6547,
+      "sha256": "8b9b78a128ab5178f1a1e29681a3f8ecd9875cea9493f06910fcbbd49bb9f0e2"
     },
     "references/workflow.md": {
       "bytes": 8505,
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
     },
     "RELEASE_NOTES.md": {
-      "bytes": 4741,
-      "sha256": "93ee77145254459360b30e27cf0f1392b851ff84811de229ef356e82fe7d1a59"
+      "bytes": 5176,
+      "sha256": "63111de9f219d43b60579eacc700bab7f25f0352d62b7c5cba946acc08577331"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
@@ -256,8 +256,8 @@
       "sha256": "deac3f53bacdc7c1433a798495396e0ddc22fd23ad0d6a75b1c8374745c16d73"
     },
     "scripts/quality.mjs": {
-      "bytes": 10208,
-      "sha256": "5dc0bdab5f09c10cc03ba45e9e9cbe739e1c98be55f00b4fe4e2394ebccacd6a"
+      "bytes": 10233,
+      "sha256": "4d9bb7bb97bd2d5915db138f889ce156a4a255f1d70aea425acee6eba5976595"
     },
     "scripts/review.mjs": {
       "bytes": 11051,
@@ -284,16 +284,16 @@
       "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
     },
     "SKILL.md": {
-      "bytes": 10357,
-      "sha256": "660585869d01f049dea10ad2181b10cd1969930a6aa53d114b3b2986ff5dd14f"
+      "bytes": 10522,
+      "sha256": "5d92016768a34cc35032027532789273b38efda3de8a9c1807586b32ab1218fa"
     }
   },
   "localExtension": {
     "id": "visual-presets-and-score-strip",
-    "date": "2026-10-24",
-    "status": "engineering-checked-awaiting-user-visual-review",
+    "date": "2026-10-25",
+    "status": "aligned-with-14-keep-12-drop",
     "baseVersion": "1.1.0",
-    "scope": "phase-1 visual upgrade plus measured multi-system SVG strip generator",
+    "scope": "visual presets aligned to 2026-10-24 decision plus score-strip",
     "excluded": [
       "per-song timing repair",
       "private media",

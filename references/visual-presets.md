@@ -1,4 +1,6 @@
-# Local visual configuration upgrade (1.2.0-local.2)
+# Local visual configuration upgrade (1.2.0-local.3)
+
+Grounded in the 2026-10-24 decision: 14 kept options, 12 dropped. Retired choices remain readable in old jobs but are rejected for new presets.
 
 This local candidate is not a GitHub release. Use `SCORE_PRESETS` from
 `components/ScoreVideoConfig.ts` and `resolveScoreVideoConfig` from
@@ -16,26 +18,24 @@ already supplied. Recommendations are not consent.
 |---|---|
 | Aspect | **9:16**; 16:9 |
 | Camera | portrait-focus; portrait-runway; landscape-classic |
-| Theme | **slate-gray**; cosmic-nebula; obsidian-dark; deep-sapphire; vintage-parchment |
-| Surface | **black-multiply**; metallic-screen; white-invert |
+| Theme | **slate-gray**; obsidian-dark; deep-sapphire |
+| Surface | **black-multiply**; metallic-screen |
 | Hand colors | right #b895ff / left #E95514; standard for new presets |
-| Motion | 16-frame tapered trail, chord split/merge, ripple opacity .35, inactive highlight opacity 0 |
+| Motion | **converge-arc**: 14-frame tapered trail, chord split/merge, right 58 / left 44 px arcs, no starburst or ground ripple, inactive highlight opacity 0. Alternative pulse-only: no air trail, notehead breathing only. |
 | Avatar | **cat**, when an actual supplied transparent video is available; none |
 | Typography | chinese-2x; bodoni-royal; clean; optional status/progress bar |
 | Pipeline | full-score for focus/classic; supplied score-strip for runway |
 
 Preset factories return independent mutable FX objects; modifying one preset
-does not change future presets. New presets do not include the discarded 62-degree
-camera or cyan/magenta hand palette. Existing low-level props and old jobs remain
+does not change future presets. New presets do not include the discarded 62-degree camera, cyan/magenta hand palette, nebula/parchment themes, white-invert surface, or ground ripple rings. Existing low-level props and old jobs remain
 compatible. Do not force these choices onto explicitly requested different work.
 
 | Factory | Aspect / camera | Theme / surface | Avatar |
 |---|---|---|---|
 | SlateClassic | 9:16 / portrait-focus | slate-gray / black-multiply | supplied cat |
-| CosmicRunway | 9:16 / portrait-runway | cosmic-nebula / metallic-screen | supplied cat |
-| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / white-invert | supplied cat |
+| SapphireRunway | 9:16 / portrait-runway | deep-sapphire / metallic-screen | supplied cat |
+| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / metallic-screen | supplied cat |
 | SapphireLandscape | 16:9 / landscape-classic | deep-sapphire / metallic-screen | supplied cat |
-| ParchmentManuscript | 9:16 / portrait-focus | vintage-parchment / black-multiply | none |
 
 ## Resolved scene example
 

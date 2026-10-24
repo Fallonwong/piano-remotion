@@ -2,7 +2,7 @@
 
 /**
  * 钢琴动效视频统一规范配置体系 (Piano Remotion Configuration Matrix)
- * 依据 2026-10-23 用户最终筛选决议正式固化。
+ * 依据 2026-10-24 用户样式精简决议正式固化（14 保留项 / 12 裁撤项）。
  *
  * ❌ 明确永久剔除项：
  * - B4: 62° 极倾斜星际巡游跑道（过度压缩低音，视线眩晕，永久废弃）
@@ -30,10 +30,8 @@ export type ScoreCameraMode =
 // ==========================================
 export type ScoreBackgroundTheme =
   | 'slate-gray'         // C1: 【首选推荐】经典石板灰质感 (沉稳深灰 #6b6561，La La Land 视觉基准)
-  | 'cosmic-nebula'      // C2: 极夜深空星云 (极夜群青底色 + 紫罗兰呼吸星云 + 28组钻石星芒 + 流星)
-  | 'obsidian-dark'      // C3: 黑曜石纯黑极简 (纯黑暗夜 #05070e + 12组微弱环境星芒)
-  | 'deep-sapphire'      // C4: 普鲁士深蓝星海 (深海幽蓝 #030714 + 冷调微星)
-  | 'vintage-parchment'; // C5: 复古羊皮纸暖黄 (暖黄纸质手稿 #f5ede0 + 边缘自然晕染)
+  | 'obsidian-dark'      // C2: 黑曜石纯黑极简 (纯黑暗夜 #05070e + 12组微弱环境星芒)
+  | 'deep-sapphire';     // C3: 普鲁士深蓝星海 (深海幽蓝 #030714 + 冷调微星)
 
 // ==========================================
 // 4. 乐谱质感与线条混合 (Score Surface & Texture)
@@ -41,8 +39,7 @@ export type ScoreBackgroundTheme =
 // ==========================================
 export type ScoreSurfaceTexture =
   | 'black-multiply'     // D1: 【首选推荐】传统雕版黑墨印刷 (Multiply 混合，原版黑墨线自然渗入纸面)
-  | 'metallic-screen'    // D2: 金属通透发光反色 (Screen 混合，透亮银白微光，暗夜星空专用)
-  | 'white-invert';      // D3: 纯白高对比反色 (黑白极度分明，音符读谱极度清晰)
+  | 'metallic-screen';   // D2: 金属通透发光反色 (Screen 混合，透亮银白微光，暗夜星空专用)
 
 // ==========================================
 // 5. 声部发光色彩 (Hand Glow Palette)
@@ -74,24 +71,26 @@ export type ScoreHandColors = {
 // 6. 声部发光动效机制 (Motion FX & Dynamics)
 // ==========================================
 export type ScoreMotionFxConfig = {
-  trailFrames: number;          // F1: 拖尾帧数 (默认 16 帧收窄渐细优雅长拖尾)
+  trailFrames: number;          // F1: 拖尾帧数 (默认 14 帧收窄渐细超细羽化尾迹)
   taperTrail: boolean;          // F1: 两头渐细收窄
   followChordNotes: boolean;    // F2: 和弦音头逐一分叉与汇聚
-  rippleRing: boolean;          // F3: 透视椭圆触键冲击波
-  rippleFrames: number;         // F3: 冲击波扩散时长 (默认 12~14 帧)
-  rippleOpacity: number;        // F3: 冲击波不透明度 (默认 0.35~0.4，清透不喧宾夺主)
+  rippleRing: boolean;          // 已裁撤：新预设固定关闭地面冲击波
+  rippleFrames: number;         // 保留字段仅供旧配置兼容
+  rippleOpacity: number;        // 保留字段仅供旧配置兼容
   inactiveNoteOpacity: number;  // F4: 静止/击键后音符消退透明度 (默认 0，完全交还给原谱)
 };
 
-export const DEFAULT_MOTION_FX: ScoreMotionFxConfig = {
-  trailFrames: 16,
-  taperTrail: true,
-  followChordNotes: true,
-  rippleRing: true,
-  rippleFrames: 12,
-  rippleOpacity: 0.35,
-  inactiveNoteOpacity: 0,
+/** F1 converge-arc: per-note chord flights, 14-frame tapered trails, no starburst/ripple. */
+export const CONVERGE_ARC_MOTION_FX: ScoreMotionFxConfig = {
+  trailFrames: 14, taperTrail: true, followChordNotes: true,
+  rippleRing: false, rippleFrames: 0, rippleOpacity: 0, inactiveNoteOpacity: 0,
 };
+/** F2 pulse-only: no air arc or trail; only the struck notehead breathes. */
+export const PULSE_ONLY_MOTION_FX: ScoreMotionFxConfig = {
+  trailFrames: 0, taperTrail: false, followChordNotes: true,
+  rippleRing: false, rippleFrames: 0, rippleOpacity: 0, inactiveNoteOpacity: 0,
+};
+export const DEFAULT_MOTION_FX = CONVERGE_ARC_MOTION_FX;
 
 // ==========================================
 // 7. 伴弹角标 IP 形象 (Pianist Avatar)
@@ -163,10 +162,10 @@ export const SCORE_PRESETS = {
    * 官方预设方案 01：深空宇宙 3D 跑道款
    * 算法吸睛、视觉冲击力强、适合短视频平台
    */
-  CosmicRunway: (title = '曲目名', subtitle = 'Piano Cover'): ScoreVideoConfig => ({
+  SapphireRunway: (title = '曲目名', subtitle = 'Piano Cover'): ScoreVideoConfig => ({
     aspectRatio: '9:16',
     cameraMode: 'portrait-runway',
-    theme: 'cosmic-nebula',
+    theme: 'deep-sapphire',
     texture: 'metallic-screen',
     motionFx: {...DEFAULT_MOTION_FX},
     avatar: 'cat',
@@ -188,7 +187,7 @@ export const SCORE_PRESETS = {
     aspectRatio: '9:16',
     cameraMode: 'portrait-focus',
     theme: 'obsidian-dark',
-    texture: 'white-invert',
+    texture: 'metallic-screen',
     motionFx: {...DEFAULT_MOTION_FX},
     avatar: 'cat',
     typography: {
@@ -221,27 +220,4 @@ export const SCORE_PRESETS = {
     pipeline: 'full-score',
   }),
 
-  /**
-   * 典雅手稿方案：复古羊皮纸手稿款
-   * 适合国风古风、中国民乐与古典手抄谱质感
-   */
-  ParchmentManuscript: (title = '曲目名', subtitle = '古典钢琴手稿'): ScoreVideoConfig => ({
-    aspectRatio: '9:16',
-    cameraMode: 'portrait-focus',
-    theme: 'vintage-parchment',
-    texture: 'black-multiply',
-    motionFx: {
-      ...DEFAULT_MOTION_FX,
-      rippleOpacity: 0.25,
-    },
-    avatar: 'none',
-    typography: {
-      style: 'chinese-2x',
-      showStatusBar: false,
-      title,
-      chineseTitle: title,
-      subtitle,
-    },
-    pipeline: 'full-score',
-  }),
 };

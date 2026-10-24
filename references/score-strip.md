@@ -55,7 +55,7 @@ pixels. All rows share a grand-staff center after placement.
   fabricated user approval.
 
 Use these three corresponding SVG/timeline/layout files together. Pass the new
-timeline and SVG to `resolveScoreVideoConfig(SCORE_PRESETS.CosmicRunway(...),
+timeline and SVG to `resolveScoreVideoConfig(SCORE_PRESETS.SapphireRunway(...),
 {timeline, scoreSrc, pipeline:'score-strip', ...})`. Keep the original recording
 and audio timing. Freeze/rebind the changed layout and show actual frames and a
 short motion preview before full export. Existing score/keyframe approvals are
