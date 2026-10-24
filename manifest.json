@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.0-local.3",
+  "version": "1.2.0-local.4",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -9,7 +9,7 @@
   },
   "repository": "https://github.com/Fallonwong/piano-remotion",
   "releaseStatus": "local-unpublished",
-  "releaseDate": "2026-10-24",
+  "releaseDate": "2026-10-25",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -80,28 +80,28 @@
       "sha256": "298ce310c2dabee52043d2841689eb8d3c8e6f442f633222b88813339621d0eb"
     },
     "components/PianoScoreScene.tsx": {
-      "bytes": 13275,
-      "sha256": "aa69eee0465626bb88833e8168aa6fb0c23099bc2977f1774483fe02f90b5733"
+      "bytes": 13204,
+      "sha256": "a606ea04236d23776f44102be0a911875c785e8f7c52c47e7b74466e8af31757"
     },
     "components/resolveScoreVideoConfig.ts": {
-      "bytes": 4080,
-      "sha256": "e08b7e0877ef4745eddeafd8c89a5a5029acd192d32b3fc5446f4e7dada73fab"
+      "bytes": 3769,
+      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
     },
     "components/ScoreCameraPresets.ts": {
-      "bytes": 2007,
-      "sha256": "f9d8f97a245fd22b718bec45d0bbe24a43f1ad95e8567f485fc81bc6c44cd022"
+      "bytes": 2477,
+      "sha256": "9e18f2bc06e204f7501c5d1e88e632b38415e3c727790729630d54ecb659e24b"
     },
     "components/ScoreChordGeometry.ts": {
       "bytes": 4740,
       "sha256": "44de360f25c652a95512b3e81ed660bb8846ae4c594648fca3522089732d9f6f"
     },
     "components/ScoreNoteLeap.tsx": {
-      "bytes": 7555,
-      "sha256": "17c0c136aacef365d9d5f821fa8d65950888dd3aa9168f946650dc802f9f5bb3"
+      "bytes": 7705,
+      "sha256": "bf0af961848b2e5e804123974d91bfce4c152cba6b83712b10031d807543c491"
     },
     "components/ScoreVideoConfig.ts": {
-      "bytes": 8971,
-      "sha256": "9af1f6b18a7fa86cf8ed340271f074cb4b7d141c0f27f62edf7a50602d2f8a78"
+      "bytes": 8910,
+      "sha256": "cd13877f16f4bd5d70608b5f49b153abfd92c03e9a925f3e4c56625d58d86c5d"
     },
     "components/SunsetOcean.tsx": {
       "bytes": 9972,
@@ -116,12 +116,12 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 18454,
-      "sha256": "1fc55ceb96ce1b9c998ff4879af833f07961ecdee80bfdb1441d9ce8bbd83f68"
+      "bytes": 18712,
+      "sha256": "0c2bfb6bcebdcdc0f90f86a7498c0f1e76d316b855778c4159aac00c75c70881"
     },
     "README_使用说明.md": {
-      "bytes": 5358,
-      "sha256": "fd90d80d8ccded2b2d7777a8cac8547173cdeb7d45702aee5a6b46d2df910691"
+      "bytes": 5614,
+      "sha256": "1f886135fef7acf6e35dbf1a3afc2cf79bb239ed8041913ff22433d1ff7de062"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
@@ -156,8 +156,8 @@
       "sha256": "794e544351360b2cdc6d7f1ea71decb916cd180eff7779fc97dd76bba1d76332"
     },
     "references/production.md": {
-      "bytes": 4127,
-      "sha256": "0c561005f9fb458888b9674674d16e5fc58b528fd708f80af0f10fde271c7177"
+      "bytes": 4164,
+      "sha256": "01982d2975cbd8a5ccf5aa17e8ac96af076416943ab25b4b15b62eaaa551254a"
     },
     "references/rendering.md": {
       "bytes": 8865,
@@ -176,16 +176,16 @@
       "sha256": "dec01d4248289ac5574b1ae59f55e9252a0c9f665b3faccb65c19e9aa86e6f53"
     },
     "references/visual-presets.md": {
-      "bytes": 6547,
-      "sha256": "8b9b78a128ab5178f1a1e29681a3f8ecd9875cea9493f06910fcbbd49bb9f0e2"
+      "bytes": 7518,
+      "sha256": "23e26da91ac20647ec55efd1017f3272916052a57d82a63a69af0cbfde797ded"
     },
     "references/workflow.md": {
       "bytes": 8505,
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
     },
     "RELEASE_NOTES.md": {
-      "bytes": 5176,
-      "sha256": "63111de9f219d43b60579eacc700bab7f25f0352d62b7c5cba946acc08577331"
+      "bytes": 5616,
+      "sha256": "98cf33247eeddfe3f7da8ea3b99c206d00e2c0edad2e8796f83ef39e14b41da4"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
@@ -256,8 +256,8 @@
       "sha256": "deac3f53bacdc7c1433a798495396e0ddc22fd23ad0d6a75b1c8374745c16d73"
     },
     "scripts/quality.mjs": {
-      "bytes": 10233,
-      "sha256": "4d9bb7bb97bd2d5915db138f889ce156a4a255f1d70aea425acee6eba5976595"
+      "bytes": 11376,
+      "sha256": "5f7ff933309d490d5761fae6930a6be12ef53f258d671723922f8208b43d6d9f"
     },
     "scripts/review.mjs": {
       "bytes": 11051,
@@ -284,19 +284,19 @@
       "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
     },
     "SKILL.md": {
-      "bytes": 10522,
-      "sha256": "5d92016768a34cc35032027532789273b38efda3de8a9c1807586b32ab1218fa"
+      "bytes": 10438,
+      "sha256": "d3c8df4d3f9c7b3187bf01049b0dcc0fc6d9f27e431cfa24acfad996cac5bc7c"
     }
   },
   "localExtension": {
-    "id": "visual-presets-and-score-strip",
+    "id": "real-score-layout-no-personal-overlay",
     "date": "2026-10-25",
-    "status": "aligned-with-14-keep-12-drop",
+    "status": "engineering-checked-awaiting-keyframe-approval",
     "baseVersion": "1.1.0",
-    "scope": "visual presets aligned to 2026-10-24 decision plus score-strip",
+    "scope": "real-score layout profile, title/release corrections, no personal character overlays",
     "excluded": [
+      "personal character assets and references",
       "per-song timing repair",
-      "private media",
       "GitHub publication"
     ]
   }

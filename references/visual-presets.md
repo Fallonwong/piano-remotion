@@ -1,4 +1,4 @@
-# Local visual configuration upgrade (1.2.0-local.3)
+# Local visual configuration upgrade (1.2.0-local.4)
 
 Grounded in the 2026-10-24 decision: 14 kept options, 12 dropped. Retired choices remain readable in old jobs but are rejected for new presets.
 
@@ -22,7 +22,7 @@ already supplied. Recommendations are not consent.
 | Surface | **black-multiply**; metallic-screen |
 | Hand colors | right #b895ff / left #E95514; standard for new presets |
 | Motion | **converge-arc**: 14-frame tapered trail, chord split/merge, right 58 / left 44 px arcs, no starburst or ground ripple, inactive highlight opacity 0. Alternative pulse-only: no air trail, notehead breathing only. |
-| Avatar | **cat**, when an actual supplied transparent video is available; none |
+| Character overlay | none; all portable presets disable overlays |
 | Typography | chinese-2x; bodoni-royal; clean; optional status/progress bar |
 | Pipeline | full-score for focus/classic; supplied score-strip for runway |
 
@@ -32,10 +32,10 @@ compatible. Do not force these choices onto explicitly requested different work.
 
 | Factory | Aspect / camera | Theme / surface | Avatar |
 |---|---|---|---|
-| SlateClassic | 9:16 / portrait-focus | slate-gray / black-multiply | supplied cat |
-| SapphireRunway | 9:16 / portrait-runway | deep-sapphire / metallic-screen | supplied cat |
-| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / metallic-screen | supplied cat |
-| SapphireLandscape | 16:9 / landscape-classic | deep-sapphire / metallic-screen | supplied cat |
+| SlateClassic | 9:16 / portrait-focus | slate-gray / black-multiply | none |
+| SapphireRunway | 9:16 / portrait-runway | deep-sapphire / metallic-screen | none |
+| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / metallic-screen | none |
+| SapphireLandscape | 16:9 / landscape-classic | deep-sapphire / metallic-screen | none |
 
 ## Resolved scene example
 
@@ -54,10 +54,8 @@ const props = resolveScoreVideoConfig(config, {
 // Save JSON.stringify(props), then bind that file. Render PianoScoreScene.
 ```
 
-For cat, pass `avatarSrc` and its measured `avatarDurationSeconds` (default 10).
-The resolver uses round(fps * seconds); the video is transparent, muted and at
-zIndex 400. No cat video, fonts or song media are distributed. This user's local
-project suggests `ip/piano-alpha.webm`, but verify it exists before use.
+All portable presets set `avatar: 'none'` and resolve to `overlay: {enabled:false}`.
+No personal character, asset path, duration, aspect ratio or video special case is part of the Skill. Generic overlays remain a low-level explicit API for separately authorized assets.
 
 ## Configuration record
 
@@ -105,3 +103,21 @@ both staves, chord split/merge, rests/ties, line transitions, final systems, lon
 titles, and avatar clearance. Title zIndex 300 / avatar 400; masks cannot cover
 active notes. A synthetic style render is engineering evidence only. Preserve
 16:9 historical geometry, palette and defaults when no new props are selected.
+
+## Real-song layout corrections (local.4)
+
+The new runway resolver explicitly chooses a 75-frame lead-in of -55 score pixels,
+start/settled scale 1.18, scaleMultiplier 1.25 and stretchX 1.45. These are selectable
+layout starting points validated on the real-song review, not an auto-fit guarantee
+for every score. The score and both hands share the same transform. Existing direct
+`portraitRunwayPose()` calls retain the original 120-frame .90-to-1.18 behavior.
+
+Chinese titles are upright; the Bodoni subtitle may be italic. New motion styles
+use trailWidth 2, glowStrength 1.25, highlightFrames 10, starburst false and
+holdHighlightUntilNext false, with right/left arcHeight 58/44. `pulse-only` now
+explicitly sets pulseOnly true, hiding air trails and moving light cores.
+
+When recording the selected visual configuration, also include the resolved
+`runwayCamera` and `rightStyle`/`leftStyle` inside visual. The validator compares
+those values to the final persisted props. User approval is still required for
+the actual frames and audition.

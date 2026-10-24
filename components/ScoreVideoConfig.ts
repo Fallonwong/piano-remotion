@@ -95,9 +95,8 @@ export const DEFAULT_MOTION_FX = CONVERGE_ARC_MOTION_FX;
 // ==========================================
 // 7. 伴弹角标 IP 形象 (Pianist Avatar)
 // ==========================================
-export type ScorePianistAvatar =
-  | 'cat'   // G1: 透明底循环弹琴小猫 (public/ip/piano-alpha.webm, 300帧无缝循环, zIndex: 400)
-  | 'none'; // G2: 无人物纯净大谱表
+/** Portable presets render the score without any personal character overlay. */
+export type ScorePianistAvatar = 'none';
 
 // ==========================================
 // 8. 标题与排版 HUD (Typography & HUD Layout)
@@ -147,7 +146,7 @@ export const SCORE_PRESETS = {
     theme: 'slate-gray',
     texture: 'black-multiply',
     motionFx: {...DEFAULT_MOTION_FX},
-    avatar: 'cat',
+    avatar: 'none',
     typography: {
       style: 'chinese-2x',
       showStatusBar: true,
@@ -168,7 +167,7 @@ export const SCORE_PRESETS = {
     theme: 'deep-sapphire',
     texture: 'metallic-screen',
     motionFx: {...DEFAULT_MOTION_FX},
-    avatar: 'cat',
+    avatar: 'none',
     typography: {
       style: 'chinese-2x',
       showStatusBar: true,
@@ -189,7 +188,7 @@ export const SCORE_PRESETS = {
     theme: 'obsidian-dark',
     texture: 'metallic-screen',
     motionFx: {...DEFAULT_MOTION_FX},
-    avatar: 'cat',
+    avatar: 'none',
     typography: {
       style: 'chinese-2x',
       showStatusBar: true,
@@ -210,7 +209,7 @@ export const SCORE_PRESETS = {
     theme: 'deep-sapphire',
     texture: 'metallic-screen',
     motionFx: {...DEFAULT_MOTION_FX},
-    avatar: 'cat',
+    avatar: 'none',
     typography: {
       style: 'bodoni-royal',
       showStatusBar: true,

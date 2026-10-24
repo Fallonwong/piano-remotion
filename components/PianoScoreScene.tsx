@@ -72,21 +72,19 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
   const cameraX = modern?preset.targetScreenX-focus!.focusX:path?.cameraX ?? (camera.follow===false ? camera.left??0 : (camera.anchorX??width*760/1920)-followX*scale*Math.cos(tilt));
   const cameraY = modern?preset.targetScreenY-focus!.focusY:path?.cameraY ?? (camera.follow===false ? camera.top??0 : (camera.anchorY??height*400/1080)-followX*scale*Math.sin(tilt));
   const uiScale = modern&&aspect==='9:16'?.72:Math.min(width/1920,height/1080);
-  const alphaIP=modern&&overlay?.enabled&&overlay.src?.endsWith('piano-alpha.webm');
-  const ipLoopFrames=overlay?.loopFrames??(alphaIP?Math.round(fps*10):undefined);
-  if(alphaIP&&ipLoopFrames!==Math.round(fps*10))throw new Error('IP_LOOP_REQUIRED: piano-alpha uses 10 seconds at composition fps');
+  const ipLoopFrames=overlay?.loopFrames;
   if (overlay?.enabled && !overlay.src) throw new Error('Enabled overlay requires an explicitly supplied asset');
   if (overlay?.enabled && overlay.loopFrames !== undefined && (!Number.isInteger(overlay.loopFrames) || overlay.loopFrames < 1)) throw new Error('overlay.loopFrames must be a positive integer');
   const overlayContent = overlay?.enabled && overlay.src ? (overlay.kind==='image'
     ? <Img src={staticFile(overlay.src)} style={{width:'100%',height:'100%',objectFit:'contain'}}/>
-    : <OffthreadVideo src={staticFile(overlay.src)} transparent={overlay.transparent??!!alphaIP} muted style={{width:'100%',height:'100%'}}/>) : null;
+    : <OffthreadVideo src={staticFile(overlay.src)} transparent={overlay.transparent??false} muted style={{width:'100%',height:'100%'}}/>) : null;
   return <AbsoluteFill style={{background:surface,overflow:'hidden'}}>
     {backgroundScene==='sunset-ocean'&&<SunsetOcean width={width} height={height}/>}
     {backgroundScene==='deep-sapphire'&&<DeepSapphire width={width} height={height}/>}
     {modern&&backgroundSrc&&<Img src={staticFile(backgroundSrc)} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}
     {audioSrc&&<Audio src={staticFile(audioSrc)} volume={modern?1:f=>interpolate(f,[Math.max(0,D-6),D],[1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})}/>}
     <div style={modern?{position:'absolute',inset:0,perspective:runway?.perspective??preset.perspective,perspectiveOrigin:'50% 50%',zIndex:10,mixBlendMode:texture?(texture==='black-multiply'?undefined:'screen'):(theme==='custom'?'screen':undefined)}:{display:'contents'}}>
-    <div style={{position:'absolute',left:cameraX,top:cameraY,width:timeline.scoreWidth,height:timeline.scoreHeight,transformOrigin:modern?`${focus!.focusX}px ${focus!.focusY}px`:'0 0',transformStyle:modern?'preserve-3d':undefined,transform:runway?`rotateZ(${z}deg) rotateY(${runway.rotateY}deg) rotateX(${rx}deg) scale(${scale})`:`rotateZ(${z}deg) rotateX(${rx}deg) scale(${scale})`}}>
+    <div style={{position:'absolute',left:cameraX,top:cameraY,width:timeline.scoreWidth,height:timeline.scoreHeight,transformOrigin:modern?`${focus!.focusX}px ${focus!.focusY}px`:'0 0',transformStyle:modern?'preserve-3d':undefined,transform:runway?`rotateZ(${z}deg) rotateY(${runway.rotateY}deg) rotateX(${rx}deg) scale(${scale}) scaleX(${runway.stretchX})`:`rotateZ(${z}deg) rotateX(${rx}deg) scale(${scale})`}}>
       {!modern&&<div style={{position:'absolute',left:-3000,top:-3000,width:Math.max(8000,timeline.scoreWidth+6000),height:Math.max(16000,timeline.scoreHeight+6000),background:surface}}/>}
       <div style={modern?{position:'absolute',inset:0,background:texture?(texture==='black-multiply'?surface:'#000000'):(runway?'#eae2d8':(theme==='custom'?'#000000':surface)),isolation:'isolate',transformStyle:'flat',boxShadow:runway&&!texture?'22px 30px 50px rgba(0,0,0,0.65), 0 0 1px rgba(0,0,0,.4)':undefined,borderRadius:runway?6:undefined,maskImage:runway&&!texture?'linear-gradient(to right, black 86%, rgba(0,0,0,0.4) 94%, transparent 100%)':undefined}:{display:'contents'}}>
       <Img src={staticFile(scoreSrc)} style={{position:'absolute',left:scoreImage.x??0,top:scoreImage.y??0,width:scoreImage.width??timeline.scoreWidth,height:scoreImage.height??timeline.scoreHeight,mixBlendMode:scoreImage.blendMode??textureStyle?.blend??(modern?palette.blend:'multiply'),filter:scoreImage.filter??textureStyle?.filter??(runway?portraitRunwayScoreFilter():(modern?palette.filter:undefined))}}/>
@@ -98,8 +96,8 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
     {vignette&&!modern&&<><AbsoluteFill style={{background:'radial-gradient(ellipse at 45% 52%,transparent 30%,rgba(58,50,68,.35) 70%,rgba(30,26,38,.7) 100%)',pointerEvents:'none'}}/><AbsoluteFill style={{background:'radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.55) 0%,rgba(0,0,0,.24) 34%,transparent 72%)',pointerEvents:'none'}}/></>}
     <div style={{position:'absolute',left:110*uiScale,top:85*uiScale,opacity:fade,zIndex:modern?300:200,fontFamily:modern?'\"Bodoni MT\", Didot, Georgia, serif':fontFamily,color:uiText,textShadow:'0 2px 14px rgba(20,12,36,.5)'}}>
       <div style={{fontSize:17*uiScale,letterSpacing:6*uiScale,color:modern?uiText:'#d8cfe4'}}>{label}</div>
-      <div style={{fontStyle:modern?'italic':undefined,fontSize:(typographyStyle==='chinese-2x'?208:104)*uiScale,maxWidth:width-180*uiScale,overflowWrap:'anywhere',letterSpacing:3*uiScale,marginTop:16*uiScale,lineHeight:1,fontFamily:typographyStyle==='chinese-2x'?'"Alimama ShuHeiTi Bold", Arial, sans-serif':typographyStyle==='clean'?'Arial, sans-serif':undefined}}>{chineseTitle??title}</div>
-      <div style={{fontFamily:modern?'\"Alimama ShuHeiTi Bold\", Arial, sans-serif':'Georgia, serif',fontSize:23*uiScale,color:modern?uiText:'#d9d0dd',marginTop:12*uiScale}}>{subtitle}</div>
+      <div style={{fontStyle:typographyStyle==='chinese-2x'?'normal':modern?'italic':undefined,fontSize:(typographyStyle==='chinese-2x'?208:104)*uiScale,maxWidth:width-180*uiScale,overflowWrap:'anywhere',letterSpacing:3*uiScale,marginTop:16*uiScale,lineHeight:1,fontFamily:typographyStyle==='chinese-2x'?'"Alimama ShuHeiTi Bold", Arial, sans-serif':typographyStyle==='clean'?'Arial, sans-serif':undefined}}>{chineseTitle??title}</div>
+      <div style={{fontFamily:typographyStyle==='chinese-2x'?'"Bodoni MT", Didot, Georgia, serif':modern?'\"Alimama ShuHeiTi Bold\", Arial, sans-serif':'Georgia, serif',fontStyle:typographyStyle==='chinese-2x'?'italic':undefined,fontSize:23*uiScale,color:modern?uiText:'#d9d0dd',marginTop:12*uiScale}}>{subtitle}</div>
     </div>
     {showProgress&&<div style={{position:'absolute',left:110*uiScale,right:170*uiScale,bottom:62*uiScale,zIndex:150,pointerEvents:'none'}}>
       <div style={{display:'flex',alignItems:'center',gap:36*uiScale,marginBottom:22*uiScale,opacity:fade}}>
@@ -107,7 +105,7 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
       </div>
       <div style={{position:'relative',height:2,background:'rgba(255,255,255,.16)',borderRadius:1}}><div style={{position:'absolute',left:0,top:0,height:2,width:`${frame/D*100}%`,background:modern?`linear-gradient(90deg,${rightGlow},${leftGlow})`:'linear-gradient(90deg,#b895ff,#E95514)',borderRadius:1}}/></div>
     </div>}
-    {overlayContent&&<div style={{position:'absolute',right:overlay?.right??-2,bottom:overlay?.bottom??85*uiScale,width:overlay?.width??220*uiScale,height:overlay?.height??(220*832/928)*uiScale,zIndex:modern?400:100}}>{ipLoopFrames?<Loop durationInFrames={ipLoopFrames}>{overlayContent}</Loop>:overlayContent}</div>}
+    {overlayContent&&<div style={{position:'absolute',right:overlay?.right??24*uiScale,bottom:overlay?.bottom??85*uiScale,width:overlay?.width??220*uiScale,height:overlay?.height??220*uiScale,zIndex:modern?400:100}}>{ipLoopFrames?<Loop durationInFrames={ipLoopFrames}>{overlayContent}</Loop>:overlayContent}</div>}
     {credit&&<div style={{position:'absolute',right:24*uiScale,bottom:48*uiScale,fontFamily,fontSize:21*uiScale,fontWeight:600,color:modern?uiText:'#eee7df',textShadow:'0 2px 8px #000'}}>{credit}</div>}
   </AbsoluteFill>;
 };

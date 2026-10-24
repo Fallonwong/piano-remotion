@@ -7,8 +7,6 @@ export type ScoreVideoAssets = {
   audioSrc?: string;
   /** Declare the supplied geometry; this resolver never generates a strip. */
   pipeline: ScoreVideoConfig['pipeline'];
-  avatarSrc?: string;
-  avatarDurationSeconds?: number;
 };
 
 /** Resolve once, persist these plain JSON props, then bind/review that exact file. */
@@ -18,7 +16,7 @@ export function resolveScoreVideoConfig(config: ScoreVideoConfig, assets: ScoreV
       !['portrait-focus','portrait-runway','landscape-classic'].includes(cameraMode) ||
       !['slate-gray','obsidian-dark','deep-sapphire'].includes(theme) ||
       !['black-multiply','metallic-screen'].includes(texture) ||
-      !['cat','none'].includes(config.avatar) ||
+      config.avatar !== 'none' ||
       !['chinese-2x','bodoni-royal','clean'].includes(typography.style)) throw new Error('INVALID_VIDEO_CONFIG');
   if ((cameraMode === 'landscape-classic') !== (aspectRatio === '16:9')) throw new Error('CAMERA_ASPECT_MISMATCH');
   if (!['full-score','score-strip'].includes(pipeline) || assets.pipeline !== pipeline ||
@@ -35,22 +33,21 @@ export function resolveScoreVideoConfig(config: ScoreVideoConfig, assets: ScoreV
   for (const [key,value] of Object.entries(config.handColors??{})) {
     if (typeof value !== 'string' || value.toLowerCase() !== expectedColors[key as keyof typeof expectedColors]?.toLowerCase()) throw new Error('STANDARD_PALETTE_REQUIRED');
   }
-  if (config.avatar === 'cat' && !assets.avatarSrc) throw new Error('AVATAR_ASSET_REQUIRED: supply your own transparent muted video, or select none');
-  const seconds = assets.avatarDurationSeconds ?? 10;
-  if (config.avatar==='cat' && (!Number.isFinite(seconds)||seconds<=0||Math.round(assets.timeline.fps*seconds)<1)) throw new Error('INVALID_AVATAR_DURATION');
   const style = (hand: 'right'|'left') => ({
     ...motionFx, color:OFFICIAL_HAND_PALETTE[hand].color,
     glowColor:OFFICIAL_HAND_PALETTE[hand].glow, coreColor:OFFICIAL_HAND_PALETTE[hand].core,
     rippleColor:OFFICIAL_HAND_PALETTE[hand].color,
-    holdHighlightUntilNext:true,
+    holdHighlightUntilNext:false, trailWidth:2, glowStrength:1.25,
+    highlightFrames:10, starburst:false, pulseOnly:motionFx.trailFrames===0,
   });
   return {
     timeline:assets.timeline,scoreSrc:assets.scoreSrc,...(assets.audioSrc?{audioSrc:assets.audioSrc}:{}),
     aspectRatio,cameraMode,theme,texture,pipeline,typographyStyle:typography.style,
+    ...(cameraMode==='portrait-runway'?{runwayCamera:{introFrames:75,leadIn:-55,startScale:1.18,settledScale:1.18,scaleMultiplier:1.25,stretchX:1.45}}:{}),
     title:typography.title,chineseTitle:typography.chineseTitle,subtitle:typography.subtitle,
     showProgress:typography.showStatusBar,vignette:false,
     backgroundScene:theme==='deep-sapphire'?'deep-sapphire':'none',
     rightStyle:{...style('right'),arcHeight:58},leftStyle:{...style('left'),arcHeight:44},
-    overlay:config.avatar==='none'?{enabled:false}:{enabled:true,src:assets.avatarSrc,kind:'video',transparent:true,loopFrames:Math.round(assets.timeline.fps*seconds)},
+    overlay:{enabled:false},
   };
 }

@@ -1,3 +1,7 @@
+# 1.2.0-local.4 — real-score layout fixes and no personal character overlays, unpublished
+
+New presets disable character overlays. Removed personal asset references and special cases. Added explicit runway scaling/stretch/lead-in profile, upright Chinese titles and Bodoni subtitles, 2px trails with 1.25 glow and finite release. Added true pulse-only hiding moving heads and trails. Legacy direct camera behavior remains unchanged.
+
 # 1.2.0-local.3 — aligned with the 14-keep / 12-drop decision, unpublished
 
 Retired nebula and parchment themes, white-invert surface, and ground ripple defaults. Synced the four remaining presets (SlateClassic, SapphireRunway, ObsidianFocus, SapphireLandscape), converge-arc 14-frame trails with 58/44 arc heights, and pulse-only alternative. Preserved legacy low-level props and both content approvals. No GitHub publication.

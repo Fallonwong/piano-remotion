@@ -58,15 +58,26 @@ export function validateProduction(config,props){
   const visual=config.visual;
   if(props && (props.texture || props.pipeline || props.typographyStyle) && !visual)failConfig('New visual preset props require a visual configuration record');
   if(visual){
+    if(config.avatar.kind!=='none')failConfig('Portable presets require no character overlay');
     if(!['portrait-focus','portrait-runway','landscape-classic'].includes(visual.cameraMode)||!['black-multiply','metallic-screen'].includes(visual.texture)||!['full-score','score-strip'].includes(visual.pipeline)||!['chinese-2x','bodoni-royal','clean'].includes(visual.typographyStyle)||typeof visual.showProgress!=='boolean')failConfig('Choose complete visual configuration');
     if((visual.cameraMode==='landscape-classic')!==(config.aspectRatio==='16:9')||(visual.cameraMode==='portrait-runway')!==(visual.pipeline==='score-strip'))failConfig('Camera, aspect and pipeline mismatch');
     if(config.rightColor?.toLowerCase()!=='#b895ff'||config.leftColor?.toLowerCase()!=='#e95514')failConfig('New presets use the standard hand palette');
     const fx=visual.motionFx;
     if(!fx||!Number.isInteger(fx.trailFrames)||fx.trailFrames<0||!Number.isInteger(fx.rippleFrames)||fx.rippleFrames<0||[fx.rippleOpacity,fx.inactiveNoteOpacity].some(n=>!Number.isFinite(n)||n<0||n>1)||[fx.taperTrail,fx.followChordNotes,fx.rippleRing].some(v=>typeof v!=='boolean')||fx.rippleRing||fx.rippleOpacity!==0)failConfig('Choose complete motion FX');
+    for(const side of ['rightStyle','leftStyle']){
+      const style=visual[side];
+      if(!style||!Number.isFinite(style.arcHeight)||style.arcHeight<0||style.trailWidth!==2||style.glowStrength!==1.25||style.highlightFrames!==10||style.holdHighlightUntilNext!==false||style.starburst!==false||style.pulseOnly!==(fx.trailFrames===0))failConfig(`Record resolved motion style: ${side}`);
+    }
+    if(visual.cameraMode==='portrait-runway'){
+      const cam=visual.runwayCamera;
+      if(!cam||!Number.isFinite(cam.introFrames)||cam.introFrames<0||!Number.isFinite(cam.leadIn)||['startScale','settledScale','scaleMultiplier','stretchX'].some(k=>!Number.isFinite(cam[k])||cam[k]<=0))failConfig('Record resolved runway camera');
+    }
     if(props){
       for(const key of ['cameraMode','texture','pipeline','typographyStyle','showProgress'])if(props[key]!==visual[key])failConfig(`Visual props mismatch: ${key}`);
       for(const side of ['rightStyle','leftStyle'])for(const key of ['trailFrames','rippleFrames','rippleOpacity','inactiveNoteOpacity','taperTrail','followChordNotes','rippleRing'])if(props[side]?.[key]!==fx[key])failConfig(`Motion props mismatch: ${side}.${key}`);
       if(props.rightStyle?.glowColor!=='#b794f4'||props.rightStyle?.coreColor!=='#ffffff'||props.leftStyle?.glowColor!=='#ff9a46'||props.leftStyle?.coreColor!=='#fff5db')failConfig('Standard glow/core colors required');
+      for(const side of ['rightStyle','leftStyle'])if(hashObject(props[side])!==hashObject(visual[side]))failConfig(`Resolved style mismatch: ${side}`);
+      if(visual.cameraMode==='portrait-runway'&&hashObject(props.runwayCamera)!==hashObject(visual.runwayCamera))failConfig('Resolved camera mismatch');
     }
   }
   if(props&&(props.aspectRatio!==config.aspectRatio||props.theme!==config.theme||(visual?props.rightStyle?.color:props.rightStyle?.glowColor)!==config.rightColor||(visual?props.leftStyle?.color:props.leftStyle?.glowColor)!==config.leftColor||!!props.overlay?.enabled!==(config.avatar.kind==='asset')||config.avatar.kind==='asset'&&props.overlay?.src!==config.avatar.src))failConfig('Props do not match confirmed configuration');

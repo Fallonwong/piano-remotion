@@ -10,6 +10,8 @@ export type ScoreNoteLeapProps = {
   glowColor?:string; glowStrength?:number; starburst?:boolean; trailWidth?:number;
   taperTrail?:boolean;
   followChordNotes?:boolean;
+  /** Only the struck notehead breathes; no moving head or air trail. */
+  pulseOnly?:boolean;
   rippleRing?:boolean; rippleFrames?:number; rippleMaxRadius?:number; rippleColor?:string;
   rippleOpacity?:number; inactiveNoteOpacity?:number;
   className?:string; style?:React.CSSProperties;
@@ -18,7 +20,7 @@ export type ScoreNoteLeapProps = {
 export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
   events=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,
   trailFrames=5,highlightFrames=10,holdHighlightUntilNext=false,glowColor=color,
-  glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,
+  glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,pulseOnly=false,
   rippleRing=false,rippleFrames=14,rippleMaxRadius=38,rippleColor,
   rippleOpacity=1,inactiveNoteOpacity=.24,
   className,style
@@ -63,9 +65,9 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
   }
 
   const chord=followChordNotes?scoreChordGeometry(events,frame,arcHeight,trailFrames):null;
-  const visibleSegments=chord?.segments??segments;
-  const visibleHeads=chord?.heads??(head?[head]:[]);
-  const visibleTails=chord?.tails??[tail];
+  const visibleSegments=pulseOnly?[]:chord?.segments??segments;
+  const visibleHeads=pulseOnly?[]:chord?.heads??(head?[head]:[]);
+  const visibleTails=pulseOnly?[]:chord?.tails??[tail];
 
   return <svg className={className} width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{overflow:'visible',...style}}>
     {events.map((event,i)=>{

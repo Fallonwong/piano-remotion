@@ -3,7 +3,7 @@ name: piano-remotion
 description: Make piano-score videos with original two-hand leaps, glow trails and camera. Review notation revisions, reuse sampled audio tools, and stop for score approval then actual keyframe/audition approval before exporting.
 ---
 
-# Piano Remotion 1.2.0-local.3
+# Piano Remotion 1.2.0-local.4
 
 Local visual upgrade candidate (2026-10-24: 14 keep / 12 drop); GitHub remains V1.1.0. For new configurations read [visual presets and compatibility](references/visual-presets.md). Use the four preset factories through `resolveScoreVideoConfig`, persist the resolved props, and keep actual content approvals. For multi-system SVG to continuous runway geometry, use [score-strip](references/score-strip.md) with measured bounds and an existing geometry map. Song-specific timing repairs remain excluded.
 
@@ -17,7 +17,7 @@ For reference-inspired portrait depth tracking, read [竖屏纵深跟谱 / portr
 
 ## Before new video production
 
-Use [production configuration and visual contracts](references/production.md). Before notation parsing/rendering, confirm missing choices once using the visual-presets matrix: recommend 9:16, slate-gray, black-multiply and a supplied cat avatar, with the standard lilac/orange hand palette. Also confirm camera, the converge-arc or pulse-only motion, typography/status and the compatible pipeline. Retired themes/surfaces are not offered for new work. Default milestone recommendation is first-four keyframes. Old theme names remain available for historical calls. Reuse actual choices already given in this task; defaults are suggestions, not consent. Keep the confirmation quote/message reference in `piano-production/v2`. For this local project the latest `piano-alpha.webm` is the suggested avatar (transparent/muted, 10 seconds at composition fps, zIndex 400); portable installs require an explicitly supplied asset and never bundle personal media. This configuration gate is separate from the two content approvals below. Audits and tool diagnostics are not new video production.
+Use [production configuration and visual contracts](references/production.md). Before notation parsing/rendering, confirm missing choices once using the visual-presets matrix: recommend 9:16, slate-gray, black-multiply and no character overlay, with the standard lilac/orange hand palette. Also confirm camera, the converge-arc or pulse-only motion, typography/status and the compatible pipeline. Retired themes/surfaces are not offered for new work. Default milestone recommendation is first-four keyframes. Old theme names remain available for historical calls. Reuse actual choices already given in this task; defaults are suggestions, not consent. Keep the confirmation quote/message reference in `piano-production/v2`. All portable presets disable character overlays. Do not add personal characters or media to the package, defaults, examples or generated preview. This configuration gate is separate from the two content approvals below. Audits and tool diagnostics are not new video production.
 
 New formal audio jobs require [content and performance-time evidence](references/performance-quality.md). New `bind` requires `--production`; `--quality` is required for formal audible jobs. Three energy onsets, a DTW path, successful import, or Agent-generated confidence cannot certify content. Do not relabel candidate anchors as observed. Keep unresolved pitches/arrangements/repeats blocked or explicitly draft. Legacy jobs remain inspectable; rebind before a new formal export.
 
