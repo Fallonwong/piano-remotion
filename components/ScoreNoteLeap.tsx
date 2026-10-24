@@ -1,17 +1,28 @@
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
+import {scoreChordGeometry} from './ScoreChordGeometry';
 
-export type ScoreAttack = {frame:number; x:number; y:number; notes?:{x:number;y:number;pitch?:string;attack?:boolean;soundingStartFrame?:number;soundingEndFrame?:number;highlightEndFrame?:number}[]};
+export type ScoreAttack = {frame:number; x:number; y:number; notes?:{x:number;y:number;pitch?:string}[]};
 export type ScoreNoteLeapProps = {
   events?: ScoreAttack[]; color?:string; coreColor?:string; width?:number; height?:number;
   arcHeight?:number; trailFrames?:number; highlightFrames?:number;
   holdHighlightUntilNext?:boolean;
   glowColor?:string; glowStrength?:number; starburst?:boolean; trailWidth?:number;
   taperTrail?:boolean;
+  followChordNotes?:boolean;
+  rippleRing?:boolean; rippleFrames?:number; rippleMaxRadius?:number; rippleColor?:string;
+  rippleOpacity?:number; inactiveNoteOpacity?:number;
   className?:string; style?:React.CSSProperties;
 };
 /** Coordinates share the score's pixel space. Every time value is in frames. */
-export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({events=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,trailFrames=5,highlightFrames=10,holdHighlightUntilNext=false,glowColor=color,glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,className,style}) => {
+export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
+  events=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,
+  trailFrames=5,highlightFrames=10,holdHighlightUntilNext=false,glowColor=color,
+  glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,
+  rippleRing=false,rippleFrames=14,rippleMaxRadius=38,rippleColor,
+  rippleOpacity=1,inactiveNoteOpacity=.24,
+  className,style
+}) => {
   const frame=useCurrentFrame();
   const point=(f:number) => {
     if(!events.length || f<events[0].frame) return null;
@@ -51,27 +62,37 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({events=[],color='#ff
     }
   }
 
+  const chord=followChordNotes?scoreChordGeometry(events,frame,arcHeight,trailFrames):null;
+  const visibleSegments=chord?.segments??segments;
+  const visibleHeads=chord?.heads??(head?[head]:[]);
+  const visibleTails=chord?.tails??[tail];
+
   return <svg className={className} width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{overflow:'visible',...style}}>
     {events.map((event,i)=>{
       const age=frame-event.frame;
       if(age<0) return null;
       const isHeld=holdHighlightUntilNext&&(i===events.length-1||frame<events[i+1].frame);
       const strength=isHeld?Math.max(.7,1-age/highlightFrames):Math.max(0,1-age/highlightFrames);
-      return <g key={i}>{(event.notes??[event]).map((n,j)=>{
-        // Optional performance metadata: legacy leap geometry/trails stay unchanged.
-        const soundingEnd='highlightEndFrame' in n?n.highlightEndFrame:('soundingEndFrame' in n?n.soundingEndFrame:undefined);
-        const isContinuation='attack' in n&&n.attack===false;
-        const noteStrength=soundingEnd!==undefined?(frame<soundingEnd?(isContinuation ? .7 : Math.max(.7,strength)):0):strength;
-        return <g key={j}>
-        {glowStrength>0&&noteStrength>0&&<ellipse cx={n.x} cy={n.y} rx={15} ry={10} fill={glowColor} opacity={noteStrength*.5} style={{filter:`blur(${4+glowStrength}px)`}}/>}
-        <ellipse cx={n.x} cy={n.y} rx={10+noteStrength*3} ry={6+noteStrength*2} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={noteStrength*.25} stroke={glowStrength>0&&noteStrength>.2?glowColor:color} strokeWidth={1.5+noteStrength} opacity={.24+noteStrength*.76} style={{filter:`drop-shadow(0 0 ${2+noteStrength*7}px ${glowStrength>0?glowColor:color})`}} />
-      </g>;})}</g>;
+      const showRipple=rippleRing&&age<rippleFrames;
+      const rippleT=showRipple?age/rippleFrames:0;
+      const rippleEase=1-Math.pow(1-rippleT,2.5);
+      const rippleRadius=10+(rippleMaxRadius-10)*rippleEase;
+      const ringOpacity=showRipple?Math.max(0,(1-rippleT)*(1-0.2*rippleT))*rippleOpacity:0;
+      const rippleStroke=Math.max(0.8,3.2*(1-rippleT*0.7));
+      return <g key={i}>{(event.notes??[event]).map((n,j)=><g key={j}>
+        {showRipple&&<>
+          <ellipse cx={n.x} cy={n.y} rx={rippleRadius*1.15} ry={rippleRadius*0.85} fill="none" stroke={glowColor} strokeWidth={rippleStroke+2.5} opacity={ringOpacity*0.45} style={{filter:`blur(${2+glowStrength*2}px)`}}/>
+          <ellipse cx={n.x} cy={n.y} rx={rippleRadius*1.15} ry={rippleRadius*0.85} fill="none" stroke={rippleColor??(glowStrength>0?glowColor:color)} strokeWidth={rippleStroke} opacity={ringOpacity*0.9} style={{filter:`drop-shadow(0 0 6px ${glowColor})`}}/>
+        </>}
+        {glowStrength>0&&strength>0&&<ellipse cx={n.x} cy={n.y} rx={15} ry={10} fill={glowColor} opacity={strength*.5} style={{filter:`blur(${4+glowStrength}px)`}}/>}
+        <ellipse cx={n.x} cy={n.y} rx={10+strength*3} ry={6+strength*2} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={strength*.25} stroke={glowStrength>0&&strength>.2?glowColor:color} strokeWidth={1.5+strength} opacity={inactiveNoteOpacity+strength*(1-inactiveNoteOpacity)} style={{filter:`drop-shadow(0 0 ${2+strength*7}px ${glowStrength>0?glowColor:color})`}} />
+      </g>)}</g>;
     })}
     {taperTrail ? (
       <>
-        {glowStrength > 0 && segments.length > 0 && (
+        {glowStrength > 0 && visibleSegments.length > 0 && (
           <g style={{filter: `blur(${glowStrength * 2}px)`}}>
-            {segments.map((seg, idx) => (
+            {visibleSegments.map((seg, idx) => (
               <line
                 key={idx}
                 x1={seg.p1.x}
@@ -86,9 +107,9 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({events=[],color='#ff
             ))}
           </g>
         )}
-        {segments.length > 0 && (
+        {visibleSegments.length > 0 && (
           <g style={{filter: `drop-shadow(0 0 5px ${glowColor})`}}>
-            {segments.map((seg, idx) => (
+            {visibleSegments.map((seg, idx) => (
               <line
                 key={idx}
                 x1={seg.p1.x}
@@ -105,15 +126,15 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({events=[],color='#ff
         )}
       </>
     ) : (
-      <>
-        {glowStrength>0&&<polyline points={tail.map(p=>`${p.x},${p.y}`).join(' ')} fill="none" stroke={glowColor} strokeWidth={trailWidth+glowStrength*3} opacity={.65} style={{filter:`blur(${glowStrength*2}px)`}}/>}
-        <polyline points={tail.map(p=>`${p.x},${p.y}`).join(' ')} fill="none" stroke={glowStrength>0?glowColor:color} strokeWidth={trailWidth} strokeLinecap="round" style={{filter:`drop-shadow(0 0 5px ${glowColor})`}}/>
-      </>
+      <>{visibleTails.map((points,i)=><React.Fragment key={i}>
+        {glowStrength>0&&<polyline points={points.map(p=>`${p.x},${p.y}`).join(' ')} fill="none" stroke={glowColor} strokeWidth={trailWidth+glowStrength*3} opacity={.65} style={{filter:`blur(${glowStrength*2}px)`}}/>}
+        <polyline points={points.map(p=>`${p.x},${p.y}`).join(' ')} fill="none" stroke={glowStrength>0?glowColor:color} strokeWidth={trailWidth} strokeLinecap="round" style={{filter:`drop-shadow(0 0 5px ${glowColor})`}}/>
+      </React.Fragment>)}</>
     )}
-    {head&&<g>
+    {visibleHeads.map((head,i)=><g key={i}>
       {glowStrength>0&&<><circle cx={head.x} cy={head.y} r={10+glowStrength*7} fill={glowColor} opacity={.55} style={{filter:`blur(${6+glowStrength*3}px)`}}/><circle cx={head.x} cy={head.y} r={7+glowStrength} fill={glowColor} style={{filter:`drop-shadow(0 0 8px ${glowColor})`}}/></>}
       {starburst&&<path d={`M${head.x-19},${head.y} H${head.x+19} M${head.x},${head.y-19} V${head.y+19}`} stroke={coreColor} strokeWidth={1} opacity={.85} style={{filter:`drop-shadow(0 0 4px ${glowColor})`}}/>}
       <circle cx={head.x} cy={head.y} r={13} fill={color} opacity={.14}/><circle cx={head.x} cy={head.y} r={4.5} fill={coreColor} style={{filter:`drop-shadow(0 0 9px ${glowColor}) drop-shadow(0 0 3px ${glowColor})`}}/>
-    </g>}
+    </g>)}
   </svg>;
 };

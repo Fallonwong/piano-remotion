@@ -249,3 +249,11 @@ node <skill>/scripts/piano.mjs --help
 [GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.1.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>
+
+
+## 本地视觉升级候选 1.2.0-local.1
+
+本机已合并五组视觉预设、统一配置解析、标准配色、光效透明度和便携背景组件。GitHub 发布版仍为 V1.1.0。新制作请使用[配置与兼容说明](references/visual-presets.md)，先保存解析后的 props 再进入原有审核流程。连续谱带生成器和逐曲时间修补不在本次范围内。
+
+
+本地增补 1.2.0-local.2：新增 [多行谱面转连续长谱](references/score-strip.md)，保留音高与时间，输出供现有纵深跑道使用的 SVG、时间线和几何证据。仍不包含逐曲时间修补。

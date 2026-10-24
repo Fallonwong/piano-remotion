@@ -49,14 +49,15 @@ async function inspectProject(project) {
       }catch(e){result.issues.push(`${name}: ${e.message}`);}
     }
     if(result.cliPath&&result.issues.length===0) {
-      result.cliProbe=await probe(process.execPath,[result.cliPath,'--version'],project,CLI_TIMEOUT);
+      result.cliProbe=await probe(process.execPath,[result.cliPath,'--help'],project,CLI_TIMEOUT);
       const p=result.cliProbe;
-      // 4.0.515 prints its version and help, then exits 1 for --version.
+      // --help prints the exact version banner without the unrelated
+      // dependency scan performed before --version in 4.0.515.
       // Accept only that exact banner, the known exit codes, and empty stderr.
       const banner=p.stdout.replace(/\x1b\[[0-9;]*m/g,'');
       p.version= /(?:^|\n)@remotion\/cli (\d+\.\d+\.\d+)(?:\r?\n|$)/.exec(banner)?.[1]??null;
       p.ok=!p.timedOut&&[0,1].includes(p.exitCode)&&!p.stderr&&p.version===BASELINE['@remotion/cli'];
-      if(!p.ok)result.issues.push(p.timedOut?'ENVIRONMENT_VERIFICATION_PENDING: installed packages match, but CLI probe timed out. Do not reinstall; inspect the process/cache and retry with PIANO_CLI_PROBE_TIMEOUT_MS (max 120000).':'Remotion --version probe failed; see cliProbe');
+      if(!p.ok)result.issues.push(p.timedOut?'ENVIRONMENT_VERIFICATION_PENDING: installed packages match, but CLI probe timed out. Do not reinstall; inspect the process/cache and retry with PIANO_CLI_PROBE_TIMEOUT_MS (max 120000).':'Remotion help/version banner probe failed; see cliProbe');
     }
   }catch(e){result.issues.push(e.message);}
   if(Number(process.versions.node.split('.')[0])<20)result.issues.push('Node >=20 required');

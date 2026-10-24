@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.1.0",
+  "version": "1.2.0-local.2",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -8,8 +8,8 @@
     "typescript": "5.9.3"
   },
   "repository": "https://github.com/Fallonwong/piano-remotion",
-  "releaseStatus": "stable",
-  "releaseDate": "2026-10-21",
+  "releaseStatus": "local-unpublished",
+  "releaseDate": "2026-10-24",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -63,21 +63,49 @@
       "bytes": 242,
       "sha256": "5e1bcd3ddc193b2fd7178fdf9cd803a84193687c430ed7064093c5875230d561"
     },
+    "components/CosmicNebula.tsx": {
+      "bytes": 9179,
+      "sha256": "ced9af5d25d709ff8713dfe36e9e16450a05ca4c698c173b6093ac8383348105"
+    },
+    "components/DeepSapphire.tsx": {
+      "bytes": 2924,
+      "sha256": "9dc6fbab86811087b1add76656dc1b52e9fbccc4f93f94ab5486bfe84ef52ae1"
+    },
     "components/PianoPresentation.ts": {
-      "bytes": 998,
-      "sha256": "618c60c4fc28a76e6933bc93a6e999d969ec476afa19d9ac2152863b0fbf5b78"
+      "bytes": 1581,
+      "sha256": "db09d9def0d4983ff05535069e3debe150869a854a5b29dfabc8a8a0f2580685"
     },
     "components/PianoRemotion.tsx": {
       "bytes": 156,
       "sha256": "298ce310c2dabee52043d2841689eb8d3c8e6f442f633222b88813339621d0eb"
     },
     "components/PianoScoreScene.tsx": {
-      "bytes": 10257,
-      "sha256": "1ef96c36c77171f7192226066557646f3758cb46a54f8085d5693660bbce7f00"
+      "bytes": 13514,
+      "sha256": "803a5f8a9a2acc9a1332db0a25eb119a38299394efb4f24024711cdb106ebfb0"
+    },
+    "components/resolveScoreVideoConfig.ts": {
+      "bytes": 3932,
+      "sha256": "2990b49be9fdd0ab747170122e1b7ce7e2e777c505da8cb05bfb48a77e4eb5d6"
+    },
+    "components/ScoreCameraPresets.ts": {
+      "bytes": 2007,
+      "sha256": "f1cf081886c6002989a99b065defd0f3ec9714567b1e9751018290243418abc1"
+    },
+    "components/ScoreChordGeometry.ts": {
+      "bytes": 4740,
+      "sha256": "44de360f25c652a95512b3e81ed660bb8846ae4c594648fca3522089732d9f6f"
     },
     "components/ScoreNoteLeap.tsx": {
-      "bytes": 6437,
-      "sha256": "9a2c7894ec83d1c2eb6260918e621d2fbf5b5f669cdb4bde2d6c6194df0978ed"
+      "bytes": 7555,
+      "sha256": "17c0c136aacef365d9d5f821fa8d65950888dd3aa9168f946650dc802f9f5bb3"
+    },
+    "components/ScoreVideoConfig.ts": {
+      "bytes": 9507,
+      "sha256": "7477b84d39e97641334bdfcc37ee871eb90cc126d90dec84c27c9e02ec461ab1"
+    },
+    "components/SunsetOcean.tsx": {
+      "bytes": 9972,
+      "sha256": "94f6f8e3d9282a7027b6fefb2d85dc2684feae9d0d3c2326b7429796b4e13344"
     },
     "examples/agent-prompts.md": {
       "bytes": 3407,
@@ -88,12 +116,12 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 17997,
-      "sha256": "a651466fa004c6d47e4fb379c82d5f6523083b88f4a1837b81419c8b22ddbbe7"
+      "bytes": 18614,
+      "sha256": "7a8c0f5462daac87a31b9a7a9401d20fff70e8dd72407fea324232df566811c1"
     },
     "README_使用说明.md": {
-      "bytes": 5153,
-      "sha256": "f85e4eb13e67dcf670f0a4bd56936d389df71d1f7aa8f4d4b9ba74354eafa3c9"
+      "bytes": 5770,
+      "sha256": "eb86651bd1d13be0aff8723c6e6062d061cb963aed04e0298a0238c7687f0fb4"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
@@ -123,13 +151,21 @@
       "bytes": 8720,
       "sha256": "d9cd8dca7e8c3c7916de6c45fd745169cd82830157010be4332d495bef4c55e4"
     },
+    "references/portrait-runway.md": {
+      "bytes": 4142,
+      "sha256": "ef3218af705cb78f5bd605f6b83fa8c5469d4cdae04f44eb00a44c14849a77ef"
+    },
     "references/production.md": {
-      "bytes": 3686,
-      "sha256": "0cd8e93b22713b63130a10a958359b25e71bb94b8933cb3f4f366b45551ab166"
+      "bytes": 4127,
+      "sha256": "0c561005f9fb458888b9674674d16e5fc58b528fd708f80af0f10fde271c7177"
     },
     "references/rendering.md": {
       "bytes": 8865,
       "sha256": "d1b963bc6587760ca6491d9ca1681bfe2d6fa9f17810afa9075dc5db15e04e95"
+    },
+    "references/score-strip.md": {
+      "bytes": 4367,
+      "sha256": "5f54b86125dffc77a0575da393947f9193c8d3a81edcbef1b1953e356ac26844"
     },
     "references/score-validation.md": {
       "bytes": 12835,
@@ -139,13 +175,17 @@
       "bytes": 3109,
       "sha256": "dec01d4248289ac5574b1ae59f55e9252a0c9f665b3faccb65c19e9aa86e6f53"
     },
+    "references/visual-presets.md": {
+      "bytes": 6240,
+      "sha256": "fd541565a38556aa6038b18f9b004c4dafb07210ef105aec9327aa979d18ee6f"
+    },
     "references/workflow.md": {
       "bytes": 8505,
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
     },
     "RELEASE_NOTES.md": {
-      "bytes": 3796,
-      "sha256": "14be7b9f2f315aa358788693c792548b765fc72c747fa2e4f1e09ac08cd8d86a"
+      "bytes": 4741,
+      "sha256": "93ee77145254459360b30e27cf0f1392b851ff84811de229ef356e82fe7d1a59"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
@@ -172,8 +212,8 @@
       "sha256": "c662a49b0e30936dd7cb46b7d6547529dadc922b8a79128275c47ed5ecd9a921"
     },
     "scripts/environment.mjs": {
-      "bytes": 15595,
-      "sha256": "60515715899158af3730065d9caadf612720c18fad88bd3af100660f863fa65a"
+      "bytes": 15662,
+      "sha256": "91f8dfdb702899e86f301a1ca6a8b0709f1aa1c156307dc92932aa221a89f578"
     },
     "scripts/execution.mjs": {
       "bytes": 942,
@@ -204,8 +244,8 @@
       "sha256": "08b8482abc64d4c8b92b69c9ea81700c874dd81f6b179295c380b4ef11a41127"
     },
     "scripts/piano.mjs": {
-      "bytes": 38005,
-      "sha256": "74810fa8faf09499e8bb885c65d5e3d9de755115231cefba2353f52cbc5d838c"
+      "bytes": 38340,
+      "sha256": "af457386976c67461eb88e5eb7dbf64afcd4c7b169166fc6d6971a5428153290"
     },
     "scripts/prepare.mjs": {
       "bytes": 13985,
@@ -216,12 +256,20 @@
       "sha256": "deac3f53bacdc7c1433a798495396e0ddc22fd23ad0d6a75b1c8374745c16d73"
     },
     "scripts/quality.mjs": {
-      "bytes": 7922,
-      "sha256": "416fcc74864adef407fd32958ce11fbe73acdd319a7eb4c51a30cf4a529bfd0c"
+      "bytes": 10208,
+      "sha256": "5dc0bdab5f09c10cc03ba45e9e9cbe739e1c98be55f00b4fe4e2394ebccacd6a"
     },
     "scripts/review.mjs": {
       "bytes": 11051,
       "sha256": "58983f2cb638d2e2487fbdffd1e58a66e34824e53a6a9dfc8615251a99c954aa"
+    },
+    "scripts/score-strip.mjs": {
+      "bytes": 12016,
+      "sha256": "6c53f617f4ea059dd273522e08e6e686e28e57e26e0fa25d20c4b37bebf75807"
+    },
+    "scripts/score-strip.test.mjs": {
+      "bytes": 5433,
+      "sha256": "81848ff8946e60b3f58b716d5dce30b2b956aa9817fdeede32be75e206bef258"
     },
     "scripts/score.mjs": {
       "bytes": 4349,
@@ -236,8 +284,20 @@
       "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
     },
     "SKILL.md": {
-      "bytes": 9232,
-      "sha256": "eca7aa8813f14773d5048a1cfecaed369e1bdf37e1387baf1cc287a20afebcf1"
+      "bytes": 10357,
+      "sha256": "660585869d01f049dea10ad2181b10cd1969930a6aa53d114b3b2986ff5dd14f"
     }
+  },
+  "localExtension": {
+    "id": "visual-presets-and-score-strip",
+    "date": "2026-10-24",
+    "status": "engineering-checked-awaiting-user-visual-review",
+    "baseVersion": "1.1.0",
+    "scope": "phase-1 visual upgrade plus measured multi-system SVG strip generator",
+    "excluded": [
+      "per-song timing repair",
+      "private media",
+      "GitHub publication"
+    ]
   }
 }

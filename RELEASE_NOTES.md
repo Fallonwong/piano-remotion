@@ -1,3 +1,11 @@
+# 1.2.0-local.2 — continuous score-strip tool, unpublished
+
+Added `piano score-strip` for a single normalized multi-system SVG with measured bounds and notehead mappings. Preserves musical timing, transforms coordinates, verifies source/output glyph registration, and generates continuous focusPath for the existing portrait-runway camera. No auto-recognition, repeat unfolding, time fitting, private assets or GitHub publication. See references/score-strip.md.
+
+# 1.2.0-local.1 — local candidate, not published
+
+Merged installed camera/chord enhancements and project visual presets. Added a resolved configuration adapter, explicit textures, standard hand palette, ripple/inactive opacity controls, portable star backgrounds and visual configuration validation. Preserved legacy defaults and both content approval gates. No private media, generic strip generator or per-song timing scripts.
+
 # Piano Remotion V1.1.0
 
 发布日期：2026-10-21。

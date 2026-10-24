@@ -63,3 +63,11 @@ node <skill>/scripts/piano.mjs --help
 新正式 bind 需要 --production；有声正式作品还需要 v2 演奏映射和 --quality。音频 FFT/DTW 分析是候选辅助，不能自动证明错音、不同改编或逐音准确；缺少人工参考时保持 needs_review。详见 [内容与同步证据](references/performance-quality.md)。现有 Python + NumPy 可运行候选分析，不自动安装模型或依赖。历史任务可检查，新正式导出需按当前证据重新绑定。
 
 PDF/图片与 XML 同时存在时先用 source-scope 核对范围；全谱小节数不一致会阻断，选段需给出源小节映射。quality-request 可从候选分析创建原谱＋原音频＋逐音复核页，初始所有项均为未审，不能作为批准。短窗口起音与分段映射用于改善时间候选；密集和弦、八度及不同改编的自动判定仍未校准，见 [能力状态](references/upgrade-status.md)。
+
+
+## 本地视觉升级候选 1.2.0-local.1
+
+本机已合并五组视觉预设、统一配置解析、标准配色、光效透明度和便携背景组件。GitHub 发布版仍为 V1.1.0。新制作请使用[配置与兼容说明](references/visual-presets.md)，先保存解析后的 props 再进入原有审核流程。连续谱带生成器和逐曲时间修补不在本次范围内。
+
+
+本地增补 1.2.0-local.2：新增 [多行谱面转连续长谱](references/score-strip.md)，保留音高与时间，输出供现有纵深跑道使用的 SVG、时间线和几何证据。仍不包含逐曲时间修补。

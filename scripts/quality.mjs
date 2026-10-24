@@ -46,14 +46,30 @@ export function requireQuality(file,{timeline,audio,originalSourceSha256}){
 export function validateProduction(config,props){
   const failConfig=message=>fail('PRODUCTION_CONFIRMATION_REQUIRED',message);
   if(config.schema!=='piano-production/v2'||!config.messageRef?.trim()||!config.confirmationQuote?.trim())failConfig('Record actual user configuration confirmation');
-  if(!['16:9','9:16'].includes(config.aspectRatio)||!['slate','parchment','dark','kraft','pure-white','custom'].includes(config.theme))failConfig('Choose aspect and theme');
+  if(!['16:9','9:16'].includes(config.aspectRatio)||!['slate','parchment','dark','kraft','pure-white','custom','slate-gray','vintage-parchment','obsidian-dark','deep-sapphire','cosmic-nebula'].includes(config.theme))failConfig('Choose aspect and theme');
   if(!/^#[0-9a-f]{6}$/i.test(config.rightColor??'')||!/^#[0-9a-f]{6}$/i.test(config.leftColor??'')||!['first-four-keyframes','first-four-pilot'].includes(config.milestone))failConfig('Choose colors and first-four milestone');
   if(!['none','asset'].includes(config.avatar?.kind)||config.avatar.kind==='asset'&&!config.avatar.src)failConfig('Choose no avatar or explicit project asset');
   if(config.theme==='custom'){
     const image=typeof config.backgroundSrc==='string'&&!!config.backgroundSrc.trim(),color=/^#[0-9a-f]{6}$/i.test(config.backgroundColor??'');
     if(Number(image)+Number(color)!==1||props&&(image?props.backgroundSrc!==config.backgroundSrc:!!props.backgroundSrc||props.background!==config.backgroundColor))failConfig('Confirm exactly one custom background image or six-digit color and matching props');
   }
-  if(props&&(props.aspectRatio!==config.aspectRatio||props.theme!==config.theme||props.rightStyle?.glowColor!==config.rightColor||props.leftStyle?.glowColor!==config.leftColor||!!props.overlay?.enabled!==(config.avatar.kind==='asset')||config.avatar.kind==='asset'&&props.overlay?.src!==config.avatar.src))failConfig('Props do not match confirmed configuration');
+  // v2 records without visual fields retain their historical glow-color semantics.
+  // New preset records explicitly bind camera, texture, pipeline, typography and FX.
+  const visual=config.visual;
+  if(props && (props.texture || props.pipeline || props.typographyStyle) && !visual)failConfig('New visual preset props require a visual configuration record');
+  if(visual){
+    if(!['portrait-focus','portrait-runway','landscape-classic'].includes(visual.cameraMode)||!['black-multiply','metallic-screen','white-invert'].includes(visual.texture)||!['full-score','score-strip'].includes(visual.pipeline)||!['chinese-2x','bodoni-royal','clean'].includes(visual.typographyStyle)||typeof visual.showProgress!=='boolean')failConfig('Choose complete visual configuration');
+    if((visual.cameraMode==='landscape-classic')!==(config.aspectRatio==='16:9')||(visual.cameraMode==='portrait-runway')!==(visual.pipeline==='score-strip'))failConfig('Camera, aspect and pipeline mismatch');
+    if(config.rightColor?.toLowerCase()!=='#b895ff'||config.leftColor?.toLowerCase()!=='#e95514')failConfig('New presets use the standard hand palette');
+    const fx=visual.motionFx;
+    if(!fx||[fx.trailFrames,fx.rippleFrames].some(n=>!Number.isInteger(n)||n<1)||[fx.rippleOpacity,fx.inactiveNoteOpacity].some(n=>!Number.isFinite(n)||n<0||n>1)||[fx.taperTrail,fx.followChordNotes,fx.rippleRing].some(v=>typeof v!=='boolean'))failConfig('Choose complete motion FX');
+    if(props){
+      for(const key of ['cameraMode','texture','pipeline','typographyStyle','showProgress'])if(props[key]!==visual[key])failConfig(`Visual props mismatch: ${key}`);
+      for(const side of ['rightStyle','leftStyle'])for(const key of ['trailFrames','rippleFrames','rippleOpacity','inactiveNoteOpacity','taperTrail','followChordNotes','rippleRing'])if(props[side]?.[key]!==fx[key])failConfig(`Motion props mismatch: ${side}.${key}`);
+      if(props.rightStyle?.glowColor!=='#b794f4'||props.rightStyle?.coreColor!=='#ffffff'||props.leftStyle?.glowColor!=='#ff9a46'||props.leftStyle?.coreColor!=='#fff5db')failConfig('Standard glow/core colors required');
+    }
+  }
+  if(props&&(props.aspectRatio!==config.aspectRatio||props.theme!==config.theme||(visual?props.rightStyle?.color:props.rightStyle?.glowColor)!==config.rightColor||(visual?props.leftStyle?.color:props.leftStyle?.glowColor)!==config.leftColor||!!props.overlay?.enabled!==(config.avatar.kind==='asset')||config.avatar.kind==='asset'&&props.overlay?.src!==config.avatar.src))failConfig('Props do not match confirmed configuration');
   if(props?.aspectRatio&&((props.width??(props.aspectRatio==='9:16'?1080:1920))!==(props.aspectRatio==='9:16'?1080:1920)||(props.height??(props.aspectRatio==='9:16'?1920:1080))!==(props.aspectRatio==='9:16'?1920:1080)))failConfig('Composition dimensions differ from aspect');
   return config;
 }
