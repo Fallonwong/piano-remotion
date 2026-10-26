@@ -6,11 +6,11 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.2.0-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.1-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1)
 
 </div>
 
@@ -32,6 +32,29 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 适合钢琴教学片段、曲谱演示、练习分享，以及带有音符跳跃效果的音乐视频。
 
+## 成品展示
+
+[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
+
+▶ **观看完整成品视频（30 秒，1280×720）**：[lalaland-showcase.mp4](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
+
+**《La La Land · 爱乐之城》**：真实曲谱驱动的双手跳跃可视化。紫色高音声部与橙色低音声部沿原谱 leaps 跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
+
+![爱乐之城曲谱](assets/showcase/lalaland-score.jpg)
+
+### 四组官方预设（实际渲染）
+
+![四组预设](assets/showcase/preset-gallery.jpg)
+
+| 预设 | 画幅 / 运镜 | 主题 / 质感 |
+|---|---|---|
+| SlateClassic | 9:16 / portrait-focus | slate-gray / black-multiply |
+| SapphireRunway | 9:16 / portrait-runway | deep-sapphire / metallic-screen |
+| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / metallic-screen |
+| SapphireLandscape | 16:9 / landscape-classic | deep-sapphire / metallic-screen |
+
+预设截图来自本仓库组件对示例谱的实际渲染。成品视频为用户制作的《La La Land》曲目，使用本工具链路完成；视频画面同样不含第三方水印素材。
+
 ## 快速开始
 
 ### 1. 安装 Skills
@@ -43,7 +66,7 @@ npx skills add remotion-dev/skills --skill remotion-best-practices
 npx skills add Fallonwong/piano-remotion --skill piano-remotion
 ```
 
-按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
+按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
 
 安装后开启新对话，确认 Agent 能读取两个 Skill。使用不支持 `$名称` 调用的 Agent 时，直接让它读取对应目录下的 `SKILL.md`。
 
@@ -246,6 +269,6 @@ node <skill>/scripts/piano.mjs --help
 **Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>

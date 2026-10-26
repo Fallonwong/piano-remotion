@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -24,16 +24,16 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 18014,
-      "sha256": "61799f0b5d15536b64907b81d99be3b748d82a3785e5eee7742a39f0772aa96c"
+      "bytes": 19314,
+      "sha256": "102fc412357a15e1ccb84e351923cb009284acb671efe8e0b5ca612b0bb2d220"
     },
     "README_使用说明.md": {
       "bytes": 5451,
       "sha256": "0f7f0d647c361f6228f05e8d08ebb167b6247f719c6d20f5c2dd5066a1ca4100"
     },
     "RELEASE_NOTES.md": {
-      "bytes": 6193,
-      "sha256": "025757bd750e9ac7ccd5604efaf1e7cc30a2d58aad806fc432d80089d946422c"
+      "bytes": 6570,
+      "sha256": "a9061c86fe9ac0984cec89195349bd808c1119dbfa6951b1bc2a002966310993"
     },
     "SKILL.md": {
       "bytes": 10474,
@@ -49,11 +49,11 @@
     },
     "assets/runtime/package-lock.json": {
       "bytes": 139418,
-      "sha256": "389fcf3b86defedddc7867b0c452a143584fdd2288e121d3da162c3e5b46845a"
+      "sha256": "581db31b0a0dbc72085b96f453c92a24550de7180c98cafd258996c8d644fc4b"
     },
     "assets/runtime/package.json": {
       "bytes": 575,
-      "sha256": "153c7ce6fbbd54b51496c9b61496f4563c0716e43c3b2cc8dbdaa91c51790b9f"
+      "sha256": "cd19690d09655cfdda397f8a7016c238e6614d5899667ff9808d4dff6b9d1242"
     },
     "assets/runtime/public/score/demo/score.svg": {
       "bytes": 5209,
@@ -82,6 +82,34 @@
     "assets/runtime/tsconfig.json": {
       "bytes": 242,
       "sha256": "5e1bcd3ddc193b2fd7178fdf9cd803a84193687c430ed7064093c5875230d561"
+    },
+    "assets/showcase/lalaland-cover.jpg": {
+      "bytes": 97703,
+      "sha256": "dc15878f0321b2da36c16c66fc9963eb8a99bf74d1c5f9be7034492248ad5012"
+    },
+    "assets/showcase/lalaland-score.jpg": {
+      "bytes": 2998848,
+      "sha256": "bdbaf1385e7447903f39ecddb86afa582dd87a9e73f9adc037b068970af7858e"
+    },
+    "assets/showcase/preset-gallery.jpg": {
+      "bytes": 101021,
+      "sha256": "05cfeb37e4de661e0817f9ab58756bb9c0022eecf89f065161de60cc738a946b"
+    },
+    "assets/showcase/preset-obsidian-focus.jpg": {
+      "bytes": 66649,
+      "sha256": "c75159c415544f0b79cc43a23bf686bac283e9fbf278c3cc66d3e0af7cd896bf"
+    },
+    "assets/showcase/preset-sapphire-landscape.jpg": {
+      "bytes": 91895,
+      "sha256": "ba3336c0241d7aaa53398b9962ee20d3ac6ce97b373c28aa4a32c628e63d825a"
+    },
+    "assets/showcase/preset-sapphire-runway.jpg": {
+      "bytes": 55490,
+      "sha256": "a62f75eae0a56442a6b893433833e5663f01da843950387219f282ef235dc1e8"
+    },
+    "assets/showcase/preset-slate-classic.jpg": {
+      "bytes": 50975,
+      "sha256": "bea6d95aeae5cb3f7a2004958043e29817d0e05510e2e9c2fcdf718831a9885f"
     },
     "components/CosmicNebula.tsx": {
       "bytes": 9179,
