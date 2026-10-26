@@ -34,7 +34,7 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 成品展示
 
-[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://v.douyin.com/UzgL2_wsNRY/)
+[![La La Land 成品](assets/showcase/douyin-cover.jpg)](https://v.douyin.com/UzgL2_wsNRY/)
 
 ▶ **点击封面观看完整成品**（30 秒 · 1280×720 · 抖音在线播放）。《La La Land · 爱乐之城》：真实曲谱驱动的双手跳跃可视化，紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。让钢琴键自己跳起来，耳朵听到的，眼睛也能跟着看到。使用的原版曲谱：
 

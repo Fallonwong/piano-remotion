@@ -136,8 +136,8 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 17571,
-      "sha256": "db759ff296347c958d1b51693c6571a5869f642c1c981243a675a13b93ffa76f"
+      "bytes": 17569,
+      "sha256": "b780ae9b519e9c061f83ae934b58641a87d63b5ba5654bf8d9c6e0aaf6eb48f6"
     },
     "README_使用说明.md": {
       "bytes": 5451,
@@ -310,6 +310,10 @@
     "assets/showcase/real-gallery.jpg": {
       "bytes": 251965,
       "sha256": "d2297635dcff56a9c75b103bbf9d9597751504a608638270d75aef4af5146453"
+    },
+    "assets/showcase/douyin-cover.jpg": {
+      "bytes": 384197,
+      "sha256": "dec6f575241924fc4ffea3f4be1dacaa419d13d7637b527cf853ca22398640ae"
     }
   }
 }
