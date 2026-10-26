@@ -6,11 +6,11 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.2.4-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.5-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.4](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.4)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.5](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.5)
 
 </div>
 
@@ -34,9 +34,9 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 成品展示
 
-![La La Land 成品视频（点击播放）](assets/showcase/lalaland-showcase.mp4)
+[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://v.douyin.com/UzgL2_wsNRY/)
 
-▶ 上方为可在线播放的成品视频（30 秒 · 1280×720 · 《La La Land · 爱乐之城》成品片段）。真实曲谱驱动的双手跳跃可视化：紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
+▶ **点击封面观看完整成品**（30 秒 · 1280×720 · 抖音在线播放）。《La La Land · 爱乐之城》：真实曲谱驱动的双手跳跃可视化，紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。让钢琴键自己跳起来，耳朵听到的，眼睛也能跟着看到。使用的原版曲谱：
 
 ![爱乐之城曲谱](assets/showcase/lalaland-score.jpg)
 
@@ -53,15 +53,19 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 以上为预览确认阶段的实际渲染画面。
 
-### 官方预设（中文对照）
+## 为钢琴乐谱而设计
 
-| 预设 | 画幅 / 运镜 | 主题 / 质感 |
-|---|---|---|
-| 经典石板灰 SlateClassic | 9:16 竖屏 / 整谱动态聚焦 | 经典石板灰 / 雕版黑墨印刷 |
-| 深蓝跑道 SapphireRunway | 9:16 竖屏 / 3D 纵深立体跑道 | 普鲁士深蓝星海 / 金属通透发光 |
-| 黑曜石聚焦 ObsidianFocus | 9:16 竖屏 / 整谱动态聚焦 | 黑曜石暗夜极黑 / 金属通透发光 |
-| 横屏深蓝 SapphireLandscape | 16:9 横屏 / 经典 3D 浮空跟谱 | 普鲁士深蓝星海 / 金属通透发光 |
+Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
 
+- **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
+- **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
+- **先看再出片**：谱面确认、关键帧与试听确认，两次停顿把决定权交给你。
+- **优先复用环境**：发现已有 Remotion、排谱工具和音源，按任务需要补齐能力。
+- **通用素材边界**：个人装饰默认关闭，作品素材由你提供。
+
+适合钢琴教学片段、曲谱演示、练习分享，以及带有音符跳跃效果的音乐视频。
+
+## 成品展示
 ## 你可以提供什么
 
 | 素材 | 推荐处理方式 |
@@ -234,6 +238,6 @@ node <skill>/scripts/piano.mjs --help
 **Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.4) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.5) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>

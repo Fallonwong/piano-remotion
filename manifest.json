@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -136,8 +136,8 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 17178,
-      "sha256": "45ad494efa0826d924c5bef0b63734540d92a2d140731d26248a71d1b38d7a44"
+      "bytes": 17834,
+      "sha256": "26dfeafd1efede9bbdbad820f95c2ff62148a33a02d903e353a4f46c1692e053"
     },
     "README_使用说明.md": {
       "bytes": 5451,
@@ -310,10 +310,6 @@
     "assets/showcase/real-gallery.jpg": {
       "bytes": 251965,
       "sha256": "d2297635dcff56a9c75b103bbf9d9597751504a608638270d75aef4af5146453"
-    },
-    "assets/showcase/lalaland-showcase.mp4": {
-      "bytes": 36649561,
-      "sha256": "8ccc49190fbce74a416ce5c1f7bfa4fff46b5d92e3440c15f6e87805ad4ec80a"
     }
   }
 }
