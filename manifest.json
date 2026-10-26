@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -22,10 +22,6 @@
     "agents/openai.yaml": {
       "bytes": 421,
       "sha256": "7678783a5c9c90ebb65e47b95ec08e7483a2ffd8b188d3649e834c7ad7a26646"
-    },
-    "assets/preview.png": {
-      "bytes": 905937,
-      "sha256": "5a82366beaa59b8c353adaeaa23391c480bf43d1b120ee4c9c49dedaffe10b1b"
     },
     "assets/runtime/package-lock.json": {
       "bytes": 139418,
@@ -70,26 +66,6 @@
     "assets/showcase/lalaland-score.jpg": {
       "bytes": 2998848,
       "sha256": "bdbaf1385e7447903f39ecddb86afa582dd87a9e73f9adc037b068970af7858e"
-    },
-    "assets/showcase/preset-gallery.jpg": {
-      "bytes": 101021,
-      "sha256": "05cfeb37e4de661e0817f9ab58756bb9c0022eecf89f065161de60cc738a946b"
-    },
-    "assets/showcase/preset-obsidian-focus.jpg": {
-      "bytes": 66649,
-      "sha256": "c75159c415544f0b79cc43a23bf686bac283e9fbf278c3cc66d3e0af7cd896bf"
-    },
-    "assets/showcase/preset-sapphire-landscape.jpg": {
-      "bytes": 91895,
-      "sha256": "ba3336c0241d7aaa53398b9962ee20d3ac6ce97b373c28aa4a32c628e63d825a"
-    },
-    "assets/showcase/preset-sapphire-runway.jpg": {
-      "bytes": 55490,
-      "sha256": "a62f75eae0a56442a6b893433833e5663f01da843950387219f282ef235dc1e8"
-    },
-    "assets/showcase/preset-slate-classic.jpg": {
-      "bytes": 50975,
-      "sha256": "bea6d95aeae5cb3f7a2004958043e29817d0e05510e2e9c2fcdf718831a9885f"
     },
     "assets/showcase/real-landscape-16x9.jpg": {
       "bytes": 287825,
@@ -160,8 +136,8 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 19314,
-      "sha256": "102fc412357a15e1ccb84e351923cb009284acb671efe8e0b5ca612b0bb2d220"
+      "bytes": 17241,
+      "sha256": "c8f7422c56e43ef179303bd9dcf44b1b63fc923c5e31f812f9068ec5f3568467"
     },
     "README_使用说明.md": {
       "bytes": 5451,
@@ -330,6 +306,10 @@
     "SKILL.md": {
       "bytes": 10474,
       "sha256": "7453718c091f1d2cdd9b9f91eee98efc8bcc3b036fc268c96361ec5377f199fb"
+    },
+    "assets/showcase/real-gallery.jpg": {
+      "bytes": 251965,
+      "sha256": "d2297635dcff56a9c75b103bbf9d9597751504a608638270d75aef4af5146453"
     }
   }
 }

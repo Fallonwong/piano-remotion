@@ -6,15 +6,15 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.2.2-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.3-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.3](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.3)
 
 </div>
 
-![Piano Remotion 动效画面](assets/preview.png)
+![La La Land 成品封面](assets/showcase/lalaland-cover.jpg)
 
 > 将钢琴乐谱变成跟随音乐演奏的动态画面。先确认谱面，再确认画面与试听，让每一次修改都有清晰的依据。
 
@@ -34,79 +34,33 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 成品展示
 
-[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.2/lalaland-showcase.mp4)
+[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
 
-▶ **观看完整成品视频（30 秒，1280×720）**：[lalaland-showcase.mp4](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.2/lalaland-showcase.mp4)
-
-**《La La Land · 爱乐之城》**：真实曲谱驱动的双手跳跃可视化。紫色高音声部与橙色低音声部沿原谱 leaps 跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
+▶ **点击上方封面在线播放**（30 秒 · 1280×720 · 《La La Land · 爱乐之城》成品片段）。真实曲谱驱动的双手跳跃可视化：紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
 
 ![爱乐之城曲谱](assets/showcase/lalaland-score.jpg)
 
-### 四组官方预设（实际渲染）
+### 真实曲目效果（预览确认稿实际画面）
 
-![四组预设](assets/showcase/preset-gallery.jpg)
+![真实曲目效果](assets/showcase/real-gallery.jpg)
 
-### 真实曲目效果（预览确认稿截图）
-
-| 效果 | 实际画面 |
+| 效果 | 画面 |
 |---|---|
-| 3D 纵深立体跑道（portrait-runway，《诀别书》） | ![纵深跑道](assets/showcase/real-portrait-runway.jpg) |
-| 整谱动态聚焦（portrait-focus，《诀别书》） | ![动态聚焦](assets/showcase/real-portrait-focus.jpg) |
-| 黑曜石暗夜极黑（obsidian-dark） | ![黑曜石](assets/showcase/real-obsidian-dark.jpg) |
-| 16:9 经典 3D 浮空跟谱（landscape-classic） | ![横屏跟谱](assets/showcase/real-landscape-16x9.jpg) |
+| 整谱动态聚焦（portrait-focus，《诀别书》） | 左上 |
+| 3D 纵深立体跑道（portrait-runway，《诀别书》） | 右上 |
+| 黑曜石暗夜极黑（obsidian-dark） | 左下 |
+| 经典 3D 浮空跟谱（landscape-classic） | 右下 |
 
-以上为用户此前生成并确认的预览稿实际画面。
+以上为预览确认阶段的实际渲染画面。
+
+### 官方预设（中文对照）
 
 | 预设 | 画幅 / 运镜 | 主题 / 质感 |
 |---|---|---|
-| SlateClassic | 9:16 / portrait-focus | slate-gray / black-multiply |
-| SapphireRunway | 9:16 / portrait-runway | deep-sapphire / metallic-screen |
-| ObsidianFocus | 9:16 / portrait-focus | obsidian-dark / metallic-screen |
-| SapphireLandscape | 16:9 / landscape-classic | deep-sapphire / metallic-screen |
-
-预设截图来自本仓库组件对示例谱的实际渲染。成品视频为用户制作的《La La Land》曲目，使用本工具链路完成；视频画面同样不含第三方水印素材。
-
-## 快速开始
-
-### 1. 安装 Skills
-
-先安装官方 Remotion Skill，再安装 Piano Remotion。已经安装的部分可以直接复用。
-
-```sh
-npx skills add remotion-dev/skills --skill remotion-best-practices
-npx skills add Fallonwong/piano-remotion --skill piano-remotion
-```
-
-按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
-
-安装后开启新对话，确认 Agent 能读取两个 Skill。使用不支持 `$名称` 调用的 Agent 时，直接让它读取对应目录下的 `SKILL.md`。
-
-### 2. 提供素材，说出目标
-
-可以附上文件，也可以提供 Agent 有权读取的本地路径。把下面的占位内容换成你的素材：
-
-```text
-使用 $piano-remotion，先读取官方 $remotion-best-practices。
-
-我的素材：<PDF / MusicXML / MIDI / SVG / MP3 / 乐谱图片的路径>。
-请制作一支钢琴跟谱视频，保留原版双手跳跃、发光轨迹、音符高亮和运镜。
-优先复用当前工程 <工程路径，如有> 及现有工具，个人装饰关闭。
-
-先展示原谱与重排谱的逐小节对照、修订差异和疑点，停下来等我确认。
-我确认谱面后，再展示真实关键帧、短试听和连音动态，第二次等我确认。
-确认后导出 MP4，并检查音频和画面同步。
-
-有录音就使用原录音；没有录音时，先检查可用钢琴音源并让我试听。
-需要安装工具或下载音源时，先说明方案和大小。
-```
-
-### 3. 在两个关键节点确认
-
-**第一次看谱**：核对旋律、节奏、左右手、和弦与连线。发现问题时指出小节和位置，Agent 会展示修改前后的差异。
-
-**第二次看画面、听声音**：确认清晰度、镜头、音符运动、钢琴音色与同步，再导出完整视频。
-
-更多输入场景见 [提示词示例](examples/agent-prompts.md)，安装细节见 [使用说明](README_使用说明.md)。
+| 经典石板灰 SlateClassic | 9:16 竖屏 / 整谱动态聚焦 | 经典石板灰 / 雕版黑墨印刷 |
+| 深蓝跑道 SapphireRunway | 9:16 竖屏 / 3D 纵深立体跑道 | 普鲁士深蓝星海 / 金属通透发光 |
+| 黑曜石聚焦 ObsidianFocus | 9:16 竖屏 / 整谱动态聚焦 | 黑曜石暗夜极黑 / 金属通透发光 |
+| 横屏深蓝 SapphireLandscape | 16:9 横屏 / 经典 3D 浮空跟谱 | 普鲁士深蓝星海 / 金属通透发光 |
 
 ## 你可以提供什么
 
@@ -280,6 +234,6 @@ node <skill>/scripts/piano.mjs --help
 **Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.3) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>
