@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -18,26 +18,6 @@
     ".gitignore": {
       "bytes": 299,
       "sha256": "f9e7471eb08d255fe7e9c6cb8ac294100728dcea529b38a65b9a23d0c7f543a0"
-    },
-    "LICENSE.txt": {
-      "bytes": 829,
-      "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
-    },
-    "README.md": {
-      "bytes": 19314,
-      "sha256": "102fc412357a15e1ccb84e351923cb009284acb671efe8e0b5ca612b0bb2d220"
-    },
-    "README_使用说明.md": {
-      "bytes": 5451,
-      "sha256": "0f7f0d647c361f6228f05e8d08ebb167b6247f719c6d20f5c2dd5066a1ca4100"
-    },
-    "RELEASE_NOTES.md": {
-      "bytes": 6570,
-      "sha256": "a9061c86fe9ac0984cec89195349bd808c1119dbfa6951b1bc2a002966310993"
-    },
-    "SKILL.md": {
-      "bytes": 10474,
-      "sha256": "7453718c091f1d2cdd9b9f91eee98efc8bcc3b036fc268c96361ec5377f199fb"
     },
     "agents/openai.yaml": {
       "bytes": 421,
@@ -111,6 +91,22 @@
       "bytes": 50975,
       "sha256": "bea6d95aeae5cb3f7a2004958043e29817d0e05510e2e9c2fcdf718831a9885f"
     },
+    "assets/showcase/real-landscape-16x9.jpg": {
+      "bytes": 287825,
+      "sha256": "2edf66265438b93225f763653cb83d77a8d806ccbe9300e3326836a896980e29"
+    },
+    "assets/showcase/real-obsidian-dark.jpg": {
+      "bytes": 327250,
+      "sha256": "8b0ea7ff008156bdb84396ae546f432ad59603abd26a0e2eb2d0c0c8dc1c2aa8"
+    },
+    "assets/showcase/real-portrait-focus.jpg": {
+      "bytes": 193716,
+      "sha256": "8099782e3e298f4871d6d718d9af27e5a71f5c7654bea31950f1b1490d14b8e2"
+    },
+    "assets/showcase/real-portrait-runway.jpg": {
+      "bytes": 307293,
+      "sha256": "ef3a6858ab7d713a5e44e6ca5bffa14190ac42e69117a5f0924bcf30c641bde2"
+    },
     "components/CosmicNebula.tsx": {
       "bytes": 9179,
       "sha256": "ced9af5d25d709ff8713dfe36e9e16450a05ca4c698c173b6093ac8383348105"
@@ -130,6 +126,10 @@
     "components/PianoScoreScene.tsx": {
       "bytes": 13204,
       "sha256": "a606ea04236d23776f44102be0a911875c785e8f7c52c47e7b74466e8af31757"
+    },
+    "components/resolveScoreVideoConfig.ts": {
+      "bytes": 3769,
+      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
     },
     "components/ScoreCameraPresets.ts": {
       "bytes": 2477,
@@ -151,13 +151,21 @@
       "bytes": 9972,
       "sha256": "94f6f8e3d9282a7027b6fefb2d85dc2684feae9d0d3c2326b7429796b4e13344"
     },
-    "components/resolveScoreVideoConfig.ts": {
-      "bytes": 3769,
-      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
-    },
     "examples/agent-prompts.md": {
       "bytes": 3407,
       "sha256": "31ca5ad7d1b5f48961a17784e670f5249cbb0c261bc31a85f662c556eaf64cef"
+    },
+    "LICENSE.txt": {
+      "bytes": 829,
+      "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
+    },
+    "README.md": {
+      "bytes": 19314,
+      "sha256": "102fc412357a15e1ccb84e351923cb009284acb671efe8e0b5ca612b0bb2d220"
+    },
+    "README_使用说明.md": {
+      "bytes": 5451,
+      "sha256": "0f7f0d647c361f6228f05e8d08ebb167b6247f719c6d20f5c2dd5066a1ca4100"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
@@ -218,6 +226,10 @@
     "references/workflow.md": {
       "bytes": 8505,
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
+    },
+    "RELEASE_NOTES.md": {
+      "bytes": 6570,
+      "sha256": "a9061c86fe9ac0984cec89195349bd808c1119dbfa6951b1bc2a002966310993"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
@@ -314,6 +326,10 @@
     "scripts/source-scope.mjs": {
       "bytes": 2645,
       "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
+    },
+    "SKILL.md": {
+      "bytes": 10474,
+      "sha256": "7453718c091f1d2cdd9b9f91eee98efc8bcc3b036fc268c96361ec5377f199fb"
     }
   }
 }

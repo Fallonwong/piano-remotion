@@ -6,11 +6,11 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.2.1-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.2-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2)
 
 </div>
 
@@ -34,9 +34,9 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 成品展示
 
-[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
+[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.2/lalaland-showcase.mp4)
 
-▶ **观看完整成品视频（30 秒，1280×720）**：[lalaland-showcase.mp4](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
+▶ **观看完整成品视频（30 秒，1280×720）**：[lalaland-showcase.mp4](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.2/lalaland-showcase.mp4)
 
 **《La La Land · 爱乐之城》**：真实曲谱驱动的双手跳跃可视化。紫色高音声部与橙色低音声部沿原谱 leaps 跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
 
@@ -45,6 +45,17 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 ### 四组官方预设（实际渲染）
 
 ![四组预设](assets/showcase/preset-gallery.jpg)
+
+### 真实曲目效果（预览确认稿截图）
+
+| 效果 | 实际画面 |
+|---|---|
+| 3D 纵深立体跑道（portrait-runway，《诀别书》） | ![纵深跑道](assets/showcase/real-portrait-runway.jpg) |
+| 整谱动态聚焦（portrait-focus，《诀别书》） | ![动态聚焦](assets/showcase/real-portrait-focus.jpg) |
+| 黑曜石暗夜极黑（obsidian-dark） | ![黑曜石](assets/showcase/real-obsidian-dark.jpg) |
+| 16:9 经典 3D 浮空跟谱（landscape-classic） | ![横屏跟谱](assets/showcase/real-landscape-16x9.jpg) |
+
+以上为用户此前生成并确认的预览稿实际画面。
 
 | 预设 | 画幅 / 运镜 | 主题 / 质感 |
 |---|---|---|
@@ -66,7 +77,7 @@ npx skills add remotion-dev/skills --skill remotion-best-practices
 npx skills add Fallonwong/piano-remotion --skill piano-remotion
 ```
 
-按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
+按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
 
 安装后开启新对话，确认 Agent 能读取两个 Skill。使用不支持 `$名称` 调用的 Agent 时，直接让它读取对应目录下的 `SKILL.md`。
 
@@ -269,6 +280,6 @@ node <skill>/scripts/piano.mjs --help
 **Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.1) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.2) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>
