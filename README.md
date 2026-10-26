@@ -6,11 +6,11 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.2.3-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.4-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.3](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.3)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.4](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.4)
 
 </div>
 
@@ -34,9 +34,9 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 成品展示
 
-[![La La Land 成品](assets/showcase/lalaland-cover.jpg)](https://github.com/Fallonwong/piano-remotion/releases/download/v1.2.1/lalaland-showcase.mp4)
+![La La Land 成品视频（点击播放）](assets/showcase/lalaland-showcase.mp4)
 
-▶ **点击上方封面在线播放**（30 秒 · 1280×720 · 《La La Land · 爱乐之城》成品片段）。真实曲谱驱动的双手跳跃可视化：紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
+▶ 上方为可在线播放的成品视频（30 秒 · 1280×720 · 《La La Land · 爱乐之城》成品片段）。真实曲谱驱动的双手跳跃可视化：紫色高音声部与橙色低音声部沿原谱跳跃，14 帧渐细尾迹，和弦多音分叉与空中合流。使用的原版曲谱：
 
 ![爱乐之城曲谱](assets/showcase/lalaland-score.jpg)
 
@@ -234,6 +234,6 @@ node <skill>/scripts/piano.mjs --help
 **Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.3) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.4) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>
