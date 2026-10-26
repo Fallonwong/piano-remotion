@@ -6,11 +6,11 @@
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.1.0-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V1.2.0-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.1.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.1.0)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.2.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0)
 
 </div>
 
@@ -18,7 +18,7 @@
 
 > 将钢琴乐谱变成跟随音乐演奏的动态画面。先确认谱面，再确认画面与试听，让每一次修改都有清晰的依据。
 
-**V1.1.0 更新**：新增横竖屏与动态焦点、制作前配置、原谱范围检查、演奏时间映射和逐音复核。不同素材的准备方式与处理链路见下文；自动音高和改编判定仍属实验能力。详见 [版本说明](RELEASE_NOTES.md)、[实现状态与限制](references/upgrade-status.md)、[制作规范](references/production.md)。
+**V1.2.0 更新**：统一四组视觉预设、三类背景与两类谱面质感；新增原谱多行拼接跑道工具；默认 14 帧和弦合流、58/44 弧高，支持纯音头脉冲。所有预设默认无人物，不含私人 IP、曲目或字体。详见 [版本说明](RELEASE_NOTES.md)、[视觉配置](references/visual-presets.md)、[连续谱带](references/score-strip.md)。
 
 ## 为钢琴乐谱而设计
 
@@ -43,7 +43,7 @@ npx skills add remotion-dev/skills --skill remotion-best-practices
 npx skills add Fallonwong/piano-remotion --skill piano-remotion
 ```
 
-按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.1.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.1.0)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
+按安装器提示选择 Agent 和安装范围。手动安装可下载 [V1.2.0 完整包](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0)，解压后保留整个 `piano-remotion/` 目录，放入当前 Agent 的 Skill 目录。
 
 安装后开启新对话，确认 Agent 能读取两个 Skill。使用不支持 `$名称` 调用的 Agent 时，直接让它读取对应目录下的 `SKILL.md`。
 
@@ -243,17 +243,9 @@ node <skill>/scripts/piano.mjs --help
 
 <div align="center">
 
-**Piano Remotion · V1.1.0**
+**Piano Remotion · V1.2.0**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.1.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
 
 </div>
-
-
-## 本地视觉升级候选 1.2.0-local.3
-
-已对齐 2026-10-24 的「14 保留 / 12 裁撤」精简决议：主题收敛为石板灰、黑曜石、深蓝三类，质感收敛为雕版黑墨与金属反色两类，默认动效为 14 帧合流大跃动（右手 58 / 左手 44），并保留纯音头脉冲备选。GitHub 发布版仍为 V1.1.0。详见[配置与兼容说明](references/visual-presets.md)与[连续谱带](references/score-strip.md)。
-
-
-本地增补 1.2.0-local.4：所有预设为无人物纯谱面，移除个人伴弹形象与相关路径、示例和专用逻辑。修正纵深跑道缩放/拉伸、中文正体与衬线副标题、尾迹消隐，并保留旧调用的默认镜头。

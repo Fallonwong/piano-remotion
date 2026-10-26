@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.0-local.4",
+  "version": "1.2.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -8,8 +8,8 @@
     "typescript": "5.9.3"
   },
   "repository": "https://github.com/Fallonwong/piano-remotion",
-  "releaseStatus": "local-unpublished",
-  "releaseDate": "2026-10-25",
+  "releaseStatus": "stable",
+  "releaseDate": "2026-10-27",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -18,6 +18,26 @@
     ".gitignore": {
       "bytes": 299,
       "sha256": "f9e7471eb08d255fe7e9c6cb8ac294100728dcea529b38a65b9a23d0c7f543a0"
+    },
+    "LICENSE.txt": {
+      "bytes": 829,
+      "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
+    },
+    "README.md": {
+      "bytes": 18014,
+      "sha256": "61799f0b5d15536b64907b81d99be3b748d82a3785e5eee7742a39f0772aa96c"
+    },
+    "README_使用说明.md": {
+      "bytes": 5451,
+      "sha256": "0f7f0d647c361f6228f05e8d08ebb167b6247f719c6d20f5c2dd5066a1ca4100"
+    },
+    "RELEASE_NOTES.md": {
+      "bytes": 6193,
+      "sha256": "025757bd750e9ac7ccd5604efaf1e7cc30a2d58aad806fc432d80089d946422c"
+    },
+    "SKILL.md": {
+      "bytes": 10474,
+      "sha256": "7453718c091f1d2cdd9b9f91eee98efc8bcc3b036fc268c96361ec5377f199fb"
     },
     "agents/openai.yaml": {
       "bytes": 421,
@@ -29,11 +49,11 @@
     },
     "assets/runtime/package-lock.json": {
       "bytes": 139418,
-      "sha256": "29729bfe60cd1ccb4c4a7811f9bb449a6913539e2d5369fa6aad01ef813cdfe5"
+      "sha256": "389fcf3b86defedddc7867b0c452a143584fdd2288e121d3da162c3e5b46845a"
     },
     "assets/runtime/package.json": {
       "bytes": 575,
-      "sha256": "404fde309d506f5713a0b3c648063dcd0bc0de9ef75c92b4e6165fc4ad8b0dcf"
+      "sha256": "153c7ce6fbbd54b51496c9b61496f4563c0716e43c3b2cc8dbdaa91c51790b9f"
     },
     "assets/runtime/public/score/demo/score.svg": {
       "bytes": 5209,
@@ -83,10 +103,6 @@
       "bytes": 13204,
       "sha256": "a606ea04236d23776f44102be0a911875c785e8f7c52c47e7b74466e8af31757"
     },
-    "components/resolveScoreVideoConfig.ts": {
-      "bytes": 3769,
-      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
-    },
     "components/ScoreCameraPresets.ts": {
       "bytes": 2477,
       "sha256": "9e18f2bc06e204f7501c5d1e88e632b38415e3c727790729630d54ecb659e24b"
@@ -107,21 +123,13 @@
       "bytes": 9972,
       "sha256": "94f6f8e3d9282a7027b6fefb2d85dc2684feae9d0d3c2326b7429796b4e13344"
     },
+    "components/resolveScoreVideoConfig.ts": {
+      "bytes": 3769,
+      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
+    },
     "examples/agent-prompts.md": {
       "bytes": 3407,
       "sha256": "31ca5ad7d1b5f48961a17784e670f5249cbb0c261bc31a85f662c556eaf64cef"
-    },
-    "LICENSE.txt": {
-      "bytes": 829,
-      "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
-    },
-    "README.md": {
-      "bytes": 18712,
-      "sha256": "0c2bfb6bcebdcdc0f90f86a7498c0f1e76d316b855778c4159aac00c75c70881"
-    },
-    "README_使用说明.md": {
-      "bytes": 5614,
-      "sha256": "1f886135fef7acf6e35dbf1a3afc2cf79bb239ed8041913ff22433d1ff7de062"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
@@ -172,20 +180,16 @@
       "sha256": "f5a8563b5d1b4a3642c9bda0bdc71e03b3a60237904d42df62fa41878eb1bd3c"
     },
     "references/upgrade-status.md": {
-      "bytes": 3109,
-      "sha256": "dec01d4248289ac5574b1ae59f55e9252a0c9f665b3faccb65c19e9aa86e6f53"
+      "bytes": 3710,
+      "sha256": "574c9f13f91174596a055ce8f792debf990c9ada40a19fd49238c95599abe1dd"
     },
     "references/visual-presets.md": {
-      "bytes": 7518,
-      "sha256": "23e26da91ac20647ec55efd1017f3272916052a57d82a63a69af0cbfde797ded"
+      "bytes": 7491,
+      "sha256": "967ae296bfb0254dbb47d18b0bda913c6c15ffe601676d8c47e97f159fb17397"
     },
     "references/workflow.md": {
       "bytes": 8505,
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
-    },
-    "RELEASE_NOTES.md": {
-      "bytes": 5616,
-      "sha256": "98cf33247eeddfe3f7da8ea3b99c206d00e2c0edad2e8796f83ef39e14b41da4"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
@@ -282,22 +286,6 @@
     "scripts/source-scope.mjs": {
       "bytes": 2645,
       "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
-    },
-    "SKILL.md": {
-      "bytes": 10438,
-      "sha256": "d3c8df4d3f9c7b3187bf01049b0dcc0fc6d9f27e431cfa24acfad996cac5bc7c"
     }
-  },
-  "localExtension": {
-    "id": "real-score-layout-no-personal-overlay",
-    "date": "2026-10-25",
-    "status": "engineering-checked-awaiting-keyframe-approval",
-    "baseVersion": "1.1.0",
-    "scope": "real-score layout profile, title/release corrections, no personal character overlays",
-    "excluded": [
-      "personal character assets and references",
-      "per-song timing repair",
-      "GitHub publication"
-    ]
   }
 }

@@ -1,18 +1,25 @@
-# 1.2.0-local.4 — real-score layout fixes and no personal character overlays, unpublished
+# Piano Remotion V1.2.0
 
-New presets disable character overlays. Removed personal asset references and special cases. Added explicit runway scaling/stretch/lead-in profile, upright Chinese titles and Bodoni subtitles, 2px trails with 1.25 glow and finite release. Added true pulse-only hiding moving heads and trails. Legacy direct camera behavior remains unchanged.
+发布日期：2026-10-27。
 
-# 1.2.0-local.3 — aligned with the 14-keep / 12-drop decision, unpublished
+本版将已验证的钢琴动效与真实乐谱跑道制作能力整理为可复用 Skill。默认无人物纯谱面，不包含私人 IP、曲目录音或字体。
 
-Retired nebula and parchment themes, white-invert surface, and ground ripple defaults. Synced the four remaining presets (SlateClassic, SapphireRunway, ObsidianFocus, SapphireLandscape), converge-arc 14-frame trails with 58/44 arc heights, and pulse-only alternative. Preserved legacy low-level props and both content approvals. No GitHub publication.
+- **统一视觉配置**：四组预设 SlateClassic、SapphireRunway、ObsidianFocus、SapphireLandscape；三类主题 slate-gray / obsidian-dark / deep-sapphire；两类质感 black-multiply / metallic-screen。
+- **和弦动效**：14帧渐细合流尾迹，右手58/左手44弧高，关闭星芒和地面冲击波；pulse-only 仅显示击键音头微光。
+- **原谱连续跑道**：新增 score-strip，输入规范化SVG、已测量音头映射、系统边界和时间线，输出原图形连续谱带、配套时间线、layout与哈希证据，浏览器复核音头坐标。保留源音高、时值和起音时间。
+- **真实画面修正**：显式跑道缩放/拉伸及75帧开场参数、中文正体标题和Bodoni副标题、有限时长的触键高亮；保留旧直接调用的镜头默认值。
+- **配置与素材边界**：新预设禁止个人角色默认注入，显式绑定最终镜头及双手动效，避免记录和实际渲染漂移。
+- **制作流程**：继续要求实际乐谱确认与关键帧/试听确认，素材识别、音频对齐候选仍须复核。
 
-# 1.2.0-local.2 — continuous score-strip tool, unpublished
+## 验证范围
 
-Added `piano score-strip` for a single normalized multi-system SVG with measured bounds and notehead mappings. Preserves musical timing, transforms coordinates, verifies source/output glyph registration, and generates continuous focusPath for the existing portrait-runway camera. No auto-recognition, repeat unfolding, time fitting, private assets or GitHub publication. See references/score-strip.md.
+复用现有精确依赖完成隔离安装和TypeScript检查；27项参数/兼容检查、旧默认场景3个抽样帧逐像素一致、纯脉冲击键与过期像素检查通过。真实曲目回归覆盖356音头、205事件、24张帧和前四小节/四处拼接短片；原谱与时间字段保留。用户已确认本版展示画面。
 
-# 1.2.0-local.1 — local candidate, not published
+本结论不宣称任意曲目自动识谱准确率，也不代表新作品逐音音画同步已自动认证。连续谱带仍需实测边界与映射，拼接处原谱边距/谱号会保留；多页自动合并、反复展开和逐曲时间修正不在本版范围。
 
-Merged installed camera/chord enhancements and project visual presets. Added a resolved configuration adapter, explicit textures, standard hand palette, ripple/inactive opacity controls, portable star backgrounds and visual configuration validation. Preserved legacy defaults and both content approval gates. No private media, generic strip generator or per-song timing scripts.
+## 兼容与迁移
+
+新制作使用 resolveScoreVideoConfig 和完整 visual 确认记录。旧低层组件默认值、显式通用overlay接口和无新visual字段的历史记录保留兼容。新预设不再提供已裁撤主题/质感；旧本地候选用户请重新选择本版预设并重新绑定镜头/动效记录。字体使用已安装字体或fallback，不自动下载。
 
 # Piano Remotion V1.1.0
 

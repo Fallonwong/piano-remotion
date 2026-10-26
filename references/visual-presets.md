@@ -1,8 +1,8 @@
-# Local visual configuration upgrade (1.2.0-local.4)
+# Visual configuration (V1.2.0)
 
 Grounded in the 2026-10-24 decision: 14 kept options, 12 dropped. Retired choices remain readable in old jobs but are rejected for new presets.
 
-This local candidate is not a GitHub release. Use `SCORE_PRESETS` from
+V1.2.0 provides the following portable configuration. Use `SCORE_PRESETS` from
 `components/ScoreVideoConfig.ts` and `resolveScoreVideoConfig` from
 `components/resolveScoreVideoConfig.ts`. The resolver returns ordinary
 `PianoScoreScene` props: serialize those resolved props before the existing bind,
@@ -104,7 +104,7 @@ titles, and avatar clearance. Title zIndex 300 / avatar 400; masks cannot cover
 active notes. A synthetic style render is engineering evidence only. Preserve
 16:9 historical geometry, palette and defaults when no new props are selected.
 
-## Real-song layout corrections (local.4)
+## Real-song layout profile
 
 The new runway resolver explicitly chooses a 75-frame lead-in of -55 score pixels,
 start/settled scale 1.18, scaleMultiplier 1.25 and stretchX 1.45. These are selectable

@@ -3,9 +3,9 @@ name: piano-remotion
 description: Make piano-score videos with original two-hand leaps, glow trails and camera. Review notation revisions, reuse sampled audio tools, and stop for score approval then actual keyframe/audition approval before exporting.
 ---
 
-# Piano Remotion 1.2.0-local.4
+# Piano Remotion V1.2.0
 
-Local visual upgrade candidate (2026-10-24: 14 keep / 12 drop); GitHub remains V1.1.0. For new configurations read [visual presets and compatibility](references/visual-presets.md). Use the four preset factories through `resolveScoreVideoConfig`, persist the resolved props, and keep actual content approvals. For multi-system SVG to continuous runway geometry, use [score-strip](references/score-strip.md) with measured bounds and an existing geometry map. Song-specific timing repairs remain excluded.
+V1.2.0 includes the refined visual configuration, original-engraving continuous score strips, and no personal character overlays. For new configurations read [visual presets and compatibility](references/visual-presets.md). Use the four preset factories through `resolveScoreVideoConfig`, persist the resolved props, and keep actual content approvals. For multi-system SVG to continuous runway geometry, use [score-strip](references/score-strip.md) with measured bounds and an existing geometry map. Song-specific timing repairs remain excluded.
 
 Read the installed official `remotion-best-practices` first. Reuse compatible authorized environments; Python/OMR are optional. First installs or large downloads require paths, versions, content, size/reason and user permission. Preserve private sources, personal overlays off, original ScoreNoteLeap/PianoScoreScene visuals. No license has been assigned.
 
@@ -44,4 +44,4 @@ Inspect scan quality, page/crop provenance, accidentals/key/clef/octave, dots/be
 
 Two failures on one path require diagnosis/alternatives. If no reviewable result exists after roughly ten minutes, report blockers; do not silently run an hour. Complete routine work autonomously inside each stage; do not ask micro-permission for ordinary reversible steps or authorized mixing adjustments.
 
-Use an installed professional OMR adapter when available. Judge notation against the original source; successful engraving or video export does not replace source review. See [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with V1.1.0 configuration, notation, time-map and quality evidence rather than overwriting finished artifacts.
+Use an installed professional OMR adapter when available. Judge notation against the original source; successful engraving or video export does not replace source review. See [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with V1.2.0 configuration, notation, time-map and quality evidence rather than overwriting finished artifacts.

@@ -1,4 +1,4 @@
-# Piano Remotion V1.1.0 使用指南
+# Piano Remotion V1.2.0 使用指南
 
 ## 安装
 
@@ -9,7 +9,7 @@ npx skills add remotion-dev/skills --skill remotion-best-practices
 npx skills add Fallonwong/piano-remotion --skill piano-remotion
 ```
 
-按提示选择 Agent 和安装范围。也可从 [V1.1.0 Release](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.1.0) 下载完整 ZIP，将 `piano-remotion/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。
+按提示选择 Agent 和安装范围。也可从 [V1.2.0 Release](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.2.0) 下载完整 ZIP，将 `piano-remotion/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。
 
 ## 发起制作
 
@@ -64,8 +64,6 @@ node <skill>/scripts/piano.mjs --help
 
 PDF/图片与 XML 同时存在时先用 source-scope 核对范围；全谱小节数不一致会阻断，选段需给出源小节映射。quality-request 可从候选分析创建原谱＋原音频＋逐音复核页，初始所有项均为未审，不能作为批准。短窗口起音与分段映射用于改善时间候选；密集和弦、八度及不同改编的自动判定仍未校准，见 [能力状态](references/upgrade-status.md)。
 
+## V1.2.0 更新
 
-## 本地视觉升级候选 1.2.0-local.3：已对齐 2026-10-24 的「14 保留 / 12 裁撤」决议，保留四组预设、14 帧合流大跃动与连续谱带工具；不包含逐曲时间修补。
-
-
-本地增补 1.2.0-local.4：所有预设为无人物纯谱面，移除个人伴弹形象与相关路径、示例和专用逻辑。修正纵深跑道缩放/拉伸、中文正体与衬线副标题、尾迹消隐，并保留旧调用的默认镜头。
+四组预设、无人物默认、14帧合流及纯脉冲，使用[视觉配置](references/visual-presets.md)；纵深跑道使用[连续谱带工具](references/score-strip.md)，从真实坐标与裁切边界生成。保留原有乐谱与关键帧/试听两阶段确认。
