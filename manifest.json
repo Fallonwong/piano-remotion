@@ -1,6 +1,6 @@
 {
   "name": "piano-remotion",
-  "version": "1.2.5",
+  "version": "1.0.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -60,8 +60,8 @@
       "sha256": "5e1bcd3ddc193b2fd7178fdf9cd803a84193687c430ed7064093c5875230d561"
     },
     "assets/showcase/lalaland-cover.jpg": {
-      "bytes": 97703,
-      "sha256": "dc15878f0321b2da36c16c66fc9963eb8a99bf74d1c5f9be7034492248ad5012"
+      "bytes": 384197,
+      "sha256": "dec6f575241924fc4ffea3f4be1dacaa419d13d7637b527cf853ca22398640ae"
     },
     "assets/showcase/lalaland-score.jpg": {
       "bytes": 2998848,
@@ -136,8 +136,8 @@
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
     "README.md": {
-      "bytes": 17834,
-      "sha256": "26dfeafd1efede9bbdbad820f95c2ff62148a33a02d903e353a4f46c1692e053"
+      "bytes": 17571,
+      "sha256": "db759ff296347c958d1b51693c6571a5869f642c1c981243a675a13b93ffa76f"
     },
     "README_使用说明.md": {
       "bytes": 5451,
@@ -204,8 +204,8 @@
       "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
     },
     "RELEASE_NOTES.md": {
-      "bytes": 6570,
-      "sha256": "a9061c86fe9ac0984cec89195349bd808c1119dbfa6951b1bc2a002966310993"
+      "bytes": 902,
+      "sha256": "94ed4c02a68963f741578c0e19834c017158f0ad0f32d5fe97489a2e6b5730ab"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11392,
